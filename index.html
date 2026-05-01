@@ -7,13 +7,9 @@
     <meta name="theme-color" content="#6366f1">
     <title>FACU INGLÉS 1D - Professional Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --primary: #6366f1;
             --secondary: #ec4899;
@@ -23,7 +19,6 @@
             --dark: #1f2937;
             --light: #f3f4f6;
         }
-
         body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
@@ -31,7 +26,6 @@
             overflow-x: hidden;
             position: relative;
         }
-
         .animated-bg {
             position: fixed;
             top: 0;
@@ -42,25 +36,21 @@
             overflow: hidden;
             pointer-events: none;
         }
-
         .floating-shape {
             position: absolute;
             opacity: 0.1;
             animation: float 20s infinite ease-in-out;
         }
-
         @keyframes float {
             0%, 100% { transform: translate(0, 0) rotate(0deg); }
             25% { transform: translate(100px, -100px) rotate(90deg); }
             50% { transform: translate(200px, 50px) rotate(180deg); }
             75% { transform: translate(-50px, 100px) rotate(270deg); }
         }
-
         .shape-1 { top: 10%; left: 10%; font-size: 100px; animation-delay: 0s; }
         .shape-2 { top: 60%; left: 70%; font-size: 80px; animation-delay: 2s; }
         .shape-3 { top: 30%; left: 80%; font-size: 120px; animation-delay: 4s; }
         .shape-4 { top: 70%; left: 20%; font-size: 90px; animation-delay: 6s; }
-
         .audio-helper {
             position: fixed;
             bottom: 30px;
@@ -80,27 +70,20 @@
             animation: pulse 2s infinite;
             transition: all 0.3s;
         }
-
         .audio-helper:hover {
             transform: scale(1.2);
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
-
-        .audio-helper.speaking {
-            animation: wave 0.5s infinite;
-        }
-
+        .audio-helper.speaking { animation: wave 0.5s infinite; }
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.1); }
         }
-
         @keyframes wave {
             0%, 100% { transform: scale(1) rotate(0deg); }
             25% { transform: scale(1.15) rotate(-10deg); }
             75% { transform: scale(1.15) rotate(10deg); }
         }
-
         .voice-indicator {
             position: fixed;
             top: 20px;
@@ -117,23 +100,15 @@
             font-size: 1.2em;
             font-weight: 600;
         }
-
         .voice-indicator.active {
             display: flex;
             animation: slideDown 0.3s;
         }
-
         @keyframes slideDown {
             from { transform: translateX(-50%) translateY(-100px); opacity: 0; }
             to { transform: translateX(-50%) translateY(0); opacity: 1; }
         }
-
-        .voice-wave {
-            display: flex;
-            gap: 4px;
-            align-items: center;
-        }
-
+        .voice-wave { display: flex; gap: 4px; align-items: center; }
         .voice-bar {
             width: 4px;
             height: 20px;
@@ -141,16 +116,13 @@
             border-radius: 2px;
             animation: wave-bar 0.5s infinite alternate;
         }
-
         .voice-bar:nth-child(2) { animation-delay: 0.1s; }
         .voice-bar:nth-child(3) { animation-delay: 0.2s; }
         .voice-bar:nth-child(4) { animation-delay: 0.3s; }
-
         @keyframes wave-bar {
             from { height: 10px; }
             to { height: 30px; }
         }
-
         .login-screen {
             position: relative;
             z-index: 1;
@@ -160,7 +132,6 @@
             min-height: 100vh;
             padding: 20px;
         }
-
         .login-container {
             background: rgba(255,255,255,0.95);
             backdrop-filter: blur(10px);
@@ -171,28 +142,20 @@
             box-shadow: 0 30px 80px rgba(0,0,0,0.3);
             animation: fadeIn 0.5s;
         }
-
         @keyframes fadeIn {
             from { opacity: 0; transform: scale(0.9); }
             to { opacity: 1; transform: scale(1); }
         }
-
-        .logo {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
+        .logo { text-align: center; margin-bottom: 40px; }
         .logo-icon {
             font-size: 8em;
             display: inline-block;
             animation: bounce 2s infinite;
         }
-
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-20px); }
         }
-
         .logo h1 {
             font-family: 'Fredoka One', cursive;
             font-size: 3.5em;
@@ -201,9 +164,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin: 20px 0;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
-
         .subtitle {
             text-align: center;
             color: var(--dark);
@@ -211,14 +172,12 @@
             margin-bottom: 40px;
             font-weight: 600;
         }
-
         .users-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 25px;
             margin-bottom: 40px;
         }
-
         .user-card {
             background: linear-gradient(135deg, #fff, #f0f0ff);
             padding: 30px;
@@ -230,7 +189,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .user-card::before {
             content: '';
             position: absolute;
@@ -243,22 +201,13 @@
             transition: opacity 0.3s;
             z-index: 0;
         }
-
-        .user-card:hover::before {
-            opacity: 0.1;
-        }
-
+        .user-card:hover::before { opacity: 0.1; }
         .user-card:hover {
             transform: translateY(-10px) scale(1.05);
             box-shadow: 0 20px 50px rgba(0,0,0,0.3);
             border-color: var(--primary);
         }
-
-        .user-card > * {
-            position: relative;
-            z-index: 1;
-        }
-
+        .user-card > * { position: relative; z-index: 1; }
         .user-avatar {
             width: 100px;
             height: 100px;
@@ -273,14 +222,12 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             animation: bounce 3s infinite;
         }
-
         .user-name {
             font-size: 1.4em;
             font-weight: 700;
             color: var(--dark);
             margin-bottom: 10px;
         }
-
         .user-stats {
             background: white;
             padding: 10px;
@@ -290,7 +237,6 @@
             justify-content: space-around;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-
         .delete-btn {
             position: absolute;
             top: 10px;
@@ -309,22 +255,14 @@
             transition: all 0.3s;
             z-index: 2;
         }
-
-        .user-card:hover .delete-btn {
-            display: block;
-        }
-
-        .delete-btn:hover {
-            transform: scale(1.2) rotate(90deg);
-        }
-
+        .user-card:hover .delete-btn { display: block; }
+        .delete-btn:hover { transform: scale(1.2) rotate(90deg); }
         .new-user-form {
             background: linear-gradient(135deg, #e0f2fe, #ddd6fe);
             padding: 40px;
             border-radius: 30px;
             border: 5px dashed var(--primary);
         }
-
         .form-title {
             text-align: center;
             font-size: 2em;
@@ -332,11 +270,7 @@
             color: var(--dark);
             margin-bottom: 30px;
         }
-
-        .input-group {
-            margin-bottom: 30px;
-        }
-
+        .input-group { margin-bottom: 30px; }
         .input-label {
             font-size: 1.3em;
             font-weight: 600;
@@ -345,7 +279,6 @@
             display: block;
             text-align: center;
         }
-
         #userName {
             width: 100%;
             padding: 20px;
@@ -357,21 +290,18 @@
             font-family: 'Poppins', sans-serif;
             transition: all 0.3s;
         }
-
         #userName:focus {
             outline: none;
             border-color: var(--secondary);
             box-shadow: 0 0 30px rgba(236, 72, 153, 0.3);
             transform: scale(1.02);
         }
-
         .avatar-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
             gap: 15px;
             margin-top: 20px;
         }
-
         .avatar-option {
             aspect-ratio: 1;
             background: white;
@@ -386,7 +316,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .avatar-option::before {
             content: '';
             position: absolute;
@@ -398,33 +327,22 @@
             opacity: 0;
             transition: opacity 0.3s;
         }
-
-        .avatar-option:hover::before {
-            opacity: 0.2;
-        }
-
+        .avatar-option:hover::before { opacity: 0.2; }
         .avatar-option:hover {
             transform: scale(1.15) rotate(5deg);
             border-color: var(--primary);
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
-
         .avatar-option.selected {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-color: var(--secondary);
             transform: scale(1.2);
             animation: pulse 1s infinite;
         }
-
-        .avatar-option > span {
-            position: relative;
-            z-index: 1;
-        }
-
+        .avatar-option > span { position: relative; z-index: 1; }
         .avatar-option.selected > span {
             filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
         }
-
         .create-btn {
             width: 100%;
             padding: 25px;
@@ -440,16 +358,11 @@
             transition: all 0.3s;
             font-family: 'Fredoka One', cursive;
         }
-
         .create-btn:hover {
             transform: scale(1.05);
             box-shadow: 0 20px 50px rgba(0,0,0,0.4);
         }
-
-        .create-btn:active {
-            transform: scale(0.95);
-        }
-
+        .create-btn:active { transform: scale(0.95); }
         .app-screen {
             display: none;
             position: relative;
@@ -457,7 +370,6 @@
             min-height: 100vh;
             padding: 20px;
         }
-
         .app-container {
             max-width: 1400px;
             margin: 0 auto;
@@ -467,7 +379,6 @@
             overflow: hidden;
             box-shadow: 0 30px 80px rgba(0,0,0,0.3);
         }
-
         .app-header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
@@ -475,7 +386,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .app-header::before {
             content: '';
             position: absolute;
@@ -486,7 +396,6 @@
             background: rgba(255,255,255,0.1);
             border-radius: 50%;
         }
-
         .user-bar {
             display: flex;
             align-items: center;
@@ -497,13 +406,11 @@
             flex-wrap: wrap;
             gap: 20px;
         }
-
         .user-profile {
             display: flex;
             align-items: center;
             gap: 20px;
         }
-
         .profile-avatar {
             width: 80px;
             height: 80px;
@@ -517,13 +424,11 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             animation: bounce 3s infinite;
         }
-
         .profile-info h2 {
             font-size: 2em;
             font-weight: 700;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
-
         .logout-btn {
             background: rgba(255,255,255,0.2);
             color: white;
@@ -536,13 +441,11 @@
             transition: all 0.3s;
             backdrop-filter: blur(10px);
         }
-
         .logout-btn:hover {
             background: white;
             color: var(--primary);
             transform: scale(1.1);
         }
-
         .app-title {
             text-align: center;
             font-family: 'Fredoka One', cursive;
@@ -552,7 +455,6 @@
             position: relative;
             z-index: 1;
         }
-
         .stats-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -561,7 +463,6 @@
             position: relative;
             z-index: 1;
         }
-
         .stat-card {
             background: rgba(255,255,255,0.2);
             backdrop-filter: blur(10px);
@@ -570,29 +471,22 @@
             text-align: center;
             border: 2px solid rgba(255,255,255,0.3);
         }
-
         .stat-value {
             font-size: 3em;
             font-weight: 700;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
-
         .stat-label {
             font-size: 1.2em;
             margin-top: 10px;
             font-weight: 600;
         }
-
-        .app-content {
-            padding: 50px;
-        }
-
+        .app-content { padding: 50px; }
         .lessons-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 35px;
         }
-
         .lesson-card {
             background: linear-gradient(135deg, #fff, #f8f9ff);
             padding: 40px;
@@ -604,7 +498,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .lesson-card::before {
             content: '';
             position: absolute;
@@ -616,53 +509,39 @@
             opacity: 0;
             transition: opacity 0.3s;
         }
-
-        .lesson-card:hover::before {
-            opacity: 0.1;
-        }
-
+        .lesson-card:hover::before { opacity: 0.1; }
         .lesson-card:hover {
             transform: translateY(-15px);
             box-shadow: 0 25px 60px rgba(0,0,0,0.3);
             border-color: var(--primary);
         }
-
         .lesson-card.completed {
             background: linear-gradient(135deg, #d1fae5, #a7f3d0);
             border-color: var(--success);
         }
-
         .lesson-card.locked {
             opacity: 0.5;
             cursor: not-allowed;
             filter: grayscale(100%);
         }
-
-        .lesson-card > * {
-            position: relative;
-            z-index: 1;
-        }
-
+        .lesson-card > * { position: relative; z-index: 1; }
         .lesson-icon {
             font-size: 6em;
             margin-bottom: 25px;
             display: inline-block;
             animation: bounce 3s infinite;
         }
-
         .lesson-title {
             font-size: 2em;
             font-weight: 700;
             color: var(--dark);
             margin-bottom: 15px;
         }
-
         .lesson-subtitle {
             font-size: 1.3em;
             color: #6b7280;
             margin-bottom: 20px;
         }
-
         .lesson-progress {
             background: white;
             padding: 12px;
@@ -671,7 +550,6 @@
             font-weight: 600;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-
         .badge {
             position: absolute;
             top: 20px;
@@ -679,12 +557,10 @@
             font-size: 3.5em;
             animation: pulse 2s infinite;
         }
-
         .vocab-display {
             max-width: 900px;
             margin: 0 auto;
         }
-
         .vocab-card {
             background: linear-gradient(135deg, #fef3c7, #fde68a);
             padding: 60px;
@@ -696,12 +572,10 @@
             transition: all 0.3s;
             box-shadow: 0 20px 60px rgba(0,0,0,0.2);
         }
-
         .vocab-card:hover {
             transform: scale(1.03);
             box-shadow: 0 30px 80px rgba(0,0,0,0.3);
         }
-
         .vocab-illustration {
             font-size: 10em;
             margin-bottom: 30px;
@@ -709,7 +583,6 @@
             animation: bounce 2s infinite;
             filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
         }
-
         .vocab-word {
             font-size: 4em;
             font-weight: 700;
@@ -717,7 +590,6 @@
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
-
         .vocab-phonetic {
             font-size: 2em;
             color: #6b7280;
@@ -729,14 +601,12 @@
             margin-bottom: 20px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-
         .vocab-translation {
             font-size: 2.5em;
             color: var(--dark);
             font-weight: 600;
             margin-bottom: 30px;
         }
-
         .speak-button {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
@@ -750,12 +620,10 @@
             transition: all 0.3s;
             font-family: 'Fredoka One', cursive;
         }
-
         .speak-button:hover {
             transform: scale(1.1);
             box-shadow: 0 20px 50px rgba(0,0,0,0.4);
         }
-
         .quiz-question {
             text-align: center;
             font-size: 2.5em;
@@ -763,21 +631,18 @@
             color: var(--dark);
             margin-bottom: 30px;
         }
-
         .quiz-icon {
             font-size: 8em;
             margin: 30px 0;
             display: inline-block;
             animation: bounce 2s infinite;
         }
-
         .quiz-hint {
             text-align: center;
             font-size: 1.5em;
             color: #6b7280;
             margin-bottom: 40px;
         }
-
         .options-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -785,7 +650,6 @@
             max-width: 900px;
             margin: 0 auto;
         }
-
         .option-card {
             background: white;
             padding: 40px;
@@ -798,36 +662,30 @@
             text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
-
         .option-card:hover {
             border-color: var(--primary);
             transform: translateY(-10px);
             box-shadow: 0 20px 50px rgba(0,0,0,0.2);
         }
-
         .option-card.correct {
             background: linear-gradient(135deg, #d1fae5, #a7f3d0);
             border-color: var(--success);
             animation: correctPulse 0.5s 3;
         }
-
         .option-card.incorrect {
             background: linear-gradient(135deg, #fee2e2, #fecaca);
             border-color: var(--danger);
             animation: shake 0.5s;
         }
-
         @keyframes correctPulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.05); }
         }
-
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
             25% { transform: translateX(-15px); }
             75% { transform: translateX(15px); }
         }
-
         .memory-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -835,7 +693,6 @@
             max-width: 700px;
             margin: 40px auto;
         }
-
         .memory-card {
             aspect-ratio: 1;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -850,23 +707,17 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             position: relative;
         }
-
-        .memory-card:hover {
-            transform: scale(1.05);
-        }
-
+        .memory-card:hover { transform: scale(1.05); }
         .memory-card.flipped {
             background: white;
             color: var(--dark);
             border: 5px solid var(--primary);
         }
-
         .memory-card.matched {
             background: linear-gradient(135deg, #d1fae5, #a7f3d0);
             color: var(--success);
             cursor: default;
         }
-
         .nav-buttons {
             display: flex;
             justify-content: space-between;
@@ -874,7 +725,6 @@
             gap: 20px;
             flex-wrap: wrap;
         }
-
         .btn {
             padding: 20px 50px;
             border: none;
@@ -886,27 +736,22 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             font-family: 'Poppins', sans-serif;
         }
-
         .btn-back {
             background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
             color: var(--dark);
         }
-
         .btn-next {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
         }
-
         .btn:hover {
             transform: scale(1.05);
             box-shadow: 0 15px 40px rgba(0,0,0,0.3);
         }
-
         .btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
         }
-
         .feedback-banner {
             text-align: center;
             padding: 35px;
@@ -917,35 +762,27 @@
             display: none;
             animation: slideDown 0.5s;
         }
-
-        .feedback-banner.show {
-            display: block;
-        }
-
+        .feedback-banner.show { display: block; }
         .feedback-banner.success {
             background: linear-gradient(135deg, #d1fae5, #a7f3d0);
             color: var(--success);
             border: 5px solid var(--success);
         }
-
         .feedback-banner.error {
             background: linear-gradient(135deg, #fee2e2, #fecaca);
             color: var(--danger);
             border: 5px solid var(--danger);
         }
-
         .completion {
             text-align: center;
             padding: 60px;
         }
-
         .completion-icon {
             font-size: 12em;
             margin: 30px 0;
             display: inline-block;
             animation: bounce 1s infinite;
         }
-
         .completion-title {
             font-family: 'Fredoka One', cursive;
             font-size: 4em;
@@ -955,19 +792,16 @@
             background-clip: text;
             margin-bottom: 30px;
         }
-
         .completion-score {
             font-size: 3em;
             font-weight: 700;
             color: var(--dark);
             margin: 30px 0;
         }
-
         .stars-display {
             font-size: 5em;
             margin: 30px 0;
         }
-
         .confetti-piece {
             position: fixed;
             width: 15px;
@@ -975,14 +809,12 @@
             animation: confetti-fall 3s linear;
             z-index: 999;
         }
-
         @keyframes confetti-fall {
             to {
                 transform: translateY(100vh) rotate(720deg);
                 opacity: 0;
             }
         }
-
         @media (max-width: 768px) {
             .logo h1 { font-size: 2.5em; }
             .avatar-grid { grid-template-columns: repeat(4, 1fr); }
@@ -993,7 +825,6 @@
             .vocab-word { font-size: 2.5em; }
             .lesson-icon { font-size: 4em; }
         }
-
         @media (max-width: 480px) {
             .users-grid { grid-template-columns: repeat(2, 1fr); }
             .avatar-grid { grid-template-columns: repeat(3, 1fr); }
@@ -1009,9 +840,7 @@
         <div class="floating-shape shape-4">🌟</div>
     </div>
 
-    <div class="audio-helper" onclick="helpMe()" title="Toca para ayuda">
-        🎤
-    </div>
+    <div class="audio-helper" onclick="helpMe()">🎤</div>
 
     <div class="voice-indicator" id="voiceIndicator">
         <div class="voice-wave">
@@ -1030,22 +859,17 @@
                 <h1>FACU INGLÉS 1D</h1>
                 <p class="subtitle">🎯 Professional English Learning</p>
             </div>
-
             <div class="users-grid" id="usersGrid"></div>
-
             <div class="new-user-form">
                 <h3 class="form-title">👤 Crear Nuevo Perfil</h3>
-                
                 <div class="input-group">
                     <label class="input-label">Escribe tu nombre:</label>
                     <input type="text" id="userName" placeholder="Tu nombre aquí..." maxlength="20">
                 </div>
-
                 <div class="input-group">
                     <label class="input-label">Elige tu avatar favorito:</label>
                     <div class="avatar-grid" id="avatarGrid"></div>
                 </div>
-
                 <button class="create-btn" onclick="createUser()">✨ CREAR PERFIL ✨</button>
             </div>
         </div>
@@ -1063,9 +887,7 @@
                     </div>
                     <button class="logout-btn" onclick="changeUser()">🚪 Cambiar</button>
                 </div>
-
                 <h1 class="app-title">FACU INGLÉS 1D</h1>
-
                 <div class="stats-container">
                     <div class="stat-card">
                         <div class="stat-value" id="starsCount">0</div>
@@ -1085,13 +907,686 @@
                     </div>
                 </div>
             </div>
-
             <div class="app-content" id="appContent"></div>
         </div>
     </div>
 
     <script>
-        // Debido al límite de caracteres, continúo con el JavaScript completo en el siguiente mensaje...
+        let isSpeaking = false;
+        let currentUser = null;
+        let selectedAvatar = '👦';
+        let currentLesson = null;
+        let currentActivity = 0;
+        let score = 0;
+
+        const AVATARS = ['👦','👧','🧒','👶','🐶','🐱','🦁','🐼','🦊','🐯','🦄','🐨','🐸','🦖','🦕','🐙','🦋','🐝'];
+
+        const LESSONS = {
+            lesson1: {
+                id: 'lesson1',
+                title: 'Hábitos Saludables',
+                titleEn: 'Healthy Habits',
+                icon: '🪥',
+                vocab: [
+                    { en: "Brush your teeth", es: "Cepillarse los dientes", icon: "🪥", phonetic: "brash yor tiiz" },
+                    { en: "Wash your hands", es: "Lavarse las manos", icon: "🧼", phonetic: "uash yor jands" },
+                    { en: "Drink water", es: "Beber agua", icon: "💧", phonetic: "drink uater" },
+                    { en: "Take a bath", es: "Tomar un baño", icon: "🛁", phonetic: "teik a baz" },
+                    { en: "Go to bed early", es: "Ir a dormir temprano", icon: "😴", phonetic: "gou tu bed erli" },
+                    { en: "Do exercise", es: "Hacer ejercicio", icon: "🏃", phonetic: "du exersais" }
+                ],
+                quiz: [
+                    { q: "¿Qué significa 'Brush your teeth'?", icon: "🪥", opts: ["Cepillarse los dientes", "Lavarse las manos", "Tomar agua", "Dormir"], optsEn: ["Brush your teeth", "Wash your hands", "Drink water", "Sleep"], correct: 0 },
+                    { q: "¿Qué significa 'Wash your hands'?", icon: "🧼", opts: ["Hacer ejercicio", "Lavarse las manos", "Cepillarse", "Bañarse"], optsEn: ["Do exercise", "Wash your hands", "Brush", "Take a bath"], correct: 1 }
+                ],
+                memory: [
+                    { text: "Brush teeth", icon: "🪥" },
+                    { text: "Wash hands", icon: "🧼" },
+                    { text: "Drink water", icon: "💧" },
+                    { text: "Take bath", icon: "🛁" }
+                ]
+            },
+            lesson2: {
+                id: 'lesson2',
+                title: 'Reglas y Comportamiento',
+                titleEn: 'Rules and Behavior',
+                icon: '📏',
+                vocab: [
+                    { en: "Be kind", es: "Ser amable", icon: "❤️", phonetic: "bi kaind" },
+                    { en: "Listen", es: "Escuchar", icon: "👂", phonetic: "lisen" },
+                    { en: "Share", es: "Compartir", icon: "🤝", phonetic: "sher" },
+                    { en: "Raise your hand", es: "Levantar la mano", icon: "✋", phonetic: "reis yor jand" },
+                    { en: "Be quiet", es: "Estar en silencio", icon: "🤫", phonetic: "bi kuaiet" },
+                    { en: "Help others", es: "Ayudar a otros", icon: "🤗", phonetic: "jelp aders" }
+                ],
+                quiz: [
+                    { q: "¿Qué significa 'Share'?", icon: "🤝", opts: ["Gritar", "Compartir", "Correr", "Saltar"], optsEn: ["Shout", "Share", "Run", "Jump"], correct: 1 },
+                    { q: "¿Qué significa 'Listen'?", icon: "👂", opts: ["Hablar", "Escuchar", "Ver", "Tocar"], optsEn: ["Speak", "Listen", "See", "Touch"], correct: 1 }
+                ],
+                memory: [
+                    { text: "Be kind", icon: "❤️" },
+                    { text: "Listen", icon: "👂" },
+                    { text: "Share", icon: "🤝" },
+                    { text: "Raise hand", icon: "✋" }
+                ]
+            },
+            lesson3: {
+                id: 'lesson3',
+                title: 'Comida Saludable',
+                titleEn: 'Healthy Food',
+                icon: '🍎',
+                vocab: [
+                    { en: "Apple", es: "Manzana", icon: "🍎", phonetic: "apol" },
+                    { en: "Banana", es: "Plátano", icon: "🍌", phonetic: "banana" },
+                    { en: "Water", es: "Agua", icon: "💧", phonetic: "uater" },
+                    { en: "Vegetables", es: "Verduras", icon: "🥦", phonetic: "vedyetabols" },
+                    { en: "Milk", es: "Leche", icon: "🥛", phonetic: "milk" },
+                    { en: "Bread", es: "Pan", icon: "🍞", phonetic: "bred" }
+                ],
+                quiz: [
+                    { q: "¿Qué es 'Apple'?", icon: "🍎", opts: ["Plátano", "Manzana", "Naranja", "Uva"], optsEn: ["Banana", "Apple", "Orange", "Grape"], correct: 1 },
+                    { q: "¿Qué es 'Water'?", icon: "💧", opts: ["Leche", "Jugo", "Agua", "Té"], optsEn: ["Milk", "Juice", "Water", "Tea"], correct: 2 }
+                ],
+                memory: [
+                    { text: "Apple", icon: "🍎" },
+                    { text: "Banana", icon: "🍌" },
+                    { text: "Water", icon: "💧" },
+                    { text: "Vegetables", icon: "🥦" }
+                ]
+            },
+            lesson4: {
+                id: 'lesson4',
+                title: 'Los Cinco Sentidos',
+                titleEn: 'Five Senses',
+                icon: '👁️',
+                vocab: [
+                    { en: "I can see", es: "Puedo ver", icon: "👁️", phonetic: "ai can si" },
+                    { en: "I can hear", es: "Puedo oír", icon: "👂", phonetic: "ai can jir" },
+                    { en: "I can smell", es: "Puedo oler", icon: "👃", phonetic: "ai can smel" },
+                    { en: "I can taste", es: "Puedo saborear", icon: "👅", phonetic: "ai can teist" },
+                    { en: "I can touch", es: "Puedo tocar", icon: "✋", phonetic: "ai can tach" }
+                ],
+                quiz: [
+                    { q: "¿Con qué puedes ver?", icon: "👁️", opts: ["Orejas", "Ojos", "Nariz", "Boca"], optsEn: ["Ears", "Eyes", "Nose", "Mouth"], correct: 1 },
+                    { q: "¿Con qué puedes oír?", icon: "👂", opts: ["Ojos", "Orejas", "Manos", "Pies"], optsEn: ["Eyes", "Ears", "Hands", "Feet"], correct: 1 }
+                ],
+                memory: [
+                    { text: "See", icon: "👁️" },
+                    { text: "Hear", icon: "👂" },
+                    { text: "Smell", icon: "👃" },
+                    { text: "Touch", icon: "✋" }
+                ]
+            },
+            lesson5: {
+                id: 'lesson5',
+                title: 'Animales',
+                titleEn: 'Animals',
+                icon: '🐶',
+                vocab: [
+                    { en: "Dog", es: "Perro", icon: "🐶", phonetic: "dog" },
+                    { en: "Cat", es: "Gato", icon: "🐱", phonetic: "cat" },
+                    { en: "Bird", es: "Pájaro", icon: "🐦", phonetic: "berd" },
+                    { en: "Fish", es: "Pez", icon: "🐟", phonetic: "fish" },
+                    { en: "Rabbit", es: "Conejo", icon: "🐰", phonetic: "rabit" },
+                    { en: "Turtle", es: "Tortuga", icon: "🐢", phonetic: "tertel" }
+                ],
+                quiz: [
+                    { q: "¿Qué es 'Dog'?", icon: "🐶", opts: ["Gato", "Perro", "Pájaro", "Pez"], optsEn: ["Cat", "Dog", "Bird", "Fish"], correct: 1 },
+                    { q: "¿Qué es 'Cat'?", icon: "🐱", opts: ["Perro", "Gato", "Conejo", "Tortuga"], optsEn: ["Dog", "Cat", "Rabbit", "Turtle"], correct: 1 }
+                ],
+                memory: [
+                    { text: "Dog", icon: "🐶" },
+                    { text: "Cat", icon: "🐱" },
+                    { text: "Bird", icon: "🐦" },
+                    { text: "Fish", icon: "🐟" }
+                ]
+            },
+            lesson6: {
+                id: 'lesson6',
+                title: 'Colores',
+                titleEn: 'Colors',
+                icon: '🎨',
+                vocab: [
+                    { en: "Red", es: "Rojo", icon: "🔴", phonetic: "red" },
+                    { en: "Blue", es: "Azul", icon: "🔵", phonetic: "blu" },
+                    { en: "Yellow", es: "Amarillo", icon: "🟡", phonetic: "yelou" },
+                    { en: "Green", es: "Verde", icon: "🟢", phonetic: "grin" },
+                    { en: "Orange", es: "Naranja", icon: "🟠", phonetic: "oranch" },
+                    { en: "Purple", es: "Morado", icon: "🟣", phonetic: "perpol" }
+                ],
+                quiz: [
+                    { q: "¿Qué color es 'Red'?", icon: "🔴", opts: ["Azul", "Rojo", "Verde", "Amarillo"], optsEn: ["Blue", "Red", "Green", "Yellow"], correct: 1 },
+                    { q: "¿Qué color es 'Blue'?", icon: "🔵", opts: ["Rojo", "Azul", "Amarillo", "Verde"], optsEn: ["Red", "Blue", "Yellow", "Green"], correct: 1 }
+                ],
+                memory: [
+                    { text: "Red", icon: "🔴" },
+                    { text: "Blue", icon: "🔵" },
+                    { text: "Yellow", icon: "🟡" },
+                    { text: "Green", icon: "🟢" }
+                ]
+            },
+            lesson7: {
+                id: 'lesson7',
+                title: 'Números 1-10',
+                titleEn: 'Numbers 1-10',
+                icon: '🔢',
+                vocab: [
+                    { en: "One", es: "Uno", icon: "1️⃣", phonetic: "uan" },
+                    { en: "Two", es: "Dos", icon: "2️⃣", phonetic: "tu" },
+                    { en: "Three", es: "Tres", icon: "3️⃣", phonetic: "zri" },
+                    { en: "Four", es: "Cuatro", icon: "4️⃣", phonetic: "for" },
+                    { en: "Five", es: "Cinco", icon: "5️⃣", phonetic: "faiv" },
+                    { en: "Six", es: "Seis", icon: "6️⃣", phonetic: "six" }
+                ],
+                quiz: [
+                    { q: "¿Qué número es 'Three'?", icon: "3️⃣", opts: ["Dos", "Tres", "Cuatro", "Cinco"], optsEn: ["Two", "Three", "Four", "Five"], correct: 1 },
+                    { q: "¿Qué número es 'Five'?", icon: "5️⃣", opts: ["Cuatro", "Cinco", "Seis", "Siete"], optsEn: ["Four", "Five", "Six", "Seven"], correct: 1 }
+                ],
+                memory: [
+                    { text: "One", icon: "1️⃣" },
+                    { text: "Two", icon: "2️⃣" },
+                    { text: "Three", icon: "3️⃣" },
+                    { text: "Four", icon: "4️⃣" }
+                ]
+            },
+            lesson8: {
+                id: 'lesson8',
+                title: 'La Familia',
+                titleEn: 'Family',
+                icon: '👨‍👩‍👧‍👦',
+                vocab: [
+                    { en: "Mother", es: "Madre", icon: "👩", phonetic: "mader" },
+                    { en: "Father", es: "Padre", icon: "👨", phonetic: "fader" },
+                    { en: "Sister", es: "Hermana", icon: "👧", phonetic: "sister" },
+                    { en: "Brother", es: "Hermano", icon: "👦", phonetic: "brader" },
+                    { en: "Baby", es: "Bebé", icon: "👶", phonetic: "beibi" },
+                    { en: "Grandma", es: "Abuela", icon: "👵", phonetic: "grandma" }
+                ],
+                quiz: [
+                    { q: "¿Qué es 'Mother'?", icon: "👩", opts: ["Padre", "Madre", "Hermana", "Hermano"], optsEn: ["Father", "Mother", "Sister", "Brother"], correct: 1 },
+                    { q: "¿Qué es 'Brother'?", icon: "👦", opts: ["Hermana", "Hermano", "Padre", "Madre"], optsEn: ["Sister", "Brother", "Father", "Mother"], correct: 1 }
+                ],
+                memory: [
+                    { text: "Mother", icon: "👩" },
+                    { text: "Father", icon: "👨" },
+                    { text: "Sister", icon: "👧" },
+                    { text: "Brother", icon: "👦" }
+                ]
+            }
+        };
+
+        function speak(text, lang = 'en-US', rate = 0.6) {
+            return new Promise((resolve) => {
+                if (!('speechSynthesis' in window)) {
+                    resolve();
+                    return;
+                }
+                speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = lang;
+                utterance.rate = rate;
+                utterance.pitch = 1.1;
+                utterance.volume = 1;
+                isSpeaking = true;
+                document.querySelector('.audio-helper').classList.add('speaking');
+                showVoiceIndicator(text);
+                utterance.onend = () => {
+                    isSpeaking = false;
+                    document.querySelector('.audio-helper').classList.remove('speaking');
+                    hideVoiceIndicator();
+                    resolve();
+                };
+                utterance.onerror = () => {
+                    isSpeaking = false;
+                    document.querySelector('.audio-helper').classList.remove('speaking');
+                    hideVoiceIndicator();
+                    resolve();
+                };
+                speechSynthesis.speak(utterance);
+            });
+        }
+
+        function speakES(text) {
+            return speak(text, 'es-ES', 0.8);
+        }
+
+        function showVoiceIndicator(text) {
+            const indicator = document.getElementById('voiceIndicator');
+            const voiceText = document.getElementById('voiceText');
+            voiceText.textContent = text.substring(0, 30) + (text.length > 30 ? '...' : '');
+            indicator.classList.add('active');
+        }
+
+        function hideVoiceIndicator() {
+            document.getElementById('voiceIndicator').classList.remove('active');
+        }
+
+        async function helpMe() {
+            const isLogin = document.getElementById('loginScreen').style.display !== 'none';
+            if (isLogin) {
+                await speakES('Toca un usuario para empezar, o crea uno nuevo escribiendo tu nombre y eligiendo tu avatar favorito');
+            } else {
+                await speakES('Toca una lección para aprender palabras nuevas en inglés');
+            }
+        }
+
+        function getUsers() {
+            return JSON.parse(localStorage.getItem('facuUsers') || '[]');
+        }
+
+        function saveUsers(users) {
+            localStorage.setItem('facuUsers', JSON.stringify(users));
+        }
+
+        function getUserData(userId) {
+            return JSON.parse(localStorage.getItem('facuData_' + userId) || '{"stars":0,"badges":0,"completed":[],"streak":0}');
+        }
+
+        function saveUserData(userId, data) {
+            localStorage.setItem('facuData_' + userId, JSON.stringify(data));
+        }
+
+        function renderAvatars() {
+            const grid = document.getElementById('avatarGrid');
+            grid.innerHTML = AVATARS.map((av, i) => 
+                `<div class="avatar-option ${i === 0 ? 'selected' : ''}" data-avatar="${av}" onclick="selectAvatar('${av}', this)">
+                    <span>${av}</span>
+                </div>`
+            ).join('');
+        }
+
+        function selectAvatar(avatar, elem) {
+            document.querySelectorAll('.avatar-option').forEach(el => el.classList.remove('selected'));
+            elem.classList.add('selected');
+            selectedAvatar = avatar;
+            speak(avatar);
+        }
+
+        async function createUser() {
+            const name = document.getElementById('userName').value.trim();
+            if (!name) {
+                await speakES('Por favor escribe tu nombre');
+                return;
+            }
+            const users = getUsers();
+            if (users.find(u => u.name.toLowerCase() === name.toLowerCase())) {
+                await speakES('Este nombre ya existe. Elige otro nombre');
+                return;
+            }
+            const newUser = {
+                id: Date.now().toString(),
+                name: name,
+                avatar: selectedAvatar,
+                created: new Date().toISOString()
+            };
+            users.push(newUser);
+            saveUsers(users);
+            saveUserData(newUser.id, { stars: 0, badges: 0, completed: [], streak: 0 });
+            document.getElementById('userName').value = '';
+            renderUsers();
+            await speakES('Usuario ' + name + ' creado correctamente');
+            createConfetti();
+        }
+
+        function renderUsers() {
+            const users = getUsers();
+            const grid = document.getElementById('usersGrid');
+            if (users.length === 0) {
+                grid.innerHTML = '<p style="text-align:center;color:#999;padding:30px;font-size:1.3em;grid-column:1/-1">No hay usuarios todavía</p>';
+                return;
+            }
+            grid.innerHTML = users.map(u => {
+                const data = getUserData(u.id);
+                return `
+                    <div class="user-card" onclick="selectUser('${u.id}')" onmouseenter="speakES('${u.name}')">
+                        <button class="delete-btn" onclick="deleteUser('${u.id}', event)">×</button>
+                        <div class="user-avatar">${u.avatar}</div>
+                        <div class="user-name">${u.name}</div>
+                        <div class="user-stats">
+                            <span>⭐ ${data.stars}</span>
+                            <span>📚 ${data.completed.length}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        async function selectUser(userId) {
+            const users = getUsers();
+            currentUser = users.find(u => u.id === userId);
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            await speakES('Hola ' + currentUser.name + '. Bienvenido a Facu Inglés');
+            showApp();
+        }
+
+        async function deleteUser(userId, e) {
+            e.stopPropagation();
+            const users = getUsers();
+            const user = users.find(u => u.id === userId);
+            if (!confirm('¿Eliminar usuario "' + user.name + '"?')) return;
+            saveUsers(users.filter(u => u.id !== userId));
+            localStorage.removeItem('facuData_' + userId);
+            renderUsers();
+            await speakES('Usuario eliminado');
+        }
+
+        async function changeUser() {
+            if (!confirm('¿Cambiar de usuario?')) return;
+            localStorage.removeItem('currentUser');
+            currentUser = null;
+            showLogin();
+            await speakES('Elige un usuario para continuar');
+        }
+
+        function showLogin() {
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('appScreen').style.display = 'none';
+            renderUsers();
+        }
+
+        async function showApp() {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('appScreen').style.display = 'block';
+            document.getElementById('profileAvatar').textContent = currentUser.avatar;
+            document.getElementById('profileName').textContent = currentUser.name;
+            updateStats();
+            showMenu();
+        }
+
+        function updateStats() {
+            const data = getUserData(currentUser.id);
+            document.getElementById('starsCount').textContent = data.stars;
+            document.getElementById('badgesCount').textContent = data.badges;
+            document.getElementById('lessonsCount').textContent = data.completed.length;
+            document.getElementById('streakCount').textContent = data.streak;
+        }
+
+        async function showMenu() {
+            const data = getUserData(currentUser.id);
+            const content = document.getElementById('appContent');
+            let html = '<div class="lessons-grid">';
+            Object.values(LESSONS).forEach((lesson, i) => {
+                const completed = data.completed.includes(lesson.id);
+                const locked = i > 0 && !data.completed.includes(Object.values(LESSONS)[i - 1].id);
+                html += `
+                    <div class="lesson-card ${completed ? 'completed' : ''} ${locked ? 'locked' : ''}"
+                         ${locked ? '' : `onclick="startLesson('${lesson.id}')"`}
+                         ${locked ? '' : `onmouseenter="speakES('${lesson.title}')"`}>
+                        ${completed ? '<div class="badge">✅</div>' : ''}
+                        ${locked ? '<div class="badge">🔒</div>' : ''}
+                        <div class="lesson-icon">${lesson.icon}</div>
+                        <div class="lesson-title">${lesson.title}</div>
+                        <div class="lesson-subtitle">${lesson.titleEn}</div>
+                        <div class="lesson-progress">${completed ? 'Completada' : locked ? 'Bloqueada' : 'Empezar'}</div>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            content.innerHTML = html;
+            setTimeout(() => speakES('Elige una lección tocando en ella'), 500);
+        }
+
+        async function startLesson(id) {
+            currentLesson = LESSONS[id];
+            currentActivity = 0;
+            score = 0;
+            await speakES('Vamos a aprender ' + currentLesson.title);
+            await new Promise(r => setTimeout(r, 500));
+            await speak('Lets learn ' + currentLesson.titleEn);
+            showActivity();
+        }
+
+        function showActivity() {
+            const totalVocab = currentLesson.vocab.length;
+            const totalQuiz = currentLesson.quiz.length;
+            const hasMemory = currentLesson.memory ? 1 : 0;
+            const totalActivities = totalVocab + totalQuiz + hasMemory;
+            if (currentActivity < totalVocab) {
+                showVocab();
+            } else if (currentActivity < totalVocab + totalQuiz) {
+                showQuiz();
+            } else if (currentActivity < totalActivities) {
+                showMemoryGame();
+            } else {
+                completeLesson();
+            }
+        }
+
+        async function showVocab() {
+            const v = currentLesson.vocab[currentActivity];
+            const content = document.getElementById('appContent');
+            content.innerHTML = `
+                <div class="vocab-display">
+                    <h2 style="text-align:center;font-size:2em;margin-bottom:30px;color:#6366f1">
+                        Palabra ${currentActivity + 1} de ${currentLesson.vocab.length}
+                    </h2>
+                    <div class="vocab-card" onclick="speakWord('${v.en}', '${v.es}')">
+                        <div class="vocab-illustration">${v.icon}</div>
+                        <div class="vocab-word">${v.en}</div>
+                        <div class="vocab-phonetic">${v.phonetic}</div>
+                        <div class="vocab-translation">${v.es}</div>
+                        <button class="speak-button" onclick="speakWord('${v.en}', '${v.es}'); event.stopPropagation()">
+                            🔊 ESCUCHAR
+                        </button>
+                    </div>
+                    <div class="nav-buttons">
+                        <button class="btn btn-back" onclick="showMenu()">← MENÚ</button>
+                        <button class="btn btn-next" onclick="nextActivity()">SIGUIENTE →</button>
+                    </div>
+                </div>
+            `;
+            setTimeout(() => speakWord(v.en, v.es), 300);
+        }
+
+        async function speakWord(en, es) {
+            await speak(en, 'en-US', 0.6);
+            await new Promise(r => setTimeout(r, 800));
+            await speakES('En español significa');
+            await new Promise(r => setTimeout(r, 500));
+            await speakES(es);
+        }
+
+        async function showQuiz() {
+            const idx = currentActivity - currentLesson.vocab.length;
+            const q = currentLesson.quiz[idx];
+            const content = document.getElementById('appContent');
+            content.innerHTML = `
+                <div class="quiz-question">${q.q}</div>
+                <div class="quiz-icon">${q.icon}</div>
+                <div class="quiz-hint">👆 Toca la respuesta correcta</div>
+                <div class="options-grid">
+                    ${q.opts.map((opt, i) => `
+                        <div class="option-card" onclick="checkAnswer(${i}, ${q.correct}, this, '${q.optsEn[i]}')"
+                             onmouseenter="speak('${q.optsEn[i]}', 'en-US', 0.7)">
+                            ${opt}
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="feedback-banner" id="feedback"></div>
+                <div class="nav-buttons">
+                    <button class="btn btn-back" onclick="showMenu()">← MENÚ</button>
+                    <button class="btn btn-next" id="nextBtn" style="display:none" onclick="nextActivity()">SIGUIENTE →</button>
+                </div>
+            `;
+            setTimeout(async () => {
+                await speakES(q.q);
+            }, 300);
+        }
+
+        async function checkAnswer(selected, correct, elem, wordEn) {
+            const cards = document.querySelectorAll('.option-card');
+            cards.forEach(c => c.style.pointerEvents = 'none');
+            const fb = document.getElementById('feedback');
+            if (selected === correct) {
+                elem.classList.add('correct');
+                fb.className = 'feedback-banner success show';
+                fb.textContent = '✅ ¡CORRECTO! ¡MUY BIEN!';
+                score++;
+                const data = getUserData(currentUser.id);
+                data.stars += 10;
+                saveUserData(currentUser.id, data);
+                updateStats();
+                await speakES('¡Muy bien! ¡Correcto!');
+                await new Promise(r => setTimeout(r, 500));
+                await speak('Excellent! ' + wordEn + ' is correct!', 'en-US', 0.7);
+                createConfetti();
+            } else {
+                elem.classList.add('incorrect');
+                cards[correct].classList.add('correct');
+                fb.className = 'feedback-banner error show';
+                fb.textContent = '❌ Intenta de nuevo';
+                await speakES('Intenta de nuevo. La respuesta correcta está en verde');
+            }
+            document.getElementById('nextBtn').style.display = 'block';
+        }
+
+        function showMemoryGame() {
+            const content = document.getElementById('appContent');
+            const pairs = currentLesson.memory;
+            const cards = [];
+            pairs.forEach(p => {
+                cards.push({ type: 'text', content: p.text, id: p.text });
+                cards.push({ type: 'icon', content: p.icon, id: p.text });
+            });
+            for (let i = cards.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [cards[i], cards[j]] = [cards[j], cards[i]];
+            }
+            content.innerHTML = `
+                <h2 style="text-align:center;font-size:2.5em;margin-bottom:30px;color:#6366f1">
+                    🧠 Juego de Memoria
+                </h2>
+                <p style="text-align:center;font-size:1.5em;margin-bottom:30px;color:#6b7280">
+                    Encuentra las parejas
+                </p>
+                <div class="memory-grid">
+                    ${cards.map((c, i) => `
+                        <div class="memory-card" data-id="${c.id}" data-index="${i}" onclick="flipCard(this)">
+                            <span class="front" style="display:none">${c.content}</span>
+                            <span class="back">?</span>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="feedback-banner" id="feedback"></div>
+                <div class="nav-buttons">
+                    <button class="btn btn-back" onclick="showMenu()">← MENÚ</button>
+                    <button class="btn btn-next" id="nextBtn" style="display:none" onclick="nextActivity()">SIGUIENTE →</button>
+                </div>
+            `;
+            window.memoryFlipped = [];
+            window.memoryMatched = 0;
+            setTimeout(() => speakES('Encuentra las parejas tocando las tarjetas'), 500);
+        }
+
+        async function flipCard(card) {
+            if (card.classList.contains('matched') || window.memoryFlipped.length >= 2) return;
+            card.classList.add('flipped');
+            card.querySelector('.back').style.display = 'none';
+            card.querySelector('.front').style.display = 'block';
+            window.memoryFlipped.push(card);
+            if (window.memoryFlipped.length === 2) {
+                setTimeout(() => checkMemoryMatch(), 1000);
+            }
+        }
+
+        async function checkMemoryMatch() {
+            const [c1, c2] = window.memoryFlipped;
+            const id1 = c1.getAttribute('data-id');
+            const id2 = c2.getAttribute('data-id');
+            if (id1 === id2) {
+                c1.classList.add('matched');
+                c2.classList.add('matched');
+                window.memoryMatched += 2;
+                await speak('Great match!', 'en-US', 0.8);
+                const data = getUserData(currentUser.id);
+                data.stars += 5;
+                saveUserData(currentUser.id, data);
+                updateStats();
+                if (window.memoryMatched === document.querySelectorAll('.memory-card').length) {
+                    setTimeout(() => {
+                        const fb = document.getElementById('feedback');
+                        fb.className = 'feedback-banner success show';
+                        fb.textContent = '🎉 ¡Increíble! ¡Todas las parejas!';
+                        document.getElementById('nextBtn').style.display = 'block';
+                        score++;
+                        createConfetti();
+                        speakES('¡Increíble! Encontraste todas las parejas');
+                    }, 500);
+                }
+            } else {
+                c1.classList.remove('flipped');
+                c2.classList.remove('flipped');
+                c1.querySelector('.back').style.display = 'block';
+                c1.querySelector('.front').style.display = 'none';
+                c2.querySelector('.back').style.display = 'block';
+                c2.querySelector('.front').style.display = 'none';
+            }
+            window.memoryFlipped = [];
+        }
+
+        function nextActivity() {
+            currentActivity++;
+            showActivity();
+        }
+
+        async function completeLesson() {
+            const data = getUserData(currentUser.id);
+            if (!data.completed.includes(currentLesson.id)) {
+                data.completed.push(currentLesson.id);
+                data.stars += 50;
+                data.badges += 1;
+                data.streak += 1;
+                saveUserData(currentUser.id, data);
+            }
+            const content = document.getElementById('appContent');
+            content.innerHTML = `
+                <div class="completion">
+                    <div class="completion-icon">${currentLesson.icon}</div>
+                    <h2 class="completion-title">¡LECCIÓN COMPLETADA!</h2>
+                    <div class="stars-display">⭐⭐⭐</div>
+                    <div class="completion-score">
+                        ¡Ganaste ${score} puntos!
+                    </div>
+                    <button class="btn btn-next" onclick="showMenu()" style="margin: 40px auto; float: none; display: block;">
+                        VOLVER AL MENÚ
+                    </button>
+                </div>
+            `;
+            updateStats();
+            createConfetti();
+            setTimeout(async () => {
+                await speakES('¡Felicitaciones! Completaste la lección de ' + currentLesson.title);
+                await new Promise(r => setTimeout(r, 500));
+                await speak('Congratulations! You completed ' + currentLesson.titleEn, 'en-US', 0.7);
+            }, 500);
+        }
+
+        function createConfetti() {
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const piece = document.createElement('div');
+                    piece.className = 'confetti-piece';
+                    piece.style.left = Math.random() * 100 + '%';
+                    piece.style.top = '-20px';
+                    piece.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                    piece.style.animationDelay = Math.random() * 0.5 + 's';
+                    document.body.appendChild(piece);
+                    setTimeout(() => piece.remove(), 3000);
+                }, i * 50);
+            }
+        }
+
+        window.onload = () => {
+            renderAvatars();
+            const saved = localStorage.getItem('currentUser');
+            if (saved) {
+                currentUser = JSON.parse(saved);
+                showApp();
+            } else {
+                showLogin();
+                setTimeout(() => speakES('Bienvenido a Facu Inglés. Toca un usuario o crea uno nuevo'), 1000);
+            }
+        };
     </script>
 </body>
 </html>
