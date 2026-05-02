@@ -202,14 +202,15 @@
     .mem.matched{background:#ecfdf5;color:#087f5b;border:2px solid var(--success);animation:pulseGood .5s}
 
     /* === SCENE TAP === */
-    .scene-objects{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:10px;margin-top:12px}
-    .scene-obj{background:#fff;border:2px solid #fff;border-radius:18px;aspect-ratio:1;display:grid;place-items:center;font-size:2.8rem;cursor:pointer;transition:transform .15s,border-color .2s;box-shadow:0 6px 14px #1720331a;position:relative;padding:8px}
+    .scene-objects{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:10px;margin-top:12px}
+    .scene-obj{background:#fff;border:2px solid #fff;border-radius:18px;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:2.8rem;cursor:pointer;transition:transform .15s,border-color .2s;box-shadow:0 6px 14px #1720331a;position:relative;padding:8px}
     .scene-obj:active{transform:scale(.92)}
     .scene-obj.correct{border-color:var(--success);background:#ecfdf5;animation:pulseGood .5s}
     .scene-obj.wrong{border-color:var(--danger);background:#fff5f5;animation:shake .4s}
     .scene-obj.faded{opacity:.35;pointer-events:none}
-    .scene-obj svg{max-width:60%;max-height:60%}
-    .scene-obj small{font-size:.65rem;font-weight:900;color:var(--muted);position:absolute;bottom:4px}
+    .scene-obj svg{max-width:50%;max-height:50%}
+    .scene-obj .so-label{font-size:.78rem;font-weight:1000;color:var(--ink);text-align:center;line-height:1}
+    .scene-obj .so-en{font-size:.65rem;color:var(--muted);font-weight:800;line-height:1}
 
     /* === SENTENCE BUILDER === */
     .sentence-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0}
@@ -410,23 +411,40 @@
 
     /* Picture Match (2 imágenes, sin texto) */
     .pic-match-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
-    .pic-choice{aspect-ratio:1;background:#fff;border:4px solid #e9ecf5;border-radius:28px;display:grid;place-items:center;box-shadow:0 10px 24px #17203314;transition:transform .15s,border-color .2s;cursor:pointer;padding:14px;position:relative}
+    .pic-choice{aspect-ratio:1;background:#fff;border:4px solid #e9ecf5;border-radius:28px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;box-shadow:0 10px 24px #17203314;transition:transform .15s,border-color .2s;cursor:pointer;padding:14px;position:relative}
     .pic-choice:active{transform:scale(.94)}
-    .pic-choice img.tw{width:80%;height:80%;max-width:120px;max-height:120px}
+    .pic-choice img.tw{width:60%;height:60%;max-width:90px;max-height:90px}
+    .pic-choice .pc-label{font-weight:1000;font-size:.95rem;color:var(--ink);text-align:center;line-height:1.1}
+    .pic-choice .pc-en{font-size:.72rem;color:var(--muted);font-weight:800;margin-top:-2px}
     .pic-choice.correct{border-color:#22c55e;background:#dcfce7;animation:choiceWin .6s}
     .pic-choice.wrong{border-color:#ef4444;background:#fee2e2;animation:choiceShake .4s}
     @keyframes choiceWin{0%,100%{transform:scale(1)}30%{transform:scale(1.12)}}
     @keyframes choiceShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
 
     /* Pop the Balloon */
-    .balloon-arena{position:relative;height:380px;background:linear-gradient(180deg,#dbeafe 0%,#fef9c3 100%);border-radius:24px;overflow:hidden;border:3px solid #fff;box-shadow:inset 0 4px 12px #0001}
-    .balloon{position:absolute;width:80px;height:96px;cursor:pointer;animation:balloonRise linear forwards;display:flex;align-items:center;justify-content:center;flex-direction:column}
-    @keyframes balloonRise{from{transform:translateY(380px)}to{transform:translateY(-110px)}}
-    .balloon-body{width:70px;height:80px;border-radius:50% 50% 48% 48% / 60% 60% 40% 40%;display:grid;place-items:center;box-shadow:inset -8px -10px 16px #00000033,0 4px 8px #00000022;position:relative}
-    .balloon-body::before{content:"";position:absolute;width:14px;height:18px;background:#ffffff66;border-radius:50%;top:14px;left:14px;filter:blur(2px)}
-    .balloon-body::after{content:"";position:absolute;bottom:-8px;left:50%;width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:10px solid currentColor;transform:translateX(-50%)}
-    .balloon-body img.tw{width:42px;height:42px}
-    .balloon-string{width:1px;height:14px;background:#374151;margin-top:6px}
+    .balloon-arena{position:relative;height:420px;background:linear-gradient(180deg,#dbeafe 0%,#fef9c3 70%,#bbf7d0 100%);border-radius:24px;overflow:hidden;border:3px solid #fff;box-shadow:inset 0 4px 12px #0001}
+    /* === GLOBOS REDISEÑADOS ===
+       - Globo translúcido pastel para que la imagen interior se vea clara
+       - Borde definido y sombra para forma de globo sin tapar el contenido
+       - Imagen grande (50px) bien visible dentro
+       - Etiqueta blanca con texto BIEN GRANDE debajo
+    */
+    .balloon{position:absolute;width:96px;height:140px;cursor:pointer;animation:balloonRise linear forwards;display:flex;align-items:center;justify-content:center;flex-direction:column;will-change:transform}
+    @keyframes balloonRise{from{transform:translateY(420px)}to{transform:translateY(-150px)}}
+    .balloon-body{width:84px;height:96px;border-radius:50% 50% 48% 48% / 60% 60% 40% 40%;display:grid;place-items:center;position:relative;background:rgba(255,255,255,.92);border:4px solid currentColor;box-shadow:0 6px 14px #00000033,inset -6px -8px 12px #00000011}
+    .balloon-body::before{content:"";position:absolute;width:18px;height:22px;background:#ffffff;border-radius:50%;top:10px;left:14px;opacity:.7;filter:blur(3px)}
+    .balloon-body::after{content:"";position:absolute;bottom:-10px;left:50%;width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:12px solid currentColor;transform:translateX(-50%)}
+    .balloon-body img.tw{width:54px;height:54px;position:relative;z-index:2}
+    .balloon-string{width:1.5px;height:12px;background:#374151;margin-top:8px}
+    .balloon-label{margin-top:3px;background:#171F35;color:#fff;font-size:.78rem;font-weight:1000;padding:3px 10px;border-radius:10px;box-shadow:0 3px 8px #00000044;white-space:nowrap;max-width:120px;overflow:hidden;text-overflow:ellipsis;letter-spacing:.01em}
+    .balloon.popped{animation:balloonPop .35s ease-out forwards}
+    @keyframes balloonPop{to{transform:scale(1.6);opacity:0}}
+    .balloon.missed{animation:balloonMiss .4s forwards}
+    @keyframes balloonMiss{to{opacity:.3}}
+
+    /* Para lecciones de COLORES: el globo se llena del color que enseña */
+    .balloon.color-lesson .balloon-body{background:currentColor;border-color:rgba(0,0,0,.15)}
+    .balloon.color-lesson .balloon-body img.tw{filter:drop-shadow(0 2px 4px rgba(0,0,0,.3))}
     .balloon.popped{animation:balloonPop .35s ease-out forwards}
     @keyframes balloonPop{to{transform:scale(1.6);opacity:0}}
     .balloon.missed{animation:balloonMiss .4s forwards}
@@ -449,15 +467,17 @@
 
     /* Image-image memory (versión sin texto) */
     .imem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
-    .imem-card{aspect-ratio:1;background:linear-gradient(135deg,#6D5DF6,#FF66A3);border-radius:18px;display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 16px #1720331a;color:#fff;transition:transform .25s,background .3s;perspective:1000px;position:relative;overflow:hidden}
+    .imem-card{aspect-ratio:1;background:linear-gradient(135deg,#6D5DF6,#FF66A3);border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;box-shadow:0 6px 16px #1720331a;color:#fff;transition:transform .25s,background .3s;perspective:1000px;position:relative;overflow:hidden;padding:6px}
     .imem-card .qmark{font-size:2.4rem;font-weight:1000;animation:qmarkFloat 2s ease-in-out infinite}
     @keyframes qmarkFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
     .imem-card.flipped{background:#fff;border:3px solid var(--primary);transform:rotateY(180deg) scale(1.05)}
     .imem-card.flipped .qmark{display:none}
-    .imem-card.flipped img.tw{width:60%;height:60%;transform:rotateY(180deg)}
+    .imem-card.flipped img.tw{width:55%;height:55%;transform:rotateY(180deg)}
+    .imem-card.flipped .imem-label{transform:rotateY(180deg);font-size:.78rem;font-weight:1000;color:var(--ink);text-align:center;line-height:1}
     .imem-card.matched{background:linear-gradient(135deg,#22c55e,#16a34a);border:3px solid #15803d;animation:matchedGlow 1s}
+    .imem-card.matched .imem-label{color:#fff}
     @keyframes matchedGlow{0%,100%{box-shadow:0 6px 16px #1720331a}50%{box-shadow:0 6px 16px #16a34a88,0 0 0 8px #16a34a44}}
-    .imem-card.matched img.tw{width:60%;height:60%;filter:drop-shadow(0 2px 4px #00000044)}
+    .imem-card.matched img.tw{width:55%;height:55%;filter:drop-shadow(0 2px 4px #00000044)}
 
     /* Cofre del tesoro al completar */
     .treasure-stage{text-align:center;padding:30px 16px}
@@ -598,7 +618,7 @@
 
 <script>
 /* === DATOS Y ESTADO === */
-const STORE='facuEnglishProMobileV3';
+const STORE='facuEnglishProMobileV5';
 const AVATARS=['👦','👧','🧒','👶','🦊','🐼','🦁','🐯','🐶','🐱','🦄','🐸','🦖','🐙','🦋','🚀','⚽','🎨','🎧','⭐'];
 let selectedAvatar='👦', currentUser=null, currentLesson=null, stepIndex=0, sessionScore=0;
 let memoryState=null, sentenceState=null, dialogState=null, speedState=null, sortState=null, tapState=null;
@@ -1186,6 +1206,17 @@ function tw(emoji,size){
   return `<img class="tw" src="${url}" alt="${emoji}" draggable="false" onerror="this.replaceWith(document.createTextNode('${emoji}'))"${sizeAttr}>`;
 }
 
+/* Mapa de colores para la lección "colors" (CSS válido para los círculos) */
+const COLOR_MAP={Red:'#dc2626',Blue:'#2563eb',Yellow:'#facc15',Green:'#16a34a',Orange:'#f97316',Purple:'#a855f7',Pink:'#ec4899',Black:'#1f2937',White:'#f3f4f6'};
+function isColorLesson(){return currentLesson&&currentLesson.id==='colors'}
+function colorVisual(en,size){
+  const c=COLOR_MAP[en]||'#6d5df6';
+  const px=size||90;
+  // White es muy claro, agregar borde
+  const border=en==='White'?'border:3px solid #cbd5e1;':'';
+  return `<div style="width:${px}px;height:${px}px;border-radius:50%;background:${c};${border}box-shadow:inset -8px -10px 18px #00000033,0 4px 12px #00000022"></div>`;
+}
+
 /* ============================================================
    AUDIO MEJORADO
    - Voces priorizadas con detección de calidad
@@ -1553,6 +1584,7 @@ function renderFlash(i){
   const v=currentLesson.words[i];
   markSeen(v.en);
   const sceneClass=getSceneClass();
+  const bigVisual=isColorLesson()?colorVisual(v.en,100):tw(v.icon,'100px');
   $('activityBody').innerHTML=`
     <div class="mascot-stage">
       <div class="mascot happy">
@@ -1561,7 +1593,7 @@ function renderFlash(i){
       <div class="speech-bubble right" id="mascotBubble">¡Escucha y mira!<br><small>Listen and look!</small></div>
     </div>
     <div class="picture-card ${sceneClass}">
-      <div class="big-pic">${tw(v.icon,'100px')}</div>
+      <div class="big-pic">${bigVisual}</div>
       <div class="word-en">${v.en}</div>
       <div class="word-es">${v.es}</div>
     </div>
@@ -1575,7 +1607,6 @@ function renderFlash(i){
     <div class="action-bar">
       <button class="primary-btn" onclick="nextStep()">${i===0?'¡Empezar! →':'Siguiente →'}</button>
     </div>`;
-  // Auto-play al mostrar
   setTimeout(()=>speakENtwice(v.en),400);
 }
 
@@ -1641,6 +1672,11 @@ function renderPictureMatch(){
   const items=dedupOptions(shuffled(currentLesson.words)).slice(0,Math.min(3,currentLesson.words.length));
   const correct=items[Math.floor(Math.random()*items.length)];
   window._pmCorrect=correct.en;
+  const colors=isColorLesson();
+  const renderChoice=v=>{
+    const visual=colors?colorVisual(v.en,80):tw(v.icon,'80px');
+    return `<button class="pic-choice" onclick="answerPicMatch(this,'${escapeAttr(v.en)}')">${visual}<div class="pc-label">${v.es}</div><div class="pc-en">${v.en}</div></button>`;
+  };
   $('activityBody').innerHTML=`
     <div class="mascot-stage">
       <div class="mascot happy"><div class="mascot-body">🦉</div></div>
@@ -1648,7 +1684,7 @@ function renderPictureMatch(){
     </div>
     <button class="listen-big-btn" onclick="speakENtwice('${escapeAttr(correct.en)}')">🔊 Escuchar</button>
     <div class="pic-match-grid" style="grid-template-columns:repeat(${items.length},1fr)">
-      ${items.map(v=>`<button class="pic-choice" onclick="answerPicMatch(this,'${escapeAttr(v.en)}')">${tw(v.icon,'90px')}</button>`).join('')}
+      ${items.map(renderChoice).join('')}
     </div>
     <div id="feedback" class="feedback"></div>
     <div class="action-bar with-back">
@@ -1692,7 +1728,6 @@ function renderTapToHear(){
 }
 function showNextTapHear(){
   if(!window._thQueue||window._thQueue.length===0){
-    // Terminó
     sfxLevelUp();confetti();
     $('activityBody').innerHTML=`
       <div class="mascot-stage"><div class="mascot celebrate"><div class="mascot-body">🦉</div></div>
@@ -1703,13 +1738,16 @@ function showNextTapHear(){
     return;
   }
   const v=window._thQueue[0];
+  const innerVisual=isColorLesson()?colorVisual(v.en,120):tw(v.icon,'110px');
   $('activityBody').innerHTML=`
     <div class="mascot-stage">
       <div class="mascot happy"><div class="mascot-body">🦉</div></div>
       <div class="speech-bubble right">Toca la imagen<br><small>Tap and listen!</small></div>
     </div>
     <div class="tap-hear-card">
-      <div class="tap-hear-pic" id="tapHearPic" onclick="tapHearAction('${escapeAttr(v.en)}')">${tw(v.icon,'110px')}</div>
+      <div class="tap-hear-pic" id="tapHearPic" onclick="tapHearAction('${escapeAttr(v.en)}')">${innerVisual}</div>
+      <div style="margin-top:14px;font-size:1.6rem;font-weight:1000;color:var(--ink)">${v.es}</div>
+      <div style="font-size:1.05rem;color:var(--primary);font-weight:900;margin-top:2px">${v.en}</div>
       <div class="tap-hear-hint">👆 Toca para escuchar</div>
       <div style="margin-top:14px;font-weight:1000;color:var(--muted);font-size:.92rem">Palabra ${window._thTotal-window._thQueue.length+1} de ${window._thTotal}</div>
     </div>
@@ -1717,7 +1755,6 @@ function showNextTapHear(){
       <button class="ghost-btn" onclick="prevStepSafe()">← Atrás</button>
       <button class="primary-btn" onclick="advanceTapHear()">Siguiente →</button>
     </div>`;
-  // Auto-play primera vez
   setTimeout(()=>speakENtwice(v.en),300);
 }
 function tapHearAction(en){
@@ -1749,51 +1786,64 @@ function startBalloonRound(){
   balloonState.target=balloonState.items[Math.floor(Math.random()*balloonState.items.length)];
   balloonState.roundActive=true;
   balloonState.balloons=[];
+  const targetVisual=isColorLesson()?
+    `<div style="width:60px;height:60px;border-radius:50%;background:${COLOR_MAP[balloonState.target.en]||'#888'};border:3px solid #fff;box-shadow:0 4px 12px #0002"></div>`:
+    `<div style="width:60px;height:60px;border-radius:18px;background:#fff;display:grid;place-items:center;box-shadow:0 4px 12px #0002">${tw(balloonState.target.icon,'42px')}</div>`;
   $('activityBody').innerHTML=`
-    <div class="mascot-stage" style="min-height:80px;padding:6px 0">
-      <div class="mascot happy" style="width:60px;height:60px"><div class="mascot-body" style="font-size:48px">🦉</div></div>
-      <div class="speech-bubble right" style="top:10px">Pincha: <b>${balloonState.target.es}</b><br><small>Pop the right balloon!</small></div>
+    <div style="background:#fff;border-radius:20px;padding:14px;display:flex;align-items:center;gap:14px;box-shadow:0 6px 16px #1720331a;margin-bottom:10px">
+      ${targetVisual}
+      <div style="flex:1;min-width:0">
+        <div style="font-size:.78rem;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.05em">Pincha el globo de:</div>
+        <div style="font-size:1.4rem;font-weight:1000;line-height:1.05;letter-spacing:-.02em">${balloonState.target.es}</div>
+        <div style="font-size:.95rem;color:var(--primary);font-weight:900">${balloonState.target.en}</div>
+      </div>
+      <button onclick="speakENtwice('${escapeAttr(balloonState.target.en)}')" style="background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;border-radius:14px;width:50px;height:50px;font-size:1.4rem;border:0;flex-shrink:0;box-shadow:0 4px 10px #6d5df633" aria-label="Escuchar">🔊</button>
     </div>
-    <div style="text-align:center;margin-bottom:8px"><b style="font-size:1.1rem">⭐ ${balloonState.score}</b> · Ronda ${balloonState.rounds}/${balloonState.totalRounds}</div>
-    <button class="listen-big-btn" onclick="speakENtwice('${escapeAttr(balloonState.target.en)}')" style="padding:10px;min-height:44px;font-size:.95rem">🔊 ${balloonState.target.en}</button>
+    <div style="text-align:center;margin-bottom:8px;font-weight:1000;color:var(--ink)"><span style="background:#fef3c7;padding:4px 10px;border-radius:12px">⭐ ${balloonState.score}</span> · Ronda ${balloonState.rounds}/${balloonState.totalRounds}</div>
     <div class="balloon-arena" id="balloonArena"></div>
     <div class="action-bar"><button class="ghost-btn" onclick="endBalloonGame(true)">⏭️ Saltar juego</button></div>`;
   setTimeout(()=>speakENtwice(balloonState.target.en),200);
-  // Generar globos cada 1.2s
   let count=0;
   balloonState.spawnTimer=setInterval(()=>{
     if(!balloonState||!balloonState.roundActive)return;
     spawnBalloon();
     count++;
-    if(count>=6){clearInterval(balloonState.spawnTimer);setTimeout(()=>{
+    if(count>=7){clearInterval(balloonState.spawnTimer);setTimeout(()=>{
       if(balloonState&&balloonState.roundActive){
-        // Fin de ronda - avanzar
         balloonState.roundActive=false;
         setTimeout(()=>startBalloonRound(),800);
       }
-    },4500)}
-  },1100);
+    },5000)}
+  },1000);
 }
 function spawnBalloon(){
   const arena=$('balloonArena');
   if(!arena||!balloonState)return;
-  // Mezclar correcto y distractores
-  const useCorrect=Math.random()<0.5;
-  const word=useCorrect?balloonState.target:balloonState.items.filter(w=>w.en!==balloonState.target.en)[Math.floor(Math.random()*(balloonState.items.length-1))];
+  const useCorrect=Math.random()<0.55;
+  const word=useCorrect?balloonState.target:balloonState.items.filter(w=>w.en!==balloonState.target.en)[Math.floor(Math.random()*Math.max(1,balloonState.items.length-1))];
   if(!word)return;
-  const colors=['#ef4444','#f59e0b','#3b82f6','#a855f7','#ec4899','#14b8a6'];
-  const color=colors[Math.floor(Math.random()*colors.length)];
-  const xPct=10+Math.random()*75;
-  const duration=4+Math.random()*1.5;
+  const colors=isColorLesson();
+  let bgColor;
+  if(colors){
+    bgColor=COLOR_MAP[word.en]||'#6d5df6';
+  }else{
+    const palette=['#ef4444','#f59e0b','#3b82f6','#a855f7','#ec4899','#14b8a6','#22c55e','#f97316'];
+    let hash=0;
+    for(let i=0;i<word.en.length;i++)hash=word.en.charCodeAt(i)+((hash<<5)-hash);
+    bgColor=palette[Math.abs(hash)%palette.length];
+  }
+  const xPct=8+Math.random()*78;
+  const duration=4.5+Math.random()*1.5;
   const balloon=document.createElement('div');
-  balloon.className='balloon';
+  balloon.className='balloon'+(colors?' color-lesson':'');
   balloon.style.left=xPct+'%';
   balloon.style.animationDuration=duration+'s';
   balloon.dataset.word=word.en;
-  balloon.innerHTML=`<div class="balloon-body" style="background:${color};color:${color}">${tw(word.icon,'42px')}</div><div class="balloon-string"></div>`;
+  // En lecciones de colores, no mostrar icono — el color del globo es la respuesta
+  const iconHtml=colors?'':tw(word.icon,'54px');
+  balloon.innerHTML=`<div class="balloon-body" style="color:${bgColor}">${iconHtml}</div><div class="balloon-string"></div><div class="balloon-label">${word.es}</div>`;
   balloon.onclick=()=>popBalloon(balloon,word.en);
   arena.appendChild(balloon);
-  // Auto-remove
   setTimeout(()=>{if(balloon.parentNode){balloon.classList.add('missed');setTimeout(()=>balloon.remove(),400)}},(duration*1000)+200);
 }
 async function popBalloon(el,word){
@@ -1832,8 +1882,8 @@ function renderImageMemory(){
   // Crear pares de la MISMA imagen (memorice clásico imagen-imagen)
   // Pero al voltear, escuchas la palabra en inglés
   const cards=shuffled(pairs.flatMap(v=>[
-    {id:v.en,icon:v.icon,n:1},
-    {id:v.en,icon:v.icon,n:2}
+    {id:v.en,icon:v.icon,es:v.es,n:1},
+    {id:v.en,icon:v.icon,es:v.es,n:2}
   ]));
   memoryState={open:[],matched:0,total:cards.length,moves:0,pairs};
   $('activityBody').innerHTML=`
@@ -1842,7 +1892,7 @@ function renderImageMemory(){
       <div class="speech-bubble right" style="top:14px">Encuentra<br>las parejas iguales</div>
     </div>
     <div class="imem-grid">
-      ${cards.map(c=>`<button class="imem-card" data-id="${escapeAttr(c.id)}" data-icon="${escapeAttr(c.icon)}" onclick="flipIMem(this)"><span class="qmark">?</span></button>`).join('')}
+      ${cards.map(c=>`<button class="imem-card" data-id="${escapeAttr(c.id)}" data-icon="${escapeAttr(c.icon)}" data-es="${escapeAttr(c.es)}" onclick="flipIMem(this)"><span class="qmark">?</span></button>`).join('')}
     </div>
     <p id="memMoves" style="text-align:center;margin-top:12px;color:var(--muted);font-weight:900;font-size:.85rem">Movimientos: 0</p>
     <div class="action-bar with-back">
@@ -1853,11 +1903,10 @@ function renderImageMemory(){
 }
 async function flipIMem(el){
   if(el.classList.contains('matched')||el.classList.contains('flipped')||memoryState.open.length>=2)return;
-  // Mostrar imagen
-  el.innerHTML=tw(el.dataset.icon,'60px');
+  const visual=isColorLesson()?colorVisual(el.dataset.id,50):tw(el.dataset.icon,'56px');
+  el.innerHTML=visual+`<div class="imem-label">${el.dataset.es||el.dataset.id}</div>`;
   el.classList.add('flipped');
   sfxTap();
-  // Reproducir audio de la palabra
   speakEN(el.dataset.id);
   memoryState.open.push(el);
   if(memoryState.open.length===2){memoryState.moves++;setTimeout(checkIMem,1000)}
@@ -1964,7 +2013,7 @@ function renderTapRound(){
     <div class="question">👆 Find: <span style="color:var(--primary)">${target.en}</span><small>${target.es}</small></div>
     <div class="scene-frame">${SCENES[sceneKey]||''}</div>
     <button class="primary-btn full" onclick="speakENtwice('${escapeAttr(target.en)}')">🔊 Escuchar</button>
-    <div class="scene-objects">${tapState.items.map(v=>`<button class="scene-obj" data-key="${escapeAttr(v.en)}" onclick="tapAnswer(this,'${escapeAttr(v.en)}')">${tw(v.icon)}</button>`).join('')}</div>
+    <div class="scene-objects">${tapState.items.map(v=>`<button class="scene-obj" data-key="${escapeAttr(v.en)}" onclick="tapAnswer(this,'${escapeAttr(v.en)}')">${tw(v.icon,'48px')}<div class="so-label">${v.es}</div></button>`).join('')}</div>
     <div id="feedback" class="feedback"></div>
     <p style="text-align:center;margin-top:10px;font-weight:900;color:var(--muted);font-size:.88rem">Encontradas: ${tapState.hits} de ${tapState.total}</p>
   </section>
@@ -2305,7 +2354,7 @@ function renderSortGame(){
       <div class="sort-bin healthy" id="binHealthy"><h4>💚 HEALTHY</h4><div class="items" id="itemsH"></div></div>
       <div class="sort-bin unhealthy" id="binUnhealthy"><h4>🚫 UNHEALTHY</h4><div class="items" id="itemsU"></div></div>
     </div>
-    <div class="sort-tray" id="sortTray">${items.map((it,i)=>`<button class="sort-pill" data-idx="${i}" onclick="pickSort(${i},this)"><span class="ic">${tw(it.icon)}</span> ${it.en}<small style="margin-left:6px;color:var(--muted);font-weight:800">(${it.es})</small></button>`).join('')}</div>
+    <div class="sort-tray" id="sortTray">${items.map((it,i)=>`<button class="sort-pill" data-idx="${i}" onclick="pickSort(${i},this)"><span class="ic">${tw(it.icon)}</span> <b>${it.es}</b><small style="margin-left:6px;color:var(--muted);font-weight:800">${it.en}</small></button>`).join('')}</div>
     <p style="text-align:center;color:var(--muted);font-weight:800;font-size:.85rem;margin-top:8px">Selecciona un item, luego toca el bin correcto.</p>
     <div id="feedback" class="feedback"></div>
   </section>
@@ -2337,7 +2386,7 @@ async function placeSort(toHealthy){
     sfxCorrect();vibrate([20,40,20]);reward(8);comboCount++;
     sortPicked.el.remove();
     const targetList=toHealthy?'itemsH':'itemsU';
-    $(targetList).insertAdjacentHTML('beforeend',`<span class="sort-pill ${toHealthy?'placed-h':'placed-u'}"><span class="ic">${tw(item.icon)}</span> ${item.en}</span>`);
+    $(targetList).insertAdjacentHTML('beforeend',`<span class="sort-pill ${toHealthy?'placed-h':'placed-u'}"><span class="ic">${tw(item.icon)}</span> <b>${item.es}</b></span>`);
     sortState.placed.push(item);sortPicked=null;
     await speakEN(item.en+' is '+(toHealthy?'healthy':'unhealthy'));
     if(sortState.placed.length===sortState.items.length){
