@@ -312,6 +312,173 @@
     .parent-card label:first-of-type{border-top:0}
     .parent-card .select{margin-top:6px}
 
+    /* === TWEMOJI IMAGES (emojis dibujados de Twitter) ===
+       Se ven IGUAL en todos los dispositivos. Más expresivos que los del sistema.
+    */
+    .tw{display:inline-block;vertical-align:middle;width:1em;height:1em;line-height:1}
+    .tw-xl{width:1.4em;height:1.4em}
+    .ic .tw{width:48px;height:48px}
+    .scene-obj .tw{width:60%;height:60%;max-width:60px;max-height:60px}
+    .word-mini .e .tw{width:48px;height:48px}
+    .practice-card .tw{width:48px;height:48px}
+    .scene-frame .tw{width:auto;height:auto}
+    .reply-btn .flag .tw{width:24px;height:24px}
+    .lesson-meta-icon .tw{width:32px;height:32px}
+    img.tw{display:inline-block}
+
+    /* === GAMIFICACIÓN PROFESIONAL ESTILO DUOLINGO === */
+
+    /* Mascota lechuza animada */
+    .mascot-stage{position:relative;display:flex;justify-content:center;align-items:center;padding:14px 0;min-height:130px}
+    .mascot{position:relative;width:120px;height:120px;transition:transform .3s}
+    .mascot-body{width:100%;height:100%;display:grid;place-items:center;font-size:88px;animation:mascotIdle 3s ease-in-out infinite}
+    @keyframes mascotIdle{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-6px) rotate(2deg)}}
+    .mascot.happy .mascot-body{animation:mascotHappy .8s ease-in-out infinite}
+    @keyframes mascotHappy{0%,100%{transform:translateY(0) rotate(0)}25%{transform:translateY(-12px) rotate(-8deg)}75%{transform:translateY(-12px) rotate(8deg)}}
+    .mascot.celebrate .mascot-body{animation:mascotCelebrate .6s ease-in-out 3}
+    @keyframes mascotCelebrate{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.3) rotate(15deg)}}
+    .mascot.sad .mascot-body{animation:mascotSad 1s ease-in-out infinite;filter:grayscale(.4)}
+    @keyframes mascotSad{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(4px) scale(.95)}}
+    .speech-bubble{position:absolute;background:#fff;color:var(--ink);padding:10px 14px;border-radius:18px;font-weight:900;font-size:.95rem;box-shadow:0 6px 20px #17203322;animation:bubbleIn .4s cubic-bezier(.28,1.6,.5,1);max-width:200px;line-height:1.3;border:2px solid #eef0f7;z-index:5}
+    .speech-bubble::after{content:"";position:absolute;width:14px;height:14px;background:#fff;border-right:2px solid #eef0f7;border-bottom:2px solid #eef0f7}
+    .speech-bubble.left{right:calc(50% + 65px);top:30%}
+    .speech-bubble.left::after{right:-9px;top:14px;transform:rotate(-45deg)}
+    .speech-bubble.right{left:calc(50% + 65px);top:30%}
+    .speech-bubble.right::after{left:-9px;top:14px;transform:rotate(135deg)}
+    @keyframes bubbleIn{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+
+    /* Gemas y XP estilo Duolingo */
+    .gem{display:inline-block;width:18px;height:18px;background:linear-gradient(135deg,#ef4444 0%,#dc2626 50%,#991b1b 100%);clip-path:polygon(20% 0,80% 0,100% 30%,80% 100%,20% 100%,0 30%);animation:gemSparkle 2.5s ease-in-out infinite;vertical-align:middle}
+    @keyframes gemSparkle{0%,100%{filter:brightness(1)}50%{filter:brightness(1.4)}}
+    .gem-fly{position:fixed;z-index:100;pointer-events:none;animation:gemFly 1s ease-in forwards;font-size:24px}
+    @keyframes gemFly{from{opacity:1;transform:translate(0,0) scale(1)}to{opacity:0;transform:translate(var(--dx,0),var(--dy,-100px)) scale(.4)}}
+    .xp-popup{position:absolute;color:#16a34a;font-weight:1000;font-size:1.3rem;animation:xpFloat 1.4s ease-out forwards;pointer-events:none;text-shadow:0 2px 8px #fff;z-index:50}
+    @keyframes xpFloat{0%{opacity:0;transform:translateY(20px) scale(.5)}30%{opacity:1;transform:translateY(0) scale(1.1)}100%{opacity:0;transform:translateY(-50px) scale(1)}}
+
+    /* Path de Duolingo (camino con burbujas) */
+    .lesson-path{display:flex;flex-direction:column;align-items:center;padding:14px 0;gap:6px;position:relative}
+    .path-node{position:relative;width:88px;height:88px;border-radius:50%;display:grid;place-items:center;background:#fff;border:6px solid #e9ecf5;box-shadow:0 6px 0 #cdd3e6,0 12px 24px #1720331a;cursor:pointer;transition:transform .2s}
+    .path-node:active{transform:translateY(2px)}
+    .path-node:not(.locked):not(.done):hover{transform:translateY(-3px)}
+    .path-node.done{background:linear-gradient(135deg,#22c55e,#16a34a);border-color:#15803d;box-shadow:0 6px 0 #166534,0 12px 24px #16a34a55}
+    .path-node.done .node-icon{filter:drop-shadow(0 2px 4px #00000033)}
+    .path-node.current{background:linear-gradient(135deg,#fef3c7,#fbbf24);border-color:#f59e0b;box-shadow:0 6px 0 #d97706,0 0 0 0 #fbbf2466,0 12px 24px #fbbf2455;animation:pulseRing 2s ease-in-out infinite}
+    @keyframes pulseRing{0%,100%{box-shadow:0 6px 0 #d97706,0 0 0 0 #fbbf2466,0 12px 24px #fbbf2455}50%{box-shadow:0 6px 0 #d97706,0 0 0 14px #fbbf2400,0 12px 24px #fbbf2455}}
+    .path-node.locked{background:#f4f5fb;border-color:#cdd3e6;cursor:not-allowed;opacity:.6}
+    .path-node.locked .node-icon{filter:grayscale(1) opacity(.5)}
+    .node-icon{width:54px;height:54px;display:grid;place-items:center}
+    .node-icon img.tw,.node-icon svg{width:54px;height:54px}
+    .path-node .star-badge{position:absolute;top:-8px;right:-8px;background:#fbbf24;color:#fff;border-radius:50%;width:28px;height:28px;display:grid;place-items:center;font-size:14px;font-weight:1000;border:3px solid #fff;box-shadow:0 2px 6px #00000033}
+    .node-label{margin-top:4px;background:#fff;padding:6px 12px;border-radius:14px;font-weight:1000;font-size:.85rem;border:2px solid #eef0f7;box-shadow:0 2px 6px #1720330f;text-align:center;max-width:160px}
+    .node-label small{display:block;color:var(--muted);font-size:.7rem;font-weight:800;margin-top:2px}
+    .path-connector{width:6px;height:38px;background:repeating-linear-gradient(180deg,#cdd3e6 0 6px,transparent 6px 12px);margin:-2px 0}
+    .path-connector.done{background:linear-gradient(180deg,#22c55e,#16a34a)}
+
+    /* Hearts (vidas) y streak */
+    .top-stats-row{display:flex;align-items:center;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+    .top-stat-pill{background:#ffffff22;border:1px solid #ffffff44;border-radius:999px;padding:5px 10px;color:#fff;font-weight:1000;font-size:.85rem;display:inline-flex;align-items:center;gap:4px}
+    .top-stat-pill.streak{background:#f59e0b;border-color:#d97706}
+    .top-stat-pill.gems{background:#ef4444;border-color:#dc2626}
+    .top-stat-pill.hearts{background:#fff;color:#ef4444;border-color:#fee2e2}
+
+    /* Activity progress bar mejorado */
+    .activity-progress{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.96);padding:10px 14px;border-radius:18px;margin-bottom:10px;box-shadow:0 4px 12px #1720330f;position:sticky;top:0;z-index:8;backdrop-filter:blur(10px)}
+    .progress-close{background:transparent;color:var(--muted);font-size:1.5rem;width:32px;height:32px;display:grid;place-items:center;font-weight:900;line-height:1}
+    .progress-close:hover{color:var(--ink)}
+    .progress-track{flex:1;height:14px;background:#e9ecf5;border-radius:999px;overflow:hidden;position:relative}
+    .progress-fill{height:100%;background:linear-gradient(90deg,#fbbf24,#22c55e);border-radius:inherit;transition:width .5s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden}
+    .progress-fill::after{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(90deg,transparent,#ffffff66 50%,transparent);animation:progressShine 2s linear infinite}
+    @keyframes progressShine{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+    .progress-hearts{font-weight:1000;color:#ef4444;font-size:1rem;display:flex;align-items:center;gap:2px}
+
+    /* Picture Card grande para flashcard sin texto dependiente */
+    .picture-card{background:linear-gradient(135deg,#fef3c7,#fed7aa);border-radius:32px;padding:24px;text-align:center;position:relative;overflow:hidden;box-shadow:0 14px 35px #1720331a;border:4px solid #fff}
+    .picture-card.healthy-bg{background:linear-gradient(135deg,#dcfce7,#bbf7d0)}
+    .picture-card.unhealthy-bg{background:linear-gradient(135deg,#fee2e2,#fecaca)}
+    .picture-card.indoor{background:linear-gradient(135deg,#dbeafe,#e9d5ff)}
+    .picture-card.morning{background:linear-gradient(135deg,#fef9c3,#fde68a)}
+    .picture-card.night{background:linear-gradient(135deg,#1e1b4b,#3730a3);color:#fff}
+    .picture-card .big-pic{margin:10px auto;width:140px;height:140px;background:#fff;border-radius:32px;display:grid;place-items:center;box-shadow:0 8px 24px #00000022;animation:bigPicFloat 3s ease-in-out infinite}
+    @keyframes bigPicFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-8px) rotate(3deg)}}
+    .picture-card .big-pic img.tw{width:100px;height:100px}
+    .picture-card .word-en{font-size:clamp(2rem,9vw,3.6rem);font-weight:1000;letter-spacing:-.04em;line-height:1;margin:8px 0;color:#291B6F}
+    .picture-card.night .word-en{color:#fff}
+    .picture-card .word-es{display:inline-block;background:#fff;color:var(--ink);padding:6px 16px;border-radius:14px;font-weight:1000;font-size:1.15rem;margin-top:6px;box-shadow:0 4px 10px #00000011}
+    .listen-big-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;border-radius:20px;padding:16px 24px;font-weight:1000;font-size:1.1rem;box-shadow:0 8px 20px #6d5df633;margin-top:10px;min-height:58px;width:100%;animation:listenPulse 2.5s ease-in-out infinite}
+    .listen-big-btn:active{transform:scale(.97)}
+    @keyframes listenPulse{0%,100%{box-shadow:0 8px 20px #6d5df633}50%{box-shadow:0 8px 20px #6d5df666,0 0 0 8px #6d5df622}}
+
+    /* Picture Match (2 imágenes, sin texto) */
+    .pic-match-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+    .pic-choice{aspect-ratio:1;background:#fff;border:4px solid #e9ecf5;border-radius:28px;display:grid;place-items:center;box-shadow:0 10px 24px #17203314;transition:transform .15s,border-color .2s;cursor:pointer;padding:14px;position:relative}
+    .pic-choice:active{transform:scale(.94)}
+    .pic-choice img.tw{width:80%;height:80%;max-width:120px;max-height:120px}
+    .pic-choice.correct{border-color:#22c55e;background:#dcfce7;animation:choiceWin .6s}
+    .pic-choice.wrong{border-color:#ef4444;background:#fee2e2;animation:choiceShake .4s}
+    @keyframes choiceWin{0%,100%{transform:scale(1)}30%{transform:scale(1.12)}}
+    @keyframes choiceShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+
+    /* Pop the Balloon */
+    .balloon-arena{position:relative;height:380px;background:linear-gradient(180deg,#dbeafe 0%,#fef9c3 100%);border-radius:24px;overflow:hidden;border:3px solid #fff;box-shadow:inset 0 4px 12px #0001}
+    .balloon{position:absolute;width:80px;height:96px;cursor:pointer;animation:balloonRise linear forwards;display:flex;align-items:center;justify-content:center;flex-direction:column}
+    @keyframes balloonRise{from{transform:translateY(380px)}to{transform:translateY(-110px)}}
+    .balloon-body{width:70px;height:80px;border-radius:50% 50% 48% 48% / 60% 60% 40% 40%;display:grid;place-items:center;box-shadow:inset -8px -10px 16px #00000033,0 4px 8px #00000022;position:relative}
+    .balloon-body::before{content:"";position:absolute;width:14px;height:18px;background:#ffffff66;border-radius:50%;top:14px;left:14px;filter:blur(2px)}
+    .balloon-body::after{content:"";position:absolute;bottom:-8px;left:50%;width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:10px solid currentColor;transform:translateX(-50%)}
+    .balloon-body img.tw{width:42px;height:42px}
+    .balloon-string{width:1px;height:14px;background:#374151;margin-top:6px}
+    .balloon.popped{animation:balloonPop .35s ease-out forwards}
+    @keyframes balloonPop{to{transform:scale(1.6);opacity:0}}
+    .balloon.missed{animation:balloonMiss .4s forwards}
+    @keyframes balloonMiss{to{opacity:.3}}
+
+    /* Tap to Hear */
+    .tap-hear-card{background:#fff;border-radius:32px;padding:24px;text-align:center;box-shadow:0 14px 35px #1720331a}
+    .tap-hear-pic{width:160px;height:160px;margin:0 auto;background:linear-gradient(135deg,#fef3c7,#fed7aa);border-radius:50%;display:grid;place-items:center;cursor:pointer;animation:tapPulse 2s ease-in-out infinite;box-shadow:0 14px 30px #fbbf2455}
+    @keyframes tapPulse{0%,100%{box-shadow:0 14px 30px #fbbf2455,0 0 0 0 #fbbf24aa}50%{box-shadow:0 14px 30px #fbbf2455,0 0 0 18px #fbbf2400}}
+    .tap-hear-pic img.tw{width:110px;height:110px}
+    .tap-hear-pic:active{transform:scale(.94)}
+    .tap-hear-hint{margin-top:14px;font-weight:1000;color:var(--muted);font-size:1rem;display:flex;align-items:center;justify-content:center;gap:6px}
+
+    /* Repeat after me */
+    .repeat-stage{background:linear-gradient(135deg,#eef2ff,#fef3f9);border-radius:24px;padding:20px;text-align:center;position:relative}
+    .repeat-mic{width:120px;height:120px;margin:14px auto;border-radius:50%;background:linear-gradient(135deg,#ef4444,#dc2626);display:grid;place-items:center;color:#fff;font-size:54px;box-shadow:0 14px 30px #ef444455;animation:micPulse 1.4s ease-in-out infinite}
+    @keyframes micPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+    .repeat-progress{height:14px;background:#e9ecf5;border-radius:999px;overflow:hidden;margin-top:14px}
+    .repeat-progress>div{height:100%;background:linear-gradient(90deg,#22c55e,#16a34a);width:0;border-radius:inherit;transition:width .1s linear}
+
+    /* Image-image memory (versión sin texto) */
+    .imem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+    .imem-card{aspect-ratio:1;background:linear-gradient(135deg,#6D5DF6,#FF66A3);border-radius:18px;display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 16px #1720331a;color:#fff;transition:transform .25s,background .3s;perspective:1000px;position:relative;overflow:hidden}
+    .imem-card .qmark{font-size:2.4rem;font-weight:1000;animation:qmarkFloat 2s ease-in-out infinite}
+    @keyframes qmarkFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+    .imem-card.flipped{background:#fff;border:3px solid var(--primary);transform:rotateY(180deg) scale(1.05)}
+    .imem-card.flipped .qmark{display:none}
+    .imem-card.flipped img.tw{width:60%;height:60%;transform:rotateY(180deg)}
+    .imem-card.matched{background:linear-gradient(135deg,#22c55e,#16a34a);border:3px solid #15803d;animation:matchedGlow 1s}
+    @keyframes matchedGlow{0%,100%{box-shadow:0 6px 16px #1720331a}50%{box-shadow:0 6px 16px #16a34a88,0 0 0 8px #16a34a44}}
+    .imem-card.matched img.tw{width:60%;height:60%;filter:drop-shadow(0 2px 4px #00000044)}
+
+    /* Cofre del tesoro al completar */
+    .treasure-stage{text-align:center;padding:30px 16px}
+    .treasure-chest{width:160px;height:140px;margin:0 auto;position:relative;cursor:pointer;animation:chestBob 1.6s ease-in-out infinite}
+    @keyframes chestBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+    .chest-base{width:160px;height:90px;background:linear-gradient(180deg,#92400e,#78350f);border-radius:0 0 14px 14px;border:3px solid #451a03;position:absolute;bottom:0;box-shadow:0 8px 20px #00000044}
+    .chest-lid{width:160px;height:60px;background:linear-gradient(180deg,#a16207,#854d0e);border-radius:14px 14px 0 0;border:3px solid #451a03;position:absolute;top:0;left:0;transform-origin:bottom;transition:transform .8s cubic-bezier(.5,0,.5,1.5)}
+    .chest-lock{width:24px;height:30px;background:#fbbf24;border-radius:6px 6px 4px 4px;position:absolute;left:50%;top:48px;transform:translateX(-50%);border:2px solid #451a03}
+    .treasure-chest.open .chest-lid{transform:rotateX(-110deg) translateY(-4px)}
+    .treasure-chest.open .chest-lock{display:none}
+    .treasure-glow{position:absolute;inset:0;background:radial-gradient(circle,#fde68a 0%,transparent 70%);opacity:0;animation:treasureGlow .6s 0.5s forwards}
+    @keyframes treasureGlow{to{opacity:1;transform:scale(1.3)}}
+
+    /* Combo flash banner */
+    .combo-banner{position:fixed;top:30%;left:0;right:0;text-align:center;z-index:60;pointer-events:none}
+    .combo-banner span{display:inline-block;font-size:clamp(2.4rem,9vw,4rem);font-weight:1000;background:linear-gradient(135deg,#fbbf24,#ef4444,#a855f7);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 30px #fbbf2466;animation:comboBanner 1.2s forwards;letter-spacing:-.05em}
+    @keyframes comboBanner{0%{opacity:0;transform:scale(.5) rotate(-15deg)}25%{opacity:1;transform:scale(1.2) rotate(5deg)}75%{opacity:1;transform:scale(1) rotate(0)}100%{opacity:0;transform:scale(1.1) translateY(-30px)}}
+
+    /* Respond to errors visually */
+    .activity-shake{animation:shake .4s}
+
     /* === MODAL para confirmaciones (funciona en todo móvil) === */
     .modal-mask{position:fixed;inset:0;background:#0008;z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
     .modal-mask.show{display:flex;animation:fadeIn .2s}
@@ -435,6 +602,7 @@ const STORE='facuEnglishProMobileV3';
 const AVATARS=['👦','👧','🧒','👶','🦊','🐼','🦁','🐯','🐶','🐱','🦄','🐸','🦖','🐙','🦋','🚀','⚽','🎨','🎧','⭐'];
 let selectedAvatar='👦', currentUser=null, currentLesson=null, stepIndex=0, sessionScore=0;
 let memoryState=null, sentenceState=null, dialogState=null, speedState=null, sortState=null, tapState=null;
+let lessonState=null;
 let comboCount=0;
 let prefs={slow:false,voiceURI:null,calmMode:false};
 
@@ -735,12 +903,12 @@ function w(en,es,icon,phonetic,syl,phrase,phraseEs){return{en,es,icon,phonetic,s
 const LESSONS=[
  // === STARTER 1 ===
  {id:'greetings', level:'Starter 1', icon:'👋', scene:'greetings_scene', title:'Saludos y despedidas', titleEn:'Greetings', goal:'Saludar, despedirse y responder en inglés.', tags:['Hello','Good morning','Bye'], words:[
-  w('Hello','Hola','👋','je-lou',['Hel','lo'],'Hello, teacher!','¡Hola, profe!'),
-  w('Hi','Hola','✋','jai',['Hi'],'Hi, friend!','¡Hola, amigo!'),
-  w('Good morning','Buenos días','🌞','gud mor-ning',['Good','mor','ning'],'Good morning, Mom!','¡Buenos días, mamá!'),
+  w('Hello','Hola (formal)','👋','je-lou',['Hel','lo'],'Hello, teacher!','¡Hola, profe!'),
+  w('Hi','Hola (informal)','😃','jai',['Hi'],'Hi, friend!','¡Hola, amigo!'),
+  w('Good morning','Buenos días','🌅','gud mor-ning',['Good','mor','ning'],'Good morning, Mom!','¡Buenos días, mamá!'),
   w('Good afternoon','Buenas tardes','☀️','gud af-ter-nun',['Good','af','ter','noon'],'Good afternoon!','¡Buenas tardes!'),
   w('Good night','Buenas noches','🌙','gud nait',['Good','night'],'Good night, Dad!','¡Buenas noches, papá!'),
-  w('Goodbye','Adiós','👋','gud-bai',['Good','bye'],'Goodbye, see you!','¡Adiós, hasta luego!'),
+  w('Goodbye','Adiós','🚪','gud-bai',['Good','bye'],'Goodbye, see you!','¡Adiós, hasta luego!'),
   w('See you tomorrow','Hasta mañana','📅','si iu tu-mo-rou',['See','you','to','mo','rrow'],'See you tomorrow!','¡Hasta mañana!'),
   w('Have a nice day','Que tengas buen día','🌈','jav a nais dei',['Have','a','nice','day'],'Have a nice day!','¡Que tengas buen día!')],
   phrases:[{en:'Hello!',es:'¡Hola!'},{en:'Good morning!',es:'¡Buenos días!'},{en:'Goodbye!',es:'¡Adiós!'},{en:'See you tomorrow!',es:'¡Hasta mañana!'},{en:'Good night, Mom!',es:'¡Buenas noches, mamá!'}],
@@ -758,8 +926,8 @@ const LESSONS=[
   w('I am six','Tengo seis años','6️⃣','ai am six',['I','am','six'],'I am six years old.','Tengo seis años.'),
   w('I am seven','Tengo siete años','7️⃣','ai am se-ven',['I','am','sev','en'],'I am seven years old.','Tengo siete años.'),
   w('I am eight','Tengo ocho años','8️⃣','ai am eit',['I','am','eight'],'I am eight years old.','Tengo ocho años.'),
-  w('How are you?','¿Cómo estás?','🙂','jau ar iu',['How','are','you'],'How are you today?','¿Cómo estás hoy?'),
-  w('I am fine','Estoy bien','😄','ai am fain',['I','am','fine'],'I am fine, thank you.','Estoy bien, gracias.'),
+  w('How are you?','¿Cómo estás?','🤔','jau ar iu',['How','are','you'],'How are you today?','¿Cómo estás hoy?'),
+  w('I am fine','Estoy bien','😊','ai am fain',['I','am','fine'],'I am fine, thank you.','Estoy bien, gracias.'),
   w('And you?','¿Y tú?','↩️','and iu',['And','you'],'I am fine. And you?','Estoy bien. ¿Y tú?'),
   w('I am from Chile','Soy de Chile','🇨🇱','ai am from chi-le',['I','am','from','Chi','le'],'I am from Chile.','Soy de Chile.')],
   phrases:[{en:'My name is Facu',es:'Mi nombre es Facu'},{en:'I am seven years old',es:'Tengo siete años'},{en:'I am fine, thank you',es:'Estoy bien, gracias'},{en:'Nice to meet you',es:'Mucho gusto'},{en:'I am from Chile',es:'Soy de Chile'}],
@@ -775,7 +943,7 @@ const LESSONS=[
   w('Look','Mira','👀','luk',['Look'],'Look at the board.','Mira la pizarra.'),
   w('Sit down','Siéntate','🪑','sit daun',['Sit','down'],'Sit down, please.','Siéntate, por favor.'),
   w('Stand up','Levántate','🧍','stand ap',['Stand','up'],'Stand up, please.','Levántate, por favor.'),
-  w('Raise your hand','Levanta la mano','✋','reiz yor jand',['Raise','your','hand'],'Raise your hand.','Levanta la mano.'),
+  w('Raise your hand','Levanta la mano','🙋','reiz yor jand',['Raise','your','hand'],'Raise your hand.','Levanta la mano.'),
   w('Open your book','Abre tu libro','📖','o-pen yor buk',['O','pen','your','book'],'Open your book.','Abre tu libro.'),
   w('Quiet please','Silencio por favor','🤫','kuai-et pliz',['Qui','et','please'],'Quiet please, children.','Silencio por favor, niños.')],
   phrases:[{en:'Listen, please',es:'Escucha, por favor'},{en:'Sit down',es:'Siéntate'},{en:'Stand up',es:'Levántate'},{en:'Open your book',es:'Abre tu libro'},{en:'Raise your hand',es:'Levanta la mano'}],
@@ -789,7 +957,7 @@ const LESSONS=[
   w('Thank you','Gracias','💝','zank iu',['Thank','you'],'Thank you, teacher.','Gracias, profe.'),
   w('You are welcome','De nada','🎁','iu ar wel-com',['You','are','wel','come'],'You are welcome.','De nada.'),
   w('Sorry','Lo siento','😔','so-ri',['Sor','ry'],'Sorry, my friend.','Lo siento, amigo.'),
-  w('Excuse me','Disculpa','🙋','ex-kius mi',['Ex','cuse','me'],'Excuse me, teacher.','Disculpa, profe.'),
+  w('Excuse me','Disculpa','👉','ex-kius mi',['Ex','cuse','me'],'Excuse me, teacher.','Disculpa, profe.'),
   w('Can you help me?','¿Me ayudas?','🆘','can iu jelp mi',['Can','you','help','me'],'Can you help me, please?','¿Me ayudas, por favor?')],
   phrases:[{en:'Please',es:'Por favor'},{en:'Thank you',es:'Gracias'},{en:'Sorry',es:'Lo siento'},{en:'You are welcome',es:'De nada'},{en:'Can you help me?',es:'¿Me ayudas?'}],
   dialog:[
@@ -847,8 +1015,8 @@ const LESSONS=[
  },
  // === STARTER 2 ===
  {id:'family', level:'Starter 2', icon:'👨‍👩‍👧‍👦', scene:'family_living', title:'Mi familia', titleEn:'Family', goal:'Hablar de la familia.', tags:['Mother','Father','Brother'], words:[
-  w('Mother','Mamá','👩','ma-der',['Moth','er'],'This is my mother.','Esta es mi mamá.'),
-  w('Father','Papá','👨','fa-der',['Fath','er'],'This is my father.','Este es mi papá.'),
+  w('Mother','Mamá','👩‍🦰','ma-der',['Moth','er'],'This is my mother.','Esta es mi mamá.'),
+  w('Father','Papá','👨‍🦱','fa-der',['Fath','er'],'This is my father.','Este es mi papá.'),
   w('Sister','Hermana','👧','sis-ter',['Sis','ter'],'This is my sister.','Esta es mi hermana.'),
   w('Brother','Hermano','👦','bra-der',['Broth','er'],'This is my brother.','Este es mi hermano.'),
   w('Baby','Bebé','👶','bei-bi',['Ba','by'],'The baby is little.','El bebé es pequeño.'),
@@ -857,7 +1025,7 @@ const LESSONS=[
   phrases:[{en:'This is my mother',es:'Esta es mi mamá'},{en:'This is my father',es:'Este es mi papá'},{en:'I love my family',es:'Amo a mi familia'},{en:'This is my brother',es:'Este es mi hermano'}]
  },
  {id:'body', level:'Starter 2', icon:'🖐️', scene:'body_kid', title:'Mi cuerpo', titleEn:'Body parts', goal:'Reconocer partes del cuerpo.', tags:['Head','Hands','Feet'], words:[
-  w('Head','Cabeza','🙂','jed',['Head'],'Touch your head.','Toca tu cabeza.'),
+  w('Head','Cabeza','👤','jed',['Head'],'Touch your head.','Toca tu cabeza.'),
   w('Eyes','Ojos','👀','ais',['Eyes'],'Touch your eyes.','Toca tus ojos.'),
   w('Nose','Nariz','👃','nous',['Nose'],'Touch your nose.','Toca tu nariz.'),
   w('Ears','Orejas','👂','irs',['Ears'],'Touch your ears.','Toca tus orejas.'),
@@ -889,27 +1057,27 @@ const LESSONS=[
   w('Rice','Arroz','🍚','rais',['Rice'],'I eat rice.','Como arroz.')],
   phrases:[{en:'I like apples',es:'Me gustan las manzanas'},{en:'Water, please',es:'Agua, por favor'},{en:'I drink milk',es:'Tomo leche'},{en:'I eat bread',es:'Como pan'}]
  },
- {id:'routines', level:'Starter 2', icon:'🪥', scene:'home_morning', title:'Rutinas diarias', titleEn:'Daily routines', goal:'Acciones del día a día.', tags:['Wake up','Brush teeth','Go to bed'], words:[
+ {id:'routines', level:'Starter 2', icon:'⏰', scene:'home_morning', title:'Rutinas diarias', titleEn:'Daily routines', goal:'Acciones del día a día.', tags:['Wake up','Get dressed','Go to bed'], words:[
   w('Wake up','Despertar','⏰','ueik ap',['Wake','up'],'I wake up at seven.','Me despierto a las siete.'),
-  w('Brush my teeth','Lavarme los dientes','🪥','brash mai tiz',['Brush','my','teeth'],'I brush my teeth.','Me lavo los dientes.'),
-  w('Wash my hands','Lavarme las manos','🧼','uash mai jands',['Wash','my','hands'],'I wash my hands.','Me lavo las manos.'),
+  w('Get dressed','Vestirme','👕','get drest',['Get','dressed'],'I get dressed.','Me visto.'),
   w('Eat breakfast','Tomar desayuno','🥣','it brek-fast',['Eat','break','fast'],'I eat breakfast.','Tomo desayuno.'),
-  w('Go to school','Ir al colegio','🏫','gou tu skul',['Go','to','school'],'I go to school.','Voy al colegio.'),
+  w('Go to school','Ir al colegio','🚌','gou tu skul',['Go','to','school'],'I go to school.','Voy al colegio.'),
+  w('Have lunch','Almorzar','🍽️','jav lonch',['Have','lunch'],'I have lunch at noon.','Almuerzo al mediodía.'),
   w('Play','Jugar','⚽','plei',['Play'],'I play with friends.','Juego con amigos.'),
-  w('Read a book','Leer un libro','📖','rid a buk',['Read','a','book'],'I read a book.','Leo un libro.'),
+  w('Read a book','Leer un libro','📚','rid a buk',['Read','a','book'],'I read a book.','Leo un libro.'),
   w('Go to bed','Ir a dormir','🛏️','gou tu bed',['Go','to','bed'],'I go to bed.','Voy a dormir.')],
-  phrases:[{en:'I wake up',es:'Me despierto'},{en:'I brush my teeth',es:'Me lavo los dientes'},{en:'I go to school',es:'Voy al colegio'},{en:'I go to bed',es:'Voy a dormir'}]
+  phrases:[{en:'I wake up',es:'Me despierto'},{en:'I get dressed',es:'Me visto'},{en:'I go to school',es:'Voy al colegio'},{en:'I go to bed',es:'Voy a dormir'}]
  },
  // === STARTER 3 — HÁBITOS SALUDABLES ===
  {id:'healthy-habits', level:'Starter 3', icon:'💪', scene:'healthy_plate', title:'Hábitos saludables', titleEn:'Healthy habits', goal:'Aprender qué es bueno para la salud.', tags:['Healthy','Exercise','Sleep'], words:[
   w('Healthy','Saludable','💚','jel-zi',['Heal','thy'],'Apples are healthy.','Las manzanas son saludables.'),
-  w('Drink water','Tomar agua','💧','drink uo-ter',['Drink','wa','ter'],'I drink water every day.','Tomo agua todos los días.'),
-  w('Eat fruit','Comer fruta','🍎','it frut',['Eat','fruit'],'I eat fruit at school.','Como fruta en el colegio.'),
+  w('Drink water','Tomar agua','🚰','drink uo-ter',['Drink','wa','ter'],'I drink water every day.','Tomo agua todos los días.'),
+  w('Eat fruit','Comer fruta','🍓','it frut',['Eat','fruit'],'I eat fruit at school.','Como fruta en el colegio.'),
   w('Eat vegetables','Comer verduras','🥦','it vech-ta-bols',['Eat','veg','e','ta','bles'],'I eat vegetables for lunch.','Como verduras en el almuerzo.'),
   w('Exercise','Hacer ejercicio','🏃','ek-ser-saiz',['Ex','er','cise'],'I exercise every day.','Hago ejercicio todos los días.'),
-  w('Sleep early','Dormir temprano','🌙','slip er-li',['Sleep','ear','ly'],'I sleep early.','Duermo temprano.'),
-  w('Wash my hands','Lavar mis manos','🧼','uash mai jands',['Wash','my','hands'],'I wash my hands before eating.','Me lavo las manos antes de comer.'),
-  w('Brush my teeth','Lavar mis dientes','🪥','brash mai tiz',['Brush','my','teeth'],'I brush my teeth twice a day.','Me lavo los dientes dos veces al día.')],
+  w('Sleep early','Dormir temprano','💤','slip er-li',['Sleep','ear','ly'],'I sleep early.','Duermo temprano.'),
+  w('Wash my hands','Lavar manos antes de comer','🧼','uash mai jands',['Wash','my','hands'],'I wash my hands before eating.','Me lavo las manos antes de comer.'),
+  w('Brush my teeth','Lavar dientes 2 veces al día','🪥','brash mai tiz',['Brush','my','teeth'],'I brush my teeth twice a day.','Me lavo los dientes dos veces al día.')],
   phrases:[{en:'I drink water',es:'Tomo agua'},{en:'I eat fruit',es:'Como fruta'},{en:'I exercise every day',es:'Hago ejercicio todos los días'},{en:'I sleep early',es:'Duermo temprano'},{en:'I am healthy',es:'Soy saludable'}],
   dialog:[
    {char:'👩 Mom',scene:'kitchen_breakfast',en:'Time for breakfast! What do you want?',es:'¡Hora del desayuno! ¿Qué quieres?',replies:[{en:'An apple, please.',es:'Una manzana, por favor.',ok:true},{en:'Candy and soda.',es:'Dulces y bebida.',ok:false},{en:'Goodbye!',es:'¡Adiós!',ok:false}]},
@@ -974,7 +1142,49 @@ function modalConfirm(){const cb=_modalCb;$('modalMask').classList.remove('show'
 function todayKey(){return new Date().toISOString().slice(0,10)}
 function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p)}catch(e){}}
 function shuffled(arr){return [...arr].sort(()=>Math.random()-.5)}
+
+/* Quita palabras con la misma traducción al español o el mismo icono.
+   Se queda con la primera ocurrencia. */
+function dedupOptions(words){
+  const seenEs=new Set(), seenIc=new Set(), out=[];
+  for(const w of words){
+    if(seenEs.has(w.es)||seenIc.has(w.icon))continue;
+    seenEs.add(w.es);seenIc.add(w.icon);
+    out.push(w);
+  }
+  return out;
+}
 function escapeAttr(s){return String(s).replace(/'/g,'&#39;').replace(/"/g,'&quot;').replace(/\\/g,'\\\\')}
+
+/* === TWEMOJI HELPERS ===
+   Convierte cualquier emoji a una imagen SVG de Twemoji (CDN gratuito).
+   Se ven IGUAL en todos los dispositivos y son más expresivos.
+*/
+const TWEMOJI_BASE='https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/';
+function emojiToCodepoint(emoji){
+  // Convertir emoji a codepoint hex tipo "1f44b" o "1f44b-1f3fb" para emojis con modificador
+  const codepoints=[];
+  let i=0;
+  // Eliminar variation selector (FE0F) y zero-width joiner para algunos emojis simples
+  const stripped=Array.from(emoji);
+  for(const ch of stripped){
+    const cp=ch.codePointAt(0);
+    if(cp===0xFE0F)continue; // skip variation selector for simple emojis
+    codepoints.push(cp.toString(16));
+  }
+  return codepoints.join('-');
+}
+function tw(emoji,size){
+  // Devuelve un <img> de Twemoji o el emoji original como fallback
+  if(!emoji||typeof emoji!=='string')return emoji||'';
+  // Si ya es HTML (un dibujo SVG), devolver tal cual
+  if(emoji.startsWith('<'))return emoji;
+  const cp=emojiToCodepoint(emoji);
+  if(!cp)return emoji;
+  const url=TWEMOJI_BASE+cp+'.svg';
+  const sizeAttr=size?` style="width:${size};height:${size}"`:'';
+  return `<img class="tw" src="${url}" alt="${emoji}" draggable="false" onerror="this.replaceWith(document.createTextNode('${emoji}'))"${sizeAttr}>`;
+}
 
 /* ============================================================
    AUDIO MEJORADO
@@ -1193,28 +1403,48 @@ function updateStats(){const d=userData();$('stars').textContent=d.stars||0;$('d
 function setNavTab(n){document.querySelectorAll('.nav-tab').forEach((t,i)=>t.classList.toggle('active',i===n))}
 function isUnlocked(i){const d=userData();return i===0||d.completed.includes(LESSONS[i-1].id)}
 
-/* === HOME === */
+/* === HOME — CAMINO ESTILO DUOLINGO === */
 function showHome(){
   setNavTab(0);
   const d=userData();
-  const pct=Math.round(((d.completed||[]).length/LESSONS.length)*100);
+  const completedCount=(d.completed||[]).length;
+  const pct=Math.round((completedCount/LESSONS.length)*100);
+  // Encontrar la lección actual (primera no completada y desbloqueada)
+  let currentIdx=LESSONS.findIndex((l,i)=>!d.completed.includes(l.id)&&isUnlocked(i));
+  if(currentIdx<0)currentIdx=LESSONS.length-1;
+
   // Agrupar por nivel
   const levels={};
-  LESSONS.forEach((l,i)=>{(levels[l.level]=levels[l.level]||[]).push({...l,i})});
-  let html=`<div class="path-header"><div><h2>Ruta de aprendizaje</h2><p>De saludos básicos a hábitos saludables.</p></div><div class="progress-pill">${pct}% completado</div></div>`;
+  LESSONS.forEach((l,i)=>{(levels[l.level]=levels[l.level]||[]).push({...l,i,done:d.completed.includes(l.id),locked:!isUnlocked(i),current:i===currentIdx})});
+
+  let html=`<div style="text-align:center;padding:14px 4px 8px">
+    <div style="display:inline-flex;background:#fff;border-radius:18px;padding:10px 18px;align-items:center;gap:14px;box-shadow:0 6px 16px #1720331a">
+      <div style="display:flex;align-items:center;gap:6px"><span style="font-size:1.4rem">🔥</span><b style="font-size:1.1rem">${d.streak||0}</b><small style="color:var(--muted);font-weight:800">días</small></div>
+      <div style="width:2px;height:24px;background:#eef0f7"></div>
+      <div style="display:flex;align-items:center;gap:6px"><span style="font-size:1.4rem">💎</span><b style="font-size:1.1rem">${d.stars||0}</b><small style="color:var(--muted);font-weight:800">XP</small></div>
+      <div style="width:2px;height:24px;background:#eef0f7"></div>
+      <div style="display:flex;align-items:center;gap:6px"><span style="font-size:1.4rem">🏅</span><b style="font-size:1.1rem">${d.badges||0}</b></div>
+    </div>
+    <div style="margin-top:10px;background:rgba(255,255,255,.7);display:inline-block;padding:6px 14px;border-radius:999px;font-weight:900;color:var(--primary);font-size:.9rem">${pct}% completado · ${completedCount}/${LESSONS.length}</div>
+  </div>`;
+
   for(const lvl of Object.keys(levels)){
-    html+=`<div class="level-header">${lvl}</div><div class="lesson-grid">${levels[lvl].map(l=>{
-      const done=d.completed.includes(l.id), lock=!isUnlocked(l.i);
-      const acts=(l.dialog?5:4)+(l.sortItems?1:0);
+    html+=`<div style="margin-top:14px"><div style="background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;padding:10px 16px;border-radius:14px;font-weight:1000;font-size:1rem;text-align:center;box-shadow:0 6px 16px #6d5df633;letter-spacing:.04em">📘 ${lvl.toUpperCase()}</div>`;
+    html+=`<div class="lesson-path">`;
+    levels[lvl].forEach((l,idx)=>{
       const ico=LESSON_ICONS[l.id]||{bg:'',svg:''};
-      return `<article class="lesson ${done?'done':''} ${lock?'locked':''}" onclick="${lock?"speakES('Completa la lección anterior primero.')":"startLesson('"+l.id+"')"}">
-        <div class="lesson-top"><div class="lesson-icon ${ico.bg}">${ico.svg||l.icon}</div><div class="level">${lock?'🔒 Bloqueada':done?'✅ Hecha':'Nivel '+l.level.split(' ')[1]}</div></div>
-        <h3>${l.title}</h3>
-        <p>${l.goal}</p>
-        <div class="chips">${l.tags.map(t=>`<span class="chip">${t}</span>`).join('')}</div>
-        <div class="status"><span>${l.titleEn}</span><small>${l.words.length} palabras · ${acts} actividades</small></div>
-      </article>`;
-    }).join('')}</div>`;
+      const cls=l.done?'done':(l.locked?'locked':(l.current?'current':''));
+      const onclick=l.locked?`speakES('Completa la lección anterior primero.')`:`startLesson('${l.id}')`;
+      const stars=l.done?3:0;
+      html+=`<div class="path-node ${cls}" onclick="${onclick}" style="margin-left:${(idx%2===0?-40:40)}px">
+        <div class="node-icon">${ico.svg||tw(l.icon)}</div>
+        ${l.done?`<div class="star-badge">⭐</div>`:''}
+        ${l.current?`<div class="star-badge" style="background:#ef4444;animation:pulseRing 1.5s infinite">▶</div>`:''}
+      </div>
+      <div class="node-label">${l.title}<small>${l.titleEn} · ${l.words.length} palabras</small></div>`;
+      if(idx<levels[lvl].length-1)html+=`<div class="path-connector ${l.done?'done':''}"></div>`;
+    });
+    html+=`</div></div>`;
   }
   $('content').innerHTML=html;
 }
@@ -1223,27 +1453,38 @@ function showHome(){
 function startLesson(id){
   currentLesson=LESSONS.find(l=>l.id===id);
   stepIndex=0;sessionScore=0;comboCount=0;
+  lessonState={hearts:3,errors:0,startTime:Date.now()};
   showStep();
   speakES('Lección: '+currentLesson.title).then(()=>setTimeout(()=>speakEN("Let's learn "+currentLesson.titleEn+"!"),200));
 }
 
 function stepsForLesson(){
-  // Ahora: cada palabra es UNA flashcard, y luego hay un mini-test inmediato (cada 2 palabras)
-  // Esto es metodología mejor para 7 años: ver palabra → escuchar → mini quiz → siguiente palabra
+  // Metodología Duolingo ABC para niños 6-8 años:
+  // 1. INTRODUCCIÓN: Cada palabra como flashcard grande con audio doble
+  // 2. RECONOCIMIENTO: Picture Match (sin texto) - tocar la imagen correcta
+  // 3. EJERCICIO: Tap to Hear - escuchar y asociar
+  // 4. JUEGO: Balloon Pop - mecánica visual atractiva
+  // 5. PRÁCTICA: Memorice imagen-imagen (NO TEXTO)
+  // 6. APLICACIÓN: Diálogo / Sort / Speed
+  // 7. RECOMPENSA: Cofre + medalla
   const steps=[];
   const words=currentLesson.words;
+  // Fase 1: Introducción visual (1 flashcard por palabra)
   for(let i=0;i<words.length;i++){
     steps.push({type:'flash',idx:i});
-    // Mini-quiz cada 2 palabras (refuerzo inmediato)
+    // Mini test cada 2 palabras (Picture Match - sin texto)
     if((i+1)%2===0&&i<words.length-1){
-      steps.push({type:'micro',from:Math.max(0,i-1),to:i});
+      steps.push({type:'picmatch'});
     }
   }
-  // Juegos al final
-  steps.push({type:'listen'});
-  steps.push({type:'tap'});
-  steps.push({type:'match'});
-  steps.push({type:'sentence'});
+  // Fase 2: Juegos visuales (sin depender de leer)
+  steps.push({type:'taphear'});       // Toca y escucha
+  steps.push({type:'picmatch'});      // Otro Picture Match
+  steps.push({type:'balloon'});        // Pop the Balloon
+  steps.push({type:'match'});          // Memorice IMAGEN-IMAGEN
+  // Fase 3: Práctica con texto solo si la lección tiene
+  if(currentLesson.phrases&&currentLesson.phrases.length)steps.push({type:'sentence'});
+  // Fase 4: Especiales
   if(currentLesson.sortItems)steps.push({type:'sort'});
   if(currentLesson.dialog&&currentLesson.dialog.length)steps.push({type:'dialog'});
   if(['greetings','about-me','classroom','healthy-habits'].includes(currentLesson.id))steps.push({type:'speed'});
@@ -1254,28 +1495,25 @@ function stepsForLesson(){
 function showStep(){
   const steps=stepsForLesson();
   const step=steps[stepIndex];
-  const pct=Math.round((stepIndex/Math.max(1,steps.length-1))*100);
-  const ico=LESSON_ICONS[currentLesson.id]||{bg:'',svg:''};
-  const headerIcon=ico.svg?`<div class="mini-icon ${ico.bg}" style="padding:0;overflow:hidden">${ico.svg}</div>`:`<div class="mini-icon">${currentLesson.icon}</div>`;
+  const pct=Math.round(((stepIndex+1)/steps.length)*100);
+  const hearts=lessonState?.hearts??3;
   $('content').innerHTML=`<div class="activity">
-    <div class="activity-head">
-      <div class="left">
-        ${headerIcon}
-        <div>
-          <h2>${currentLesson.title}</h2>
-          <p>Paso ${Math.min(stepIndex+1,steps.length)} de ${steps.length}</p>
-        </div>
-      </div>
-      <button class="exit-btn" onclick="exitLesson()">✕ Salir</button>
+    <div class="activity-progress">
+      <button class="progress-close" onclick="exitLesson()" aria-label="Salir">✕</button>
+      <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
+      <div class="progress-hearts">❤️ ${hearts}</div>
     </div>
-    <div class="stepbar"><div style="width:${pct}%"></div></div>
     <div id="activityBody"></div>
   </div>`;
   if(step.type==='flash')renderFlash(step.idx);
   else if(step.type==='micro')renderMicroQuiz(step.from,step.to);
   else if(step.type==='listen')renderListenGame();
+  else if(step.type==='picmatch')renderPictureMatch();
+  else if(step.type==='taphear')renderTapToHear();
+  else if(step.type==='balloon')renderBalloonGame();
+  else if(step.type==='repeat')renderRepeatGame();
   else if(step.type==='tap')renderTapGame();
-  else if(step.type==='match')renderMatchGame();
+  else if(step.type==='match')renderImageMemory();
   else if(step.type==='sentence')renderSentenceGame();
   else if(step.type==='sort')renderSortGame();
   else if(step.type==='dialog')renderDialogGame();
@@ -1294,45 +1532,61 @@ function exitLesson(){
 /* Limpiar timers y estado al salir o cambiar de paso */
 function cleanupActivityState(){
   if(speedState&&speedState.timer){clearInterval(speedState.timer);speedState=null}
+  if(balloonState&&balloonState.spawnTimer){clearInterval(balloonState.spawnTimer);balloonState=null}
   if(window._dialogTimer){clearTimeout(window._dialogTimer);window._dialogTimer=null}
   if(window._tapTimer){clearTimeout(window._tapTimer);window._tapTimer=null}
-  // Cancelar audio en cola
   speechQueue=[];
   if('speechSynthesis'in window){try{speechSynthesis.cancel()}catch(e){}}
   speaking=false;
-  // Reset estados de juegos
   sortPicked=null;
+  hideHelpPanel();
 }
 
-/* === FLASHCARD MEJORADA: imagen grande, audio doble, fonética con sílabas en colores === */
+/* === FLASHCARD ESTILO DUOLINGO/BABBEL ===
+   - Imagen grande y central (140x140)
+   - Audio se reproduce automáticamente al cargar
+   - Texto en inglés visible pero NO es lo principal
+   - Traducción al español destacada
+   - Mascota lechuza al costado animada
+*/
 function renderFlash(i){
   const v=currentLesson.words[i];
   markSeen(v.en);
-  const sceneKey=currentLesson.scene||'home_morning';
-  const sceneSvg=SCENES[sceneKey]||'';
-  const sylsHtml=v.syl.map(s=>`<span class="syl">${s}</span>`).join('');
-  $('activityBody').innerHTML=`<section class="card flash-main">
-    <div class="audio-badge">🇺🇸 Escucha 2 veces</div>
-    <div class="scene-frame">${sceneSvg}<div style="position:absolute;font-size:clamp(3rem,15vw,5.5rem);bottom:8px;right:14px;text-shadow:0 4px 12px rgba(0,0,0,.2)">${v.icon}</div></div>
-    <div class="word">${v.en}</div>
-    <div class="syllables">${sylsHtml}</div>
-    <div class="phonetic">/${v.phonetic}/</div>
-    <div class="translation">${v.es}</div>
-    <div class="phrase">💬 <b>${v.phrase}</b><br><small style="opacity:.75">${v.phraseEs}</small></div>
-    <div class="actions">
-      <button class="primary-btn" onclick="speakENtwice('${escapeAttr(v.en)}')">🔊 Repetir palabra</button>
-      <button class="secondary-btn" onclick="speakEN('${escapeAttr(v.phrase)}')">💬 Frase completa</button>
+  const sceneClass=getSceneClass();
+  $('activityBody').innerHTML=`
+    <div class="mascot-stage">
+      <div class="mascot happy">
+        <div class="mascot-body">🦉</div>
+      </div>
+      <div class="speech-bubble right" id="mascotBubble">¡Escucha y mira!<br><small>Listen and look!</small></div>
     </div>
+    <div class="picture-card ${sceneClass}">
+      <div class="big-pic">${tw(v.icon,'100px')}</div>
+      <div class="word-en">${v.en}</div>
+      <div class="word-es">${v.es}</div>
+    </div>
+    <button class="listen-big-btn" onclick="speakENtwice('${escapeAttr(v.en)}')">
+      🔊 Escuchar otra vez
+    </button>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
-      <button class="ghost-btn" onclick="speakEN('${escapeAttr(v.en)}',.45)">🐢 Muy lento</button>
-      <button class="ghost-btn" onclick="speakES('${escapeAttr(v.es)}')">🇪🇸 Significado</button>
+      <button class="ghost-btn" onclick="speakEN('${escapeAttr(v.en)}',.45)">🐢 Lento</button>
+      <button class="ghost-btn" onclick="speakEN('${escapeAttr(v.phrase)}')">💬 En frase</button>
     </div>
-  </section>
-  <div class="action-bar">
-    <button class="primary-btn" onclick="nextStep()">${i===0?'Empezar →':'Siguiente →'}</button>
-  </div>`;
-  // Auto-play: 2 veces la palabra en inglés con voz inglesa
-  setTimeout(()=>speakENtwice(v.en),300);
+    <div class="action-bar">
+      <button class="primary-btn" onclick="nextStep()">${i===0?'¡Empezar! →':'Siguiente →'}</button>
+    </div>`;
+  // Auto-play al mostrar
+  setTimeout(()=>speakENtwice(v.en),400);
+}
+
+/* Determinar scene class según lección para fondo */
+function getSceneClass(){
+  const id=currentLesson.id;
+  if(id==='healthy-habits')return 'healthy-bg';
+  if(id==='unhealthy-habits')return 'unhealthy-bg';
+  if(id==='greetings'||id==='about-me')return 'morning';
+  if(['classroom','school-objects','magic-words'].includes(id))return 'indoor';
+  return '';
 }
 
 async function playWord(i){const v=currentLesson.words[i];await speakENtwice(v.en)}
@@ -1344,15 +1598,15 @@ function renderMicroQuiz(from,to){
   const candidates=currentLesson.words.slice(Math.max(0,from-1),to+1);
   const pool=candidates.length>=2?candidates:currentLesson.words.slice(0,Math.min(3,currentLesson.words.length));
   const correct=pool[Math.floor(Math.random()*pool.length)];
-  // Distractores
-  const others=currentLesson.words.filter(w=>w.en!==correct.en);
-  const distractors=shuffled(others).slice(0,Math.min(2,others.length));
+  // Distractores que NO comparten es ni icon con la correcta
+  const others=currentLesson.words.filter(w=>w.en!==correct.en&&w.es!==correct.es&&w.icon!==correct.icon);
+  const distractors=dedupOptions(shuffled(others)).slice(0,Math.min(2,others.length));
   const opts=shuffled([correct,...distractors]);
   window._mqCorrect=correct.en;
   $('activityBody').innerHTML=`<section class="card">
     <div class="question">¿Qué escuchaste? <small>Listen and pick the picture</small></div>
     <button class="primary-btn full" onclick="speakENtwice('${escapeAttr(correct.en)}')">🔊 Escuchar otra vez</button>
-    <div class="options" style="grid-template-columns:repeat(${opts.length},1fr);margin-top:12px">${opts.map(v=>`<button class="option" onclick="answerMicro(this,'${escapeAttr(v.en)}','${escapeAttr(v.es)}')"><span class="ic">${v.icon}</span><span class="lbl-es">${v.es}</span></button>`).join('')}</div>
+    <div class="options" style="grid-template-columns:repeat(${opts.length},1fr);margin-top:12px">${opts.map(v=>`<button class="option" onclick="answerMicro(this,'${escapeAttr(v.en)}','${escapeAttr(v.es)}')"><span class="ic">${tw(v.icon)}</span><span class="lbl-es">${v.es}</span></button>`).join('')}</div>
     <div id="feedback" class="feedback"></div>
   </section>
   <div class="action-bar with-back"><button class="ghost-btn" onclick="prevStepSafe()">← Atrás</button><button class="primary-btn" onclick="nextStep()">⏭️ Saltar</button></div>`;
@@ -1362,15 +1616,16 @@ async function answerMicro(el,enKey,esKey){
   document.querySelectorAll('.option').forEach(o=>o.disabled=true);
   const ok=enKey===window._mqCorrect;
   el.classList.add(ok?'correct':'wrong');
-  if(ok){sfxCorrect();vibrate([20,40,20]);comboCount++;reward(8);showFeedback(true,'✅ ¡Muy bien!');await speakEN('Yes! '+enKey);
+  if(ok){sfxCorrect();vibrate([20,40,20]);comboCount++;reward(8);
+    setMascotState('celebrate');
+    showFeedback(true,'✅ ¡Muy bien!');await speakEN('Yes! '+enKey);
     setTimeout(()=>nextStep(),1200);
   }else{
-    sfxWrong();vibrate(120);comboCount=0;
-    // Resaltar la respuesta correcta
+    sfxWrong();vibrate(120);comboCount=0;loseHeart();
+    setMascotState('sad');
     [...document.querySelectorAll('.option')].find(o=>o.querySelector('.lbl-es')&&o.querySelector('.lbl-es').textContent===currentLesson.words.find(w=>w.en===window._mqCorrect)?.es)?.classList.add('correct');
     showFeedback(false,'Casi. La correcta era: '+window._mqCorrect);
     await speakES('Casi.');await speakEN(window._mqCorrect);
-    // Mostrar panel inline con botón continuar — siempre visible
     showHelpPanel('No te preocupes, sigue intentando.', {
       showAnswer:{label:'✅ Continuar',fn:()=>{hideHelpPanel();nextStep()}}
     });
@@ -1379,15 +1634,295 @@ async function answerMicro(el,enKey,esKey){
 
 function prevStepSafe(){if(stepIndex>0){cleanupActivityState();stepIndex--;showStep();window.scrollTo(0,0)}}
 
+/* === PICTURE MATCH === Niño escucha audio, elige entre 2-3 imágenes (NO texto)
+   Mecánica core de Duolingo ABC para pre-lectores.
+*/
+function renderPictureMatch(){
+  const items=dedupOptions(shuffled(currentLesson.words)).slice(0,Math.min(3,currentLesson.words.length));
+  const correct=items[Math.floor(Math.random()*items.length)];
+  window._pmCorrect=correct.en;
+  $('activityBody').innerHTML=`
+    <div class="mascot-stage">
+      <div class="mascot happy"><div class="mascot-body">🦉</div></div>
+      <div class="speech-bubble right">¿Cuál es?<br><small>Tap the picture!</small></div>
+    </div>
+    <button class="listen-big-btn" onclick="speakENtwice('${escapeAttr(correct.en)}')">🔊 Escuchar</button>
+    <div class="pic-match-grid" style="grid-template-columns:repeat(${items.length},1fr)">
+      ${items.map(v=>`<button class="pic-choice" onclick="answerPicMatch(this,'${escapeAttr(v.en)}')">${tw(v.icon,'90px')}</button>`).join('')}
+    </div>
+    <div id="feedback" class="feedback"></div>
+    <div class="action-bar with-back">
+      <button class="ghost-btn" onclick="prevStepSafe()">← Atrás</button>
+      <button class="primary-btn" onclick="nextStep()">⏭️ Saltar</button>
+    </div>`;
+  setTimeout(()=>speakENtwice(correct.en),400);
+}
+async function answerPicMatch(el,key){
+  document.querySelectorAll('.pic-choice').forEach(o=>o.disabled=true);
+  const ok=key===window._pmCorrect;
+  el.classList.add(ok?'correct':'wrong');
+  if(ok){
+    sfxCorrect();vibrate([20,40,20]);comboCount++;reward(10);
+    setMascotState('celebrate');
+    if(comboCount>=3)showComboBanner('¡Increíble! '+comboCount+'x');
+    await speakEN('Yes! '+window._pmCorrect);
+    setTimeout(()=>nextStep(),1100);
+  }else{
+    sfxWrong();vibrate(120);comboCount=0;loseHeart();
+    setMascotState('sad');
+    [...document.querySelectorAll('.pic-choice')].forEach((b,i)=>{
+      const it=currentLesson.words.find(w=>w.en===window._pmCorrect);
+      if(b.innerHTML.includes(tw(it?.icon||'',''))||(b.querySelector('img')?.alt===it?.icon))b.classList.add('correct');
+    });
+    await speakES('Casi.');await speakEN(window._pmCorrect);
+    showHelpPanel('La correcta era esta. ¡Sigue!',{
+      showAnswer:{label:'✅ Continuar',fn:()=>{hideHelpPanel();nextStep()}}
+    });
+  }
+}
+
+/* === TAP TO HEAR === Imagen grande, niño toca para escuchar (refuerzo) */
+function renderTapToHear(){
+  // Recorrer 4 palabras al azar, una a la vez
+  const items=dedupOptions(shuffled(currentLesson.words)).slice(0,Math.min(4,currentLesson.words.length));
+  window._thQueue=[...items];
+  window._thHits=0;
+  window._thTotal=items.length;
+  showNextTapHear();
+}
+function showNextTapHear(){
+  if(!window._thQueue||window._thQueue.length===0){
+    // Terminó
+    sfxLevelUp();confetti();
+    $('activityBody').innerHTML=`
+      <div class="mascot-stage"><div class="mascot celebrate"><div class="mascot-body">🦉</div></div>
+      <div class="speech-bubble right">¡Excelente!<br><small>Great job!</small></div></div>
+      <div style="text-align:center;padding:20px"><div style="font-size:5rem">⭐</div><h2 style="font-size:1.6rem;margin-top:8px">¡Bien hecho!</h2></div>
+      <div class="action-bar"><button class="primary-btn" onclick="nextStep()">Siguiente →</button></div>`;
+    setTimeout(()=>speakES('¡Muy bien!'),200);
+    return;
+  }
+  const v=window._thQueue[0];
+  $('activityBody').innerHTML=`
+    <div class="mascot-stage">
+      <div class="mascot happy"><div class="mascot-body">🦉</div></div>
+      <div class="speech-bubble right">Toca la imagen<br><small>Tap and listen!</small></div>
+    </div>
+    <div class="tap-hear-card">
+      <div class="tap-hear-pic" id="tapHearPic" onclick="tapHearAction('${escapeAttr(v.en)}')">${tw(v.icon,'110px')}</div>
+      <div class="tap-hear-hint">👆 Toca para escuchar</div>
+      <div style="margin-top:14px;font-weight:1000;color:var(--muted);font-size:.92rem">Palabra ${window._thTotal-window._thQueue.length+1} de ${window._thTotal}</div>
+    </div>
+    <div class="action-bar with-back">
+      <button class="ghost-btn" onclick="prevStepSafe()">← Atrás</button>
+      <button class="primary-btn" onclick="advanceTapHear()">Siguiente →</button>
+    </div>`;
+  // Auto-play primera vez
+  setTimeout(()=>speakENtwice(v.en),300);
+}
+function tapHearAction(en){
+  speakENtwice(en);
+  sfxTap();vibrate(20);
+  const pic=$('tapHearPic');
+  if(pic){pic.style.transform='scale(1.1)';setTimeout(()=>pic.style.transform='',300)}
+}
+function advanceTapHear(){
+  reward(5);
+  if(window._thQueue&&window._thQueue.length>0)window._thQueue.shift();
+  showNextTapHear();
+}
+
+/* === BALLOON POP === Globos con imágenes suben, niño revienta el correcto */
+let balloonState=null;
+function renderBalloonGame(){
+  const items=dedupOptions(shuffled(currentLesson.words)).slice(0,Math.min(5,currentLesson.words.length));
+  balloonState={
+    items,target:items[Math.floor(Math.random()*items.length)],
+    score:0,rounds:0,totalRounds:5,balloons:[],spawnTimer:null,roundActive:false
+  };
+  startBalloonRound();
+}
+function startBalloonRound(){
+  if(!balloonState)return;
+  if(balloonState.rounds>=balloonState.totalRounds){endBalloonGame();return}
+  balloonState.rounds++;
+  balloonState.target=balloonState.items[Math.floor(Math.random()*balloonState.items.length)];
+  balloonState.roundActive=true;
+  balloonState.balloons=[];
+  $('activityBody').innerHTML=`
+    <div class="mascot-stage" style="min-height:80px;padding:6px 0">
+      <div class="mascot happy" style="width:60px;height:60px"><div class="mascot-body" style="font-size:48px">🦉</div></div>
+      <div class="speech-bubble right" style="top:10px">Pincha: <b>${balloonState.target.es}</b><br><small>Pop the right balloon!</small></div>
+    </div>
+    <div style="text-align:center;margin-bottom:8px"><b style="font-size:1.1rem">⭐ ${balloonState.score}</b> · Ronda ${balloonState.rounds}/${balloonState.totalRounds}</div>
+    <button class="listen-big-btn" onclick="speakENtwice('${escapeAttr(balloonState.target.en)}')" style="padding:10px;min-height:44px;font-size:.95rem">🔊 ${balloonState.target.en}</button>
+    <div class="balloon-arena" id="balloonArena"></div>
+    <div class="action-bar"><button class="ghost-btn" onclick="endBalloonGame(true)">⏭️ Saltar juego</button></div>`;
+  setTimeout(()=>speakENtwice(balloonState.target.en),200);
+  // Generar globos cada 1.2s
+  let count=0;
+  balloonState.spawnTimer=setInterval(()=>{
+    if(!balloonState||!balloonState.roundActive)return;
+    spawnBalloon();
+    count++;
+    if(count>=6){clearInterval(balloonState.spawnTimer);setTimeout(()=>{
+      if(balloonState&&balloonState.roundActive){
+        // Fin de ronda - avanzar
+        balloonState.roundActive=false;
+        setTimeout(()=>startBalloonRound(),800);
+      }
+    },4500)}
+  },1100);
+}
+function spawnBalloon(){
+  const arena=$('balloonArena');
+  if(!arena||!balloonState)return;
+  // Mezclar correcto y distractores
+  const useCorrect=Math.random()<0.5;
+  const word=useCorrect?balloonState.target:balloonState.items.filter(w=>w.en!==balloonState.target.en)[Math.floor(Math.random()*(balloonState.items.length-1))];
+  if(!word)return;
+  const colors=['#ef4444','#f59e0b','#3b82f6','#a855f7','#ec4899','#14b8a6'];
+  const color=colors[Math.floor(Math.random()*colors.length)];
+  const xPct=10+Math.random()*75;
+  const duration=4+Math.random()*1.5;
+  const balloon=document.createElement('div');
+  balloon.className='balloon';
+  balloon.style.left=xPct+'%';
+  balloon.style.animationDuration=duration+'s';
+  balloon.dataset.word=word.en;
+  balloon.innerHTML=`<div class="balloon-body" style="background:${color};color:${color}">${tw(word.icon,'42px')}</div><div class="balloon-string"></div>`;
+  balloon.onclick=()=>popBalloon(balloon,word.en);
+  arena.appendChild(balloon);
+  // Auto-remove
+  setTimeout(()=>{if(balloon.parentNode){balloon.classList.add('missed');setTimeout(()=>balloon.remove(),400)}},(duration*1000)+200);
+}
+async function popBalloon(el,word){
+  if(!balloonState)return;
+  const ok=word===balloonState.target.en;
+  el.classList.add('popped');
+  if(ok){
+    sfxCorrect();vibrate([20,40,20]);
+    balloonState.score+=10;reward(8);comboCount++;
+    if(comboCount>=3)showComboBanner('🔥 '+comboCount+'x');
+  }else{
+    sfxWrong();vibrate(120);comboCount=0;loseHeart();
+  }
+  setTimeout(()=>el.remove(),350);
+}
+function endBalloonGame(skip){
+  if(balloonState&&balloonState.spawnTimer)clearInterval(balloonState.spawnTimer);
+  const score=balloonState?balloonState.score:0;
+  balloonState=null;
+  if(skip){nextStep();return}
+  $('activityBody').innerHTML=`
+    <div class="mascot-stage"><div class="mascot celebrate"><div class="mascot-body">🦉</div></div>
+    <div class="speech-bubble right">¡Increíble!<br><small>Amazing!</small></div></div>
+    <div style="text-align:center;padding:20px">
+      <div style="font-size:5rem">🎈</div>
+      <h2 style="font-size:1.4rem;margin-top:8px">¡Globos reventados!</h2>
+      <div style="margin-top:12px;background:#fff;display:inline-block;padding:10px 22px;border-radius:18px;box-shadow:0 4px 12px #1720331a"><b style="font-size:1.6rem;color:var(--primary)">⭐ ${score}</b></div>
+    </div>
+    <div class="action-bar"><button class="primary-btn" onclick="nextStep()">Continuar →</button></div>`;
+  if(score>=30){confetti();sfxLevelUp()}
+}
+
+/* === IMAGE MEMORY === Memorice solo con IMÁGENES (no texto) */
+function renderImageMemory(){
+  const pairs=dedupOptions(shuffled(currentLesson.words)).slice(0,Math.min(3,currentLesson.words.length));
+  // Crear pares de la MISMA imagen (memorice clásico imagen-imagen)
+  // Pero al voltear, escuchas la palabra en inglés
+  const cards=shuffled(pairs.flatMap(v=>[
+    {id:v.en,icon:v.icon,n:1},
+    {id:v.en,icon:v.icon,n:2}
+  ]));
+  memoryState={open:[],matched:0,total:cards.length,moves:0,pairs};
+  $('activityBody').innerHTML=`
+    <div class="mascot-stage" style="min-height:90px;padding:6px 0">
+      <div class="mascot happy" style="width:70px;height:70px"><div class="mascot-body" style="font-size:54px">🦉</div></div>
+      <div class="speech-bubble right" style="top:14px">Encuentra<br>las parejas iguales</div>
+    </div>
+    <div class="imem-grid">
+      ${cards.map(c=>`<button class="imem-card" data-id="${escapeAttr(c.id)}" data-icon="${escapeAttr(c.icon)}" onclick="flipIMem(this)"><span class="qmark">?</span></button>`).join('')}
+    </div>
+    <p id="memMoves" style="text-align:center;margin-top:12px;color:var(--muted);font-weight:900;font-size:.85rem">Movimientos: 0</p>
+    <div class="action-bar with-back">
+      <button class="ghost-btn" onclick="prevStepSafe()">← Atrás</button>
+      <button class="primary-btn" onclick="skipMemory()">⏭️ Saltar</button>
+    </div>`;
+  setTimeout(()=>speakES('Encuentra las parejas iguales.'),300);
+}
+async function flipIMem(el){
+  if(el.classList.contains('matched')||el.classList.contains('flipped')||memoryState.open.length>=2)return;
+  // Mostrar imagen
+  el.innerHTML=tw(el.dataset.icon,'60px');
+  el.classList.add('flipped');
+  sfxTap();
+  // Reproducir audio de la palabra
+  speakEN(el.dataset.id);
+  memoryState.open.push(el);
+  if(memoryState.open.length===2){memoryState.moves++;setTimeout(checkIMem,1000)}
+}
+async function checkIMem(){
+  const[a,b]=memoryState.open;
+  if(a.dataset.id===b.dataset.id){
+    a.classList.add('matched');b.classList.add('matched');
+    memoryState.matched+=2;reward(10);sfxCorrect();vibrate([20,30,20]);comboCount++;
+    setMascotState('celebrate');
+    if(comboCount>=2)showComboBanner('✨ ¡Pareja!');
+    await speakEN(a.dataset.id);
+    if(memoryState.matched===memoryState.total){
+      sfxLevelUp();confetti();
+      setTimeout(()=>{
+        $('activityBody').innerHTML=`
+          <div class="mascot-stage"><div class="mascot celebrate"><div class="mascot-body">🦉</div></div>
+          <div class="speech-bubble right">¡Memoria perfecta!</div></div>
+          <div style="text-align:center;padding:24px"><div style="font-size:5rem">🧠</div><h2>¡Excelente memoria!</h2></div>
+          <div class="action-bar"><button class="primary-btn" onclick="nextStep()">Continuar →</button></div>`;
+      },1500);
+    }
+  }else{
+    sfxWrong();
+    setTimeout(()=>{
+      a.classList.remove('flipped');
+      b.classList.remove('flipped');
+      a.innerHTML='<span class="qmark">?</span>';
+      b.innerHTML='<span class="qmark">?</span>';
+    },200);
+    comboCount=0;
+  }
+  memoryState.open=[];
+  const mm=$('memMoves');
+  if(mm)mm.textContent='Movimientos: '+memoryState.moves;
+  if(memoryState.moves>=10&&memoryState.matched<memoryState.total){
+    showHelpPanel('¿Lo hacemos más fácil?',{
+      skip:{label:'⏭️ Saltar',fn:()=>{hideHelpPanel();nextStep()}}
+    });
+  }
+}
+
+/* === Sistema de corazones (vidas) === */
+function loseHeart(){
+  if(!lessonState)return;
+  lessonState.hearts=Math.max(0,lessonState.hearts-1);
+  // Re-render header bar
+  const hp=document.querySelector('.progress-hearts');
+  if(hp)hp.textContent='❤️ '+lessonState.hearts;
+  if(lessonState.hearts<=0){
+    showModal('Sin corazones','Te quedaste sin corazones. ¿Quieres reintentar la lección?','🔁 Reintentar',()=>{
+      startLesson(currentLesson.id);
+    });
+  }
+}
+
 /* === LISTEN GAME === */
 function renderListenGame(){
-  const items=shuffled(currentLesson.words).slice(0,Math.min(4,currentLesson.words.length));
+  const items=dedupOptions(shuffled(currentLesson.words)).slice(0,Math.min(4,currentLesson.words.length));
   const correct=items[Math.floor(Math.random()*items.length)];
   window.listenCorrect=correct.en;
   $('activityBody').innerHTML=`<section class="card">
     <div class="question">🎧 Escucha y elige <small>Listen and choose</small></div>
     <button class="primary-btn full" onclick="speakENtwice('${escapeAttr(correct.en)}')">🔊 Escuchar otra vez</button>
-    <div class="options">${items.map(v=>`<button class="option" onclick="answerListen(this,'${escapeAttr(v.en)}')"><span class="ic">${v.icon}</span><span class="lbl-es">${v.es}</span><span class="lbl-en">${v.en}</span></button>`).join('')}</div>
+    <div class="options">${items.map(v=>`<button class="option" onclick="answerListen(this,'${escapeAttr(v.en)}')"><span class="ic">${tw(v.icon)}</span><span class="lbl-es">${v.es}</span><span class="lbl-en">${v.en}</span></button>`).join('')}</div>
     <div id="feedback" class="feedback"></div>
   </section>
   <div class="action-bar with-back">
@@ -1402,8 +1937,9 @@ async function answerListen(el,ans){
   el.classList.add(ok?'correct':'wrong');
   if(!ok){
     [...document.querySelectorAll('.option')].find(o=>o.querySelector('.lbl-en')?.textContent===window.listenCorrect)?.classList.add('correct');
-    sfxWrong();vibrate(120);comboCount=0;
-  }else{sfxCorrect();vibrate([30,50,30]);comboCount++;if(comboCount>=3)comboPop('🔥 Combo x'+comboCount)}
+    sfxWrong();vibrate(120);comboCount=0;loseHeart();
+    setMascotState('sad');
+  }else{sfxCorrect();vibrate([30,50,30]);comboCount++;setMascotState('celebrate');if(comboCount>=3)showComboBanner('🔥 Combo x'+comboCount)}
   showFeedback(ok);
   if(ok){reward(12);await speakEN('Correct!');setTimeout(()=>nextStep(),1300)}
   else{
@@ -1416,7 +1952,7 @@ async function answerListen(el,ans){
 
 /* === TAP THE THING === */
 function renderTapGame(){
-  const items=shuffled(currentLesson.words).slice(0,Math.min(6,currentLesson.words.length));
+  const items=dedupOptions(shuffled(currentLesson.words)).slice(0,Math.min(6,currentLesson.words.length));
   tapState={items:[...items],remaining:[...items],hits:0,total:Math.min(4,items.length),current:null};
   tapState.current=tapState.remaining[Math.floor(Math.random()*tapState.remaining.length)];
   renderTapRound();
@@ -1428,7 +1964,7 @@ function renderTapRound(){
     <div class="question">👆 Find: <span style="color:var(--primary)">${target.en}</span><small>${target.es}</small></div>
     <div class="scene-frame">${SCENES[sceneKey]||''}</div>
     <button class="primary-btn full" onclick="speakENtwice('${escapeAttr(target.en)}')">🔊 Escuchar</button>
-    <div class="scene-objects">${tapState.items.map(v=>`<button class="scene-obj" data-key="${escapeAttr(v.en)}" onclick="tapAnswer(this,'${escapeAttr(v.en)}')">${v.icon}</button>`).join('')}</div>
+    <div class="scene-objects">${tapState.items.map(v=>`<button class="scene-obj" data-key="${escapeAttr(v.en)}" onclick="tapAnswer(this,'${escapeAttr(v.en)}')">${tw(v.icon)}</button>`).join('')}</div>
     <div id="feedback" class="feedback"></div>
     <p style="text-align:center;margin-top:10px;font-weight:900;color:var(--muted);font-size:.88rem">Encontradas: ${tapState.hits} de ${tapState.total}</p>
   </section>
@@ -1487,8 +2023,8 @@ async function tapAnswer(el,key){
 
 /* === MEMORY === */
 function renderMatchGame(){
-  const pairs=shuffled(currentLesson.words).slice(0,Math.min(4,currentLesson.words.length));
-  const cards=shuffled(pairs.flatMap(v=>[{id:v.en,show:v.icon,type:'icon'},{id:v.en,show:v.en,type:'word'}]));
+  const pairs=dedupOptions(shuffled(currentLesson.words)).slice(0,Math.min(4,currentLesson.words.length));
+  const cards=shuffled(pairs.flatMap(v=>[{id:v.en,show:tw(v.icon),type:'icon'},{id:v.en,show:v.en,type:'word'}]));
   memoryState={open:[],matched:0,total:cards.length,moves:0};
   $('activityBody').innerHTML=`<section class="card">
     <div class="question">🧠 Memorice <small>Match icon and word</small></div>
@@ -1511,7 +2047,7 @@ function skipMemory(){
 }
 async function flipMem(el){
   if(el.classList.contains('matched')||el.classList.contains('flipped')||memoryState.open.length>=2)return;
-  el.textContent=el.dataset.show;el.classList.add('flipped');sfxTap();
+  el.innerHTML=el.dataset.show;el.classList.add('flipped');sfxTap();
   speakEN(el.dataset.id);
   memoryState.open.push(el);
   if(memoryState.open.length===2){memoryState.moves++;setTimeout(checkMem,800)}
@@ -1531,7 +2067,7 @@ async function checkMem(){
   }else{
     sfxWrong();
     a.classList.remove('flipped');b.classList.remove('flipped');
-    a.textContent='?';b.textContent='?';
+    a.innerHTML='?';b.innerHTML='?';
     comboCount=0;
   }
   memoryState.open=[];
@@ -1692,7 +2228,7 @@ function renderSpeedGame(){
 }
 function speedNextRound(){
   if(!speedState||speedState.lives<=0||speedState.timeLeft<=0){speedEnd();return}
-  const items=shuffled(currentLesson.words).slice(0,Math.min(4,currentLesson.words.length));
+  const items=dedupOptions(shuffled(currentLesson.words)).slice(0,Math.min(4,currentLesson.words.length));
   const correct=items[Math.floor(Math.random()*items.length)];
   speedState.correct=correct.en;
   $('activityBody').innerHTML=`<section class="card">
@@ -1703,7 +2239,7 @@ function speedNextRound(){
     </div>
     <div class="question">⚡ Speed Round <small>30 segundos</small></div>
     <button class="primary-btn full" onclick="speakEN('${escapeAttr(correct.en)}')">🔊 Repetir</button>
-    <div class="options">${items.map(v=>`<button class="option" onclick="speedAnswer(this,'${escapeAttr(v.en)}')"><span class="ic">${v.icon}</span><span class="lbl-es">${v.es}</span></button>`).join('')}</div>
+    <div class="options">${items.map(v=>`<button class="option" onclick="speedAnswer(this,'${escapeAttr(v.en)}')"><span class="ic">${tw(v.icon)}</span><span class="lbl-es">${v.es}</span></button>`).join('')}</div>
   </section>
   <div class="action-bar"><button class="ghost-btn" onclick="speedQuit()">Salir del Speed Round</button></div>`;
   setTimeout(()=>speakEN(correct.en),200);
@@ -1769,7 +2305,7 @@ function renderSortGame(){
       <div class="sort-bin healthy" id="binHealthy"><h4>💚 HEALTHY</h4><div class="items" id="itemsH"></div></div>
       <div class="sort-bin unhealthy" id="binUnhealthy"><h4>🚫 UNHEALTHY</h4><div class="items" id="itemsU"></div></div>
     </div>
-    <div class="sort-tray" id="sortTray">${items.map((it,i)=>`<button class="sort-pill" data-idx="${i}" onclick="pickSort(${i},this)"><span class="ic">${it.icon}</span> ${it.en}<small style="margin-left:6px;color:var(--muted);font-weight:800">(${it.es})</small></button>`).join('')}</div>
+    <div class="sort-tray" id="sortTray">${items.map((it,i)=>`<button class="sort-pill" data-idx="${i}" onclick="pickSort(${i},this)"><span class="ic">${tw(it.icon)}</span> ${it.en}<small style="margin-left:6px;color:var(--muted);font-weight:800">(${it.es})</small></button>`).join('')}</div>
     <p style="text-align:center;color:var(--muted);font-weight:800;font-size:.85rem;margin-top:8px">Selecciona un item, luego toca el bin correcto.</p>
     <div id="feedback" class="feedback"></div>
   </section>
@@ -1801,7 +2337,7 @@ async function placeSort(toHealthy){
     sfxCorrect();vibrate([20,40,20]);reward(8);comboCount++;
     sortPicked.el.remove();
     const targetList=toHealthy?'itemsH':'itemsU';
-    $(targetList).insertAdjacentHTML('beforeend',`<span class="sort-pill ${toHealthy?'placed-h':'placed-u'}"><span class="ic">${item.icon}</span> ${item.en}</span>`);
+    $(targetList).insertAdjacentHTML('beforeend',`<span class="sort-pill ${toHealthy?'placed-h':'placed-u'}"><span class="ic">${tw(item.icon)}</span> ${item.en}</span>`);
     sortState.placed.push(item);sortPicked=null;
     await speakEN(item.en+' is '+(toHealthy?'healthy':'unhealthy'));
     if(sortState.placed.length===sortState.items.length){
@@ -1832,39 +2368,136 @@ function renderComplete(){
   if(!d.completed.includes(currentLesson.id)){
     d.completed.push(currentLesson.id);
     d.badges=(d.badges||0)+1;
-    d.stars=(d.stars||0)+40;
+    d.stars=(d.stars||0)+50;
     const today=todayKey();
     if(d.lastDay!==today){d.streak=(d.streak||0)+1;d.lastDay=today}
     currentUser.data=d;persistUser();
   }
   updateStats();
-  const stars=sessionScore>=120?3:sessionScore>=60?2:1;
-  $('activityBody').innerHTML=`<section class="card flash-main">
-    <div class="big-emoji">🏆</div>
-    <div class="word" style="font-size:clamp(1.8rem,7vw,2.8rem)">¡Lección completada!</div>
-    <div class="translation">${currentLesson.title}</div>
-    <div class="stars-row">
-      <span class="star-big">⭐</span>
-      <span class="star-big">⭐</span>
-      <span class="star-big">⭐</span>
+  const stars=Math.min(3,Math.max(1,Math.ceil(sessionScore/80)));
+  const heartsLeft=lessonState?.hearts??3;
+  $('activityBody').innerHTML=`
+    <div class="treasure-stage">
+      <div class="mascot-stage"><div class="mascot celebrate"><div class="mascot-body">🦉</div></div>
+      <div class="speech-bubble right">¡LO LOGRASTE!<br><small>You did it!</small></div></div>
+      <div class="treasure-chest" id="treasureChest" onclick="openTreasure()">
+        <div class="treasure-glow"></div>
+        <div class="chest-base"></div>
+        <div class="chest-lid"></div>
+        <div class="chest-lock"></div>
+      </div>
+      <div style="margin-top:24px"><h2 style="font-size:1.6rem;letter-spacing:-.03em">¡Lección completada!</h2>
+      <p style="color:var(--muted);font-weight:900;margin-top:6px">${currentLesson.title}</p></div>
+      <div class="stars-row">
+        <span class="star-big">⭐</span>
+        <span class="star-big">⭐</span>
+        <span class="star-big">⭐</span>
+      </div>
+      <div style="display:flex;justify-content:center;gap:14px;margin-top:18px;flex-wrap:wrap">
+        <div style="background:#fff;padding:10px 16px;border-radius:16px;box-shadow:0 4px 12px #1720331a">
+          <div style="font-size:1.6rem">💎</div>
+          <b style="color:var(--primary)">+${sessionScore} XP</b>
+        </div>
+        <div style="background:#fff;padding:10px 16px;border-radius:16px;box-shadow:0 4px 12px #1720331a">
+          <div style="font-size:1.6rem">❤️</div>
+          <b style="color:#ef4444">${heartsLeft}/3</b>
+        </div>
+        <div style="background:#fff;padding:10px 16px;border-radius:16px;box-shadow:0 4px 12px #1720331a">
+          <div style="font-size:1.6rem">🏅</div>
+          <b style="color:#f59e0b">+1</b>
+        </div>
+      </div>
     </div>
-    <p class="phrase">Ganaste estrellas, una medalla y desbloqueaste la siguiente lección.</p>
-  </section>
-  <div class="action-bar with-back">
-    <button class="ghost-btn" onclick="startLesson('${currentLesson.id}')">🔁 Repetir</button>
-    <button class="primary-btn" onclick="showHome()">Ir a la ruta →</button>
-  </div>`;
+    <div class="action-bar with-back">
+      <button class="ghost-btn" onclick="startLesson('${currentLesson.id}')">🔁 Repetir</button>
+      <button class="primary-btn" onclick="showHome()">Continuar →</button>
+    </div>`;
+  // Animar estrellas
+  setTimeout(()=>openTreasure(),600);
   const starEls=document.querySelectorAll('.star-big');
   for(let i=0;i<stars;i++){
-    setTimeout(()=>{starEls[i].classList.add('shown');playTone(523+i*200,180,'sine',.18)},400+i*350);
+    setTimeout(()=>{starEls[i].classList.add('shown');playTone(523+i*200,180,'sine',.2)},1100+i*350);
   }
   confetti();
-  setTimeout(()=>speakEN('Congratulations! Lesson complete!'),300);
-  setTimeout(()=>speakES('¡Felicitaciones! Completaste la lección.'),1800);
+  setTimeout(()=>speakEN('Congratulations! Lesson complete!'),400);
+  setTimeout(()=>speakES('¡Felicitaciones! Completaste la lección.'),2000);
+}
+function openTreasure(){
+  const c=$('treasureChest');
+  if(c)c.classList.add('open');
+  sfxLevelUp();
 }
 
-function reward(points){sessionScore+=points;const d=userData();d.stars=(d.stars||0)+points;currentUser.data=d;persistUser();updateStats()}
+function reward(points){sessionScore+=points;const d=userData();d.stars=(d.stars||0)+points;currentUser.data=d;persistUser();updateStats();spawnGems(points)}
+
+/* === Animación de gemas volando hacia el contador === */
+function spawnGems(amount){
+  const target=$('stars');
+  if(!target)return;
+  const tRect=target.getBoundingClientRect();
+  // Spawn desde el centro de la pantalla
+  const startX=window.innerWidth/2;
+  const startY=window.innerHeight/2;
+  const count=Math.min(5,Math.max(1,Math.floor(amount/5)));
+  for(let i=0;i<count;i++){
+    setTimeout(()=>{
+      const g=document.createElement('div');
+      g.className='gem-fly';
+      g.textContent='💎';
+      g.style.left=startX+(Math.random()*60-30)+'px';
+      g.style.top=startY+'px';
+      const dx=tRect.left-startX;
+      const dy=tRect.top-startY;
+      g.style.setProperty('--dx',dx+'px');
+      g.style.setProperty('--dy',dy+'px');
+      document.body.appendChild(g);
+      setTimeout(()=>g.remove(),1000);
+    },i*80);
+  }
+  // XP popup
+  const xp=document.createElement('div');
+  xp.className='xp-popup';
+  xp.textContent='+'+amount+' XP';
+  xp.style.left='50%';
+  xp.style.top='40%';
+  xp.style.transform='translateX(-50%)';
+  xp.style.position='fixed';
+  document.body.appendChild(xp);
+  setTimeout(()=>xp.remove(),1400);
+}
+
+/* === Mascota: cambia de estado según contexto === */
+function setMascotState(state){
+  const m=document.querySelector('.mascot');
+  if(!m)return;
+  m.classList.remove('happy','celebrate','sad');
+  if(state)m.classList.add(state);
+}
+function mascotSays(text,duration=2200){
+  const stage=document.querySelector('.mascot-stage');
+  if(!stage)return;
+  // Eliminar bubble anterior
+  const old=stage.querySelector('.speech-bubble');
+  if(old)old.remove();
+  const bubble=document.createElement('div');
+  bubble.className='speech-bubble left';
+  bubble.textContent=text;
+  stage.appendChild(bubble);
+  setTimeout(()=>bubble.remove(),duration);
+}
+
 function showFeedback(ok,msg){const f=$('feedback');if(!f)return;f.className='feedback show '+(ok?'good':'bad');f.textContent=msg||(ok?'✅ Correcto':'❌ Intenta otra vez')}
+
+/* Combo banner épico */
+function showComboBanner(text){
+  const old=document.querySelector('.combo-banner');
+  if(old)old.remove();
+  const b=document.createElement('div');
+  b.className='combo-banner';
+  b.innerHTML='<span>'+text+'</span>';
+  document.body.appendChild(b);
+  setTimeout(()=>b.remove(),1200);
+}
 
 /* Panel de ayuda inline tras errores - aparece JUNTO a la pregunta, no abajo */
 window._helpHandlers={};
@@ -1920,7 +2553,7 @@ function quickGame(mode){
   if(mode==='flashcards'){renderQuickFlashcards(words);return}
   if(mode==='listen')renderListenGame();
   if(mode==='tap')renderTapGame();
-  if(mode==='memory')renderMatchGame();
+  if(mode==='memory')renderImageMemory();
   if(mode==='speed')renderSpeedGame();
   if(mode==='dialog'){
     if(!currentLesson.dialog){area.innerHTML='<p style="text-align:center;color:var(--muted);font-weight:900;margin-top:14px">Aún no hay diálogos disponibles.</p>';return}
@@ -1934,7 +2567,7 @@ function quickGame(mode){
 }
 function renderQuickFlashcards(words){
   $('activityBody').innerHTML=`<div class="practice-grid">${words.map(v=>`<article class="practice-card">
-    <div style="font-size:2.6rem">${v.icon}</div>
+    <div>${tw(v.icon,'56px')}</div>
     <h3>${v.en}</h3>
     <p>${v.es} · ${v.lesson}</p>
     <div style="font-family:monospace;color:#5b21b6;background:#f5f3ff;border-radius:10px;padding:6px 10px;display:inline-block;margin:6px 0;font-weight:900">/${v.phonetic}/</div>
@@ -1958,7 +2591,7 @@ function showLibrary(){
     <div class="progress-pill">${words.length} palabras</div>
   </div>
   <div class="library-grid">${words.map(v=>`<button class="word-mini" ondblclick="speakEN('${escapeAttr(v.en)}',.45)" onclick="speakENtwice('${escapeAttr(v.en)}')">
-    <div class="e">${v.icon}</div>
+    <div class="e">${tw(v.icon,'48px')}</div>
     <b>${v.en}</b>
     <span>${v.es}</span>
     <small style="display:block;color:#4338ca;font-weight:950;margin-top:6px;font-size:.7rem">/${v.phonetic}/</small>
