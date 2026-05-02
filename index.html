@@ -6,15 +6,17 @@
   <meta name="theme-color" content="#6D5DF6" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="description" content="FACU INGLÉS 1D - App móvil de autoaprendizaje de inglés inicial para niños" />
+  <meta name="description" content="FACU INGLÉS 1D - App móvil de inglés para niños de 7 años" />
   <title>FACU INGLÉS 1D Pro Mobile</title>
   <style>
     :root{
       --bg1:#6D5DF6; --bg2:#FF66A3; --bg3:#00C2FF;
       --ink:#172033; --muted:#6B7280; --paper:#FFFFFF; --soft:#F6F7FB;
       --primary:#6D5DF6; --secondary:#FF66A3; --success:#12B886; --warning:#F59F00; --danger:#F03E3E;
+      --healthy:#12B886; --unhealthy:#F03E3E;
       --radius:26px; --shadow:0 18px 45px rgba(23,32,51,.18);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-top: env(safe-area-inset-top, 0px);
     }
     *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
     html{height:100%;scroll-behavior:smooth}
@@ -23,124 +25,308 @@
       color:var(--ink);background:radial-gradient(circle at 20% 10%,#fff3 0 12%,transparent 13%),linear-gradient(135deg,var(--bg1),var(--bg2) 58%,var(--bg3));
       overflow-x:hidden;touch-action:manipulation;
     }
-    button,input{font:inherit}
+    button,input,select{font:inherit}
     button{border:0;cursor:pointer}
+    img,svg{max-width:100%;display:block}
     .app-bg{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
     .bubble{position:absolute;border-radius:999px;background:#fff2;filter:blur(.3px);animation:float 18s ease-in-out infinite}
     .b1{width:180px;height:180px;left:-45px;top:8%}.b2{width:260px;height:260px;right:-120px;top:20%;animation-delay:4s}.b3{width:130px;height:130px;left:55%;bottom:5%;animation-delay:8s}
     @keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-35px) rotate(12deg)}}
-    .screen{position:relative;z-index:1;min-height:100dvh;padding:18px;padding-bottom:calc(18px + var(--safe-bottom))}
+    .screen{position:relative;z-index:1;min-height:100dvh;padding:14px;padding-bottom:calc(14px + var(--safe-bottom))}
     .hidden{display:none!important}
-    .shell{max-width:1100px;margin:0 auto;background:rgba(255,255,255,.92);backdrop-filter:blur(18px);border:1px solid #ffffff66;border-radius:34px;box-shadow:var(--shadow);overflow:hidden}
+    .shell{max-width:1100px;margin:0 auto;background:rgba(255,255,255,.96);backdrop-filter:blur(18px);border:1px solid #ffffff66;border-radius:34px;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;min-height:calc(100dvh - 28px)}
+
+    /* === LOGIN === */
     .hero{padding:28px 22px 22px;text-align:center;background:linear-gradient(135deg,#fff,#f7f5ff)}
     .brand-mark{width:96px;height:96px;margin:0 auto 12px;border-radius:30px;display:grid;place-items:center;font-size:54px;background:linear-gradient(135deg,#ffe066,#ff99c8);box-shadow:0 14px 30px #ff66a344;animation:pop 2.8s ease-in-out infinite}
     @keyframes pop{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-    h1{font-size:clamp(2rem,8vw,4rem);line-height:.98;letter-spacing:-.04em;color:#291B6F}.gradient-text{background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;background-clip:text;color:transparent}
+    h1{font-size:clamp(2rem,8vw,4rem);line-height:.98;letter-spacing:-.04em;color:#291B6F}
+    .gradient-text{background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;background-clip:text;color:transparent}
     .subtitle{margin-top:12px;color:var(--muted);font-weight:800;font-size:clamp(1rem,4vw,1.25rem)}
-    .panel{padding:22px}.section-title{font-size:1.3rem;font-weight:900;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px}.section-title small{font-size:.85rem;color:var(--muted);font-weight:800}
-    .profiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:14px;margin-bottom:18px}.profile-card,.add-card{background:#fff;border:2px solid #eef0f7;border-radius:24px;padding:16px;box-shadow:0 10px 24px #17203314;text-align:center;transition:.2s transform,.2s border-color}.profile-card:active,.add-card:active{transform:scale(.97)}.profile-card:hover{border-color:var(--primary)}
-    .avatar{width:72px;height:72px;margin:0 auto 10px;border-radius:24px;display:grid;place-items:center;font-size:42px;background:linear-gradient(135deg,#eef2ff,#ffe3ef)}.profile-name{font-weight:900;font-size:1.08rem}.profile-meta{margin-top:8px;color:var(--muted);font-size:.9rem;font-weight:800;display:flex;justify-content:center;gap:10px}.delete-mini{margin-top:10px;background:#fff1f1;color:var(--danger);border-radius:14px;padding:8px 10px;font-size:.85rem;font-weight:900}
-    .form-card{background:linear-gradient(135deg,#F8FAFF,#FFF7FB);border:2px dashed #c7d2fe;border-radius:26px;padding:18px}.input{width:100%;border:2px solid #e5e7eb;border-radius:18px;padding:16px 18px;font-weight:900;font-size:1.1rem;outline:none;background:#fff}.input:focus{border-color:var(--primary);box-shadow:0 0 0 5px #6d5df620}.avatar-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin:14px 0}.avatar-choice{aspect-ratio:1;border-radius:18px;background:#fff;border:2px solid #eef0f7;font-size:30px;display:grid;place-items:center}.avatar-choice.selected{border-color:var(--primary);background:#efeefe;box-shadow:0 0 0 4px #6d5df61c}.primary-btn,.secondary-btn,.ghost-btn{border-radius:20px;padding:15px 18px;font-weight:950;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:54px}.primary-btn{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;box-shadow:0 12px 26px #6d5df633}.secondary-btn{background:#fff;color:var(--primary);border:2px solid #e7e7ff}.ghost-btn{background:#f4f5fb;color:var(--ink)}.full{width:100%}
-    .topbar{background:linear-gradient(135deg,#4230D8,#8C54FF 55%,#FF66A3);color:white;padding:18px 18px 22px}.user-row{display:flex;align-items:center;justify-content:space-between;gap:12px}.user-mini{display:flex;align-items:center;gap:12px;min-width:0}.user-mini .avatar{width:58px;height:58px;margin:0;font-size:34px;border-radius:20px;background:#fff;color:var(--ink)}.hello{font-size:.92rem;opacity:.9;font-weight:800}.user-title{font-size:1.25rem;font-weight:950;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.top-actions{display:flex;gap:8px}.icon-btn{width:48px;height:48px;border-radius:17px;background:#ffffff22;color:#fff;border:1px solid #ffffff55;font-size:22px;display:grid;place-items:center}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}.stat{background:#ffffff22;border:1px solid #ffffff55;border-radius:20px;text-align:center;padding:12px 8px}.stat b{font-size:1.45rem;display:block}.stat span{font-size:.72rem;font-weight:900;opacity:.95;text-transform:uppercase;letter-spacing:.04em}
-    .tabs{position:sticky;top:0;z-index:5;background:#fffffff2;backdrop-filter:blur(16px);display:flex;gap:8px;padding:10px 12px;border-bottom:1px solid #eef0f7;overflow-x:auto}.tab{white-space:nowrap;border-radius:999px;padding:11px 14px;font-weight:950;background:#f3f4f8;color:#60677a}.tab.active{background:#171F35;color:#fff}.bottom-tabs{display:none}.bottom-tab{background:transparent;color:#697084;border-radius:18px;padding:8px 6px;font-weight:950;min-height:54px}.bottom-tab span{display:block;font-size:1.25rem;line-height:1}.bottom-tab b{display:block;font-size:.72rem;margin-top:3px}.bottom-tab.active{background:#171F35;color:#fff}
-    .content{padding:18px;background:#FAFBFF}.path-header{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:14px}.path-header h2{font-size:1.5rem;letter-spacing:-.03em}.path-header p{color:var(--muted);font-weight:800;margin-top:4px}.progress-pill{background:#fff;border:1px solid #edf0f8;border-radius:999px;padding:10px 12px;font-weight:950;color:var(--primary);white-space:nowrap}
-    .lesson-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}.lesson{position:relative;background:#fff;border:2px solid #eef0f7;border-radius:28px;padding:18px;box-shadow:0 12px 28px #17203312;overflow:hidden;transition:.2s transform,.2s border-color}.lesson:active{transform:scale(.98)}.lesson.done{border-color:#a7f3d0;background:linear-gradient(135deg,#fff,#ecfdf5)}.lesson.locked{opacity:.55;filter:grayscale(.2)}.lesson-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}.lesson-icon{width:62px;height:62px;border-radius:22px;display:grid;place-items:center;background:linear-gradient(135deg,#eef2ff,#fff0f6);font-size:34px}.level{font-size:.75rem;font-weight:950;color:var(--muted);background:#f4f5fb;border-radius:999px;padding:7px 9px}.lesson h3{font-size:1.18rem;font-weight:950;margin-bottom:4px}.lesson p{color:var(--muted);font-weight:800;font-size:.92rem}.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.chip{font-size:.75rem;background:#f4f5fb;border-radius:999px;padding:7px 9px;font-weight:900;color:#596174}.status{margin-top:14px;display:flex;justify-content:space-between;align-items:center;font-weight:950}.status small{color:var(--muted)}
-    .activity{max-width:860px;margin:0 auto}.lesson-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.lesson-head-left{display:flex;align-items:center;gap:12px}.mini-icon{width:56px;height:56px;border-radius:20px;display:grid;place-items:center;font-size:32px;background:linear-gradient(135deg,#eef2ff,#fff0f6)}.lesson-head h2{font-size:1.22rem}.lesson-head p{font-size:.9rem;color:var(--muted);font-weight:800}.stepbar{height:12px;background:#e9ecf5;border-radius:999px;overflow:hidden;margin:12px 0 18px}.stepbar>div{height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--secondary));border-radius:inherit;transition:.3s width}.card{background:#fff;border:1px solid #edf0f8;border-radius:30px;padding:20px;box-shadow:0 14px 35px #17203314}.flash-main{text-align:center}.big-emoji{font-size:clamp(5rem,22vw,9rem);line-height:1;margin:8px 0 10px;display:inline-block;animation:bounceIn .55s cubic-bezier(.28,1.6,.5,1) both}@keyframes bounceIn{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}.word{font-size:clamp(2.2rem,10vw,4.4rem);font-weight:1000;letter-spacing:-.05em;color:#21175f}.phonetic{display:inline-block;margin:10px 0 8px;background:#f5f3ff;color:#5b21b6;border-radius:999px;padding:10px 15px;font-weight:950}.translation{font-size:1.5rem;font-weight:950;color:var(--ink);margin-bottom:10px}.phrase{font-size:1rem;color:var(--muted);font-weight:850;background:#f8fafc;border-radius:18px;padding:12px;margin-top:10px}.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}.question{text-align:center;font-size:clamp(1.45rem,6vw,2.2rem);font-weight:1000;letter-spacing:-.04em;margin-bottom:12px}.options{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}.option{background:#fff;border:2px solid #e9ecf5;border-radius:22px;padding:16px;min-height:74px;font-weight:950;font-size:1.04rem;box-shadow:0 8px 18px #1720330f;transition:transform .15s,border-color .2s}.option:active{transform:scale(.97)}.option.correct{border-color:var(--success);background:#ecfdf5;color:#087f5b;animation:pulseGood .5s}.option.wrong{border-color:var(--danger);background:#fff5f5;color:#c92a2a;animation:shake .4s}@keyframes pulseGood{50%{transform:scale(1.05)}}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}.feedback{margin-top:14px;border-radius:22px;padding:14px;text-align:center;font-weight:1000;display:none}.feedback.show{display:block;animation:bounceIn .4s}.feedback.good{background:#ecfdf5;color:#087f5b}.feedback.bad{background:#fff5f5;color:#c92a2a}.memory-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.mem{aspect-ratio:1;border-radius:22px;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;font-size:clamp(1rem,6vw,2.2rem);font-weight:1000;display:grid;place-items:center;text-align:center;padding:8px;box-shadow:0 10px 20px #1720331a;transition:transform .18s}.mem.flipped{background:#fff;color:var(--ink);border:2px solid var(--primary);transform:rotateY(0)}.mem.matched{background:#ecfdf5;color:#087f5b;border:2px solid var(--success);animation:pulseGood .5s}.sentence-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:14px 0}.tile{background:#f3f4f8;border-radius:16px;padding:12px 14px;font-weight:1000;transition:transform .15s,opacity .2s}.tile:active{transform:scale(.95)}.dropzone{min-height:70px;background:#fff;border:2px dashed #cdd3e6;border-radius:22px;padding:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;color:#9ca3af;font-weight:800}.dropzone .tile{background:linear-gradient(135deg,#eef2ff,#fef3f9);color:var(--ink)}.game-note{text-align:center;color:var(--muted);font-weight:850;margin:8px 0 12px}.bottom-nav{display:flex;gap:10px;margin-top:16px}.bottom-nav button{flex:1}.coach{position:fixed;right:16px;bottom:calc(16px + var(--safe-bottom));z-index:20;width:62px;height:62px;border-radius:22px;background:linear-gradient(135deg,#FFD43B,#FF66A3);box-shadow:0 18px 32px #17203333;border:3px solid #fff;font-size:30px}.toast{position:fixed;left:50%;bottom:calc(92px + var(--safe-bottom));transform:translateX(-50%) translateY(20px);z-index:30;background:#171F35;color:#fff;padding:12px 16px;border-radius:999px;font-weight:900;opacity:0;pointer-events:none;transition:.25s;max-width:92%;text-align:center}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.library-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}.word-mini{background:#fff;border:1px solid #edf0f8;border-radius:22px;padding:14px;text-align:center}.word-mini .e{font-size:2.4rem}.word-mini b{display:block;margin-top:5px}.word-mini span{color:var(--muted);font-size:.85rem;font-weight:800}.practice-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.practice-card{background:#fff;border:1px solid #edf0f8;border-radius:26px;padding:18px;box-shadow:0 12px 28px #17203312}.practice-card h3{font-size:1.05rem;margin:8px 0 6px}.practice-card p{color:var(--muted);font-weight:800;font-size:.9rem}.audio-badge{display:inline-flex;align-items:center;gap:6px;background:#eef2ff;color:#4338ca;border-radius:999px;padding:8px 11px;font-weight:950;font-size:.8rem;margin-top:10px}.quick-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;margin-top:10px}.parent-card{background:#fff;border:1px solid #edf0f8;border-radius:28px;padding:18px;box-shadow:0 12px 28px #17203312}.parent-card h3{font-size:1.2rem;margin-bottom:10px}.parent-card ul{padding-left:18px;color:#4b5563;font-weight:750;line-height:1.55}.confetti{position:fixed;top:-18px;width:12px;height:12px;border-radius:4px;z-index:50;animation:fall 2.8s linear forwards}@keyframes fall{to{transform:translateY(110dvh) rotate(720deg);opacity:0}}
+    .panel{padding:22px}
+    .section-title{font-size:1.3rem;font-weight:900;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .section-title small{font-size:.85rem;color:var(--muted);font-weight:800}
+    .profiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:14px;margin-bottom:18px}
+    .profile-card,.add-card{background:#fff;border:2px solid #eef0f7;border-radius:24px;padding:16px;box-shadow:0 10px 24px #17203314;text-align:center;transition:.2s transform,.2s border-color}
+    .profile-card:active,.add-card:active{transform:scale(.97)}
+    .profile-card:hover{border-color:var(--primary)}
+    .avatar{width:72px;height:72px;margin:0 auto 10px;border-radius:24px;display:grid;place-items:center;font-size:42px;background:linear-gradient(135deg,#eef2ff,#ffe3ef)}
+    .profile-name{font-weight:900;font-size:1.08rem}
+    .profile-meta{margin-top:8px;color:var(--muted);font-size:.9rem;font-weight:800;display:flex;justify-content:center;gap:10px}
+    .delete-mini{margin-top:10px;background:#fff1f1;color:var(--danger);border-radius:14px;padding:8px 10px;font-size:.85rem;font-weight:900}
+    .form-card{background:linear-gradient(135deg,#F8FAFF,#FFF7FB);border:2px dashed #c7d2fe;border-radius:26px;padding:18px}
+    .input,.select{width:100%;border:2px solid #e5e7eb;border-radius:18px;padding:14px 16px;font-weight:900;font-size:1.05rem;outline:none;background:#fff}
+    .input:focus,.select:focus{border-color:var(--primary);box-shadow:0 0 0 5px #6d5df620}
+    .avatar-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin:14px 0}
+    .avatar-choice{aspect-ratio:1;border-radius:18px;background:#fff;border:2px solid #eef0f7;font-size:30px;display:grid;place-items:center}
+    .avatar-choice.selected{border-color:var(--primary);background:#efeefe;box-shadow:0 0 0 4px #6d5df61c}
+    .primary-btn,.secondary-btn,.ghost-btn{border-radius:20px;padding:14px 18px;font-weight:950;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:54px;transition:transform .15s}
+    .primary-btn{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;box-shadow:0 12px 26px #6d5df633}
+    .primary-btn:active{transform:scale(.97)}
+    .secondary-btn{background:#fff;color:var(--primary);border:2px solid #e7e7ff}
+    .ghost-btn{background:#f4f5fb;color:var(--ink)}
+    .full{width:100%}
 
-    /* NEW GAME STYLES */
-    .game-modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
-    .game-mode{background:#fff;border:2px solid #eef0f7;border-radius:22px;padding:16px;text-align:center;cursor:pointer;transition:transform .15s,border-color .2s,box-shadow .2s;box-shadow:0 8px 18px #1720330f}
-    .game-mode:active{transform:scale(.97)}
-    .game-mode:hover{border-color:var(--primary);box-shadow:0 12px 26px #6d5df622}
-    .game-mode .icon{font-size:2.6rem;margin-bottom:6px;display:block}
-    .game-mode b{display:block;font-size:1rem;margin-bottom:3px}
-    .game-mode small{color:var(--muted);font-weight:800;font-size:.78rem}
-    /* Tap-the-thing scene */
-    .scene{position:relative;background:linear-gradient(180deg,#dbeafe 0%,#fef3c7 70%,#bbf7d0 100%);border-radius:24px;padding:18px;min-height:280px;overflow:hidden}
-    .scene-prompt{background:#fff;border-radius:18px;padding:14px;text-align:center;font-weight:950;font-size:1.1rem;margin-bottom:12px;box-shadow:0 6px 16px #1720331a}
-    .scene-objects{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px}
-    .scene-obj{background:#fff;border:2px solid #fff;border-radius:20px;aspect-ratio:1;display:grid;place-items:center;font-size:3.2rem;cursor:pointer;transition:transform .15s,border-color .2s;box-shadow:0 8px 16px #1720331a}
+    /* === TOP BAR === */
+    .topbar{background:linear-gradient(135deg,#4230D8,#8C54FF 55%,#FF66A3);color:white;padding:14px 16px 18px;flex-shrink:0}
+    .user-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .user-mini{display:flex;align-items:center;gap:12px;min-width:0}
+    .user-mini .avatar{width:50px;height:50px;margin:0;font-size:28px;border-radius:18px;background:#fff;color:var(--ink)}
+    .hello{font-size:.85rem;opacity:.9;font-weight:800}
+    .user-title{font-size:1.15rem;font-weight:950;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .top-actions{display:flex;gap:8px}
+    .icon-btn{width:44px;height:44px;border-radius:15px;background:#ffffff22;color:#fff;border:1px solid #ffffff55;font-size:20px;display:grid;place-items:center}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}
+    .stat{background:#ffffff22;border:1px solid #ffffff55;border-radius:16px;text-align:center;padding:10px 6px}
+    .stat b{font-size:1.3rem;display:block;line-height:1}
+    .stat span{font-size:.65rem;font-weight:900;opacity:.95;text-transform:uppercase;letter-spacing:.04em}
+
+    /* === MAIN CONTENT AREA === */
+    .content{padding:14px;background:#FAFBFF;flex:1;overflow-y:auto;padding-bottom:calc(80px + var(--safe-bottom))}
+    .path-header{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+    .path-header h2{font-size:1.4rem;letter-spacing:-.03em}
+    .path-header p{color:var(--muted);font-weight:800;margin-top:4px;font-size:.92rem}
+    .progress-pill{background:#fff;border:1px solid #edf0f8;border-radius:999px;padding:8px 12px;font-weight:950;color:var(--primary);white-space:nowrap;font-size:.9rem}
+
+    /* === LESSON CARDS === */
+    .level-header{font-size:1.1rem;font-weight:1000;color:#4230D8;margin:14px 0 8px;display:flex;align-items:center;gap:8px}
+    .level-header::before{content:"";width:4px;height:20px;background:linear-gradient(180deg,var(--primary),var(--secondary));border-radius:4px}
+    .lesson-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+    .lesson{position:relative;background:#fff;border:2px solid #eef0f7;border-radius:24px;padding:16px;box-shadow:0 12px 28px #17203312;overflow:hidden;transition:.2s transform,.2s border-color;cursor:pointer}
+    .lesson:active{transform:scale(.98)}
+    .lesson.done{border-color:#a7f3d0;background:linear-gradient(135deg,#fff,#ecfdf5)}
+    .lesson.locked{opacity:.55;filter:grayscale(.2)}
+    .lesson-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+    .lesson-icon{width:54px;height:54px;border-radius:18px;display:grid;place-items:center;background:linear-gradient(135deg,#eef2ff,#fff0f6);font-size:30px}
+    .level{font-size:.7rem;font-weight:950;color:var(--muted);background:#f4f5fb;border-radius:999px;padding:6px 9px}
+    .lesson h3{font-size:1.08rem;font-weight:950;margin-bottom:4px;line-height:1.15}
+    .lesson p{color:var(--muted);font-weight:800;font-size:.85rem;line-height:1.3}
+    .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+    .chip{font-size:.72rem;background:#f4f5fb;border-radius:999px;padding:5px 9px;font-weight:900;color:#596174}
+    .status{margin-top:12px;display:flex;justify-content:space-between;align-items:center;font-weight:950;font-size:.85rem}
+    .status small{color:var(--muted);font-size:.78rem}
+
+    /* === ACTIVITY VIEW === */
+    .activity{max-width:860px;margin:0 auto}
+    .activity-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;background:#fff;padding:10px 14px;border-radius:18px;box-shadow:0 6px 16px #1720330f}
+    .activity-head .left{display:flex;align-items:center;gap:10px;min-width:0}
+    .mini-icon{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;font-size:24px;background:linear-gradient(135deg,#eef2ff,#fff0f6);flex-shrink:0}
+    .activity-head h2{font-size:1rem;font-weight:1000;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .activity-head p{font-size:.78rem;color:var(--muted);font-weight:800}
+    .exit-btn{background:#fff1f1;color:var(--danger);border-radius:14px;padding:8px 12px;font-weight:900;font-size:.85rem;flex-shrink:0}
+    .stepbar{height:10px;background:#e9ecf5;border-radius:999px;overflow:hidden;margin-bottom:14px}
+    .stepbar>div{height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--secondary));border-radius:inherit;transition:.3s width}
+
+    .card{background:#fff;border:1px solid #edf0f8;border-radius:26px;padding:18px;box-shadow:0 14px 35px #17203314;margin-bottom:12px}
+
+    /* === FLASHCARD === */
+    .flash-main{text-align:center}
+    .scene-frame{background:linear-gradient(180deg,#dbeafe 0%,#fef3c7 60%,#bbf7d0 100%);border-radius:22px;padding:14px;margin:10px 0 14px;position:relative;overflow:hidden;min-height:200px;display:grid;place-items:center}
+    .scene-frame.indoor{background:linear-gradient(180deg,#fef3c7 0%,#fed7aa 100%)}
+    .scene-frame.night{background:linear-gradient(180deg,#1e1b4b 0%,#3730a3 100%);color:#fff}
+    .scene-frame.kitchen{background:linear-gradient(180deg,#fef9c3 0%,#fde68a 100%)}
+    .scene-frame.school{background:linear-gradient(180deg,#dbeafe 0%,#e9d5ff 100%)}
+    .scene-frame.home{background:linear-gradient(180deg,#fce7f3 0%,#fef3c7 100%)}
+    .scene-frame.healthy-bg{background:linear-gradient(180deg,#dcfce7 0%,#bbf7d0 100%)}
+    .scene-frame.unhealthy-bg{background:linear-gradient(180deg,#fee2e2 0%,#fecaca 100%)}
+    .scene-frame svg{width:100%;height:auto;max-height:240px}
+    .word{font-size:clamp(2.4rem,11vw,4.4rem);font-weight:1000;letter-spacing:-.05em;color:#21175f;line-height:1;margin-top:4px}
+    .syllables{display:inline-flex;flex-wrap:wrap;justify-content:center;gap:4px;margin:8px 0 4px}
+    .syl{display:inline-block;padding:4px 10px;border-radius:12px;font-size:1.05rem;font-weight:1000;color:#fff;letter-spacing:.05em}
+    .syl:nth-child(3n){background:#FF66A3}
+    .syl:nth-child(3n+1){background:#6D5DF6}
+    .syl:nth-child(3n+2){background:#00C2FF}
+    .phonetic{display:inline-block;margin:6px 0;background:#f5f3ff;color:#5b21b6;border-radius:999px;padding:8px 14px;font-weight:950;font-family:monospace}
+    .translation{font-size:1.35rem;font-weight:950;color:var(--ink);margin:8px 0;background:#fef3c7;display:inline-block;padding:6px 16px;border-radius:14px}
+    .phrase{font-size:.95rem;color:var(--muted);font-weight:850;background:#f8fafc;border-radius:16px;padding:10px;margin-top:8px}
+    .phrase b{color:var(--ink)}
+    .actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+    .actions .primary-btn,.actions .secondary-btn{padding:13px 14px;font-size:.95rem;min-height:50px}
+
+    /* === GAME COMMON === */
+    .question{text-align:center;font-size:clamp(1.3rem,5.5vw,2rem);font-weight:1000;letter-spacing:-.03em;margin-bottom:8px;line-height:1.15}
+    .question small{display:block;color:var(--muted);font-weight:800;font-size:.7em;margin-top:4px}
+    .game-note{text-align:center;color:var(--muted);font-weight:850;margin:6px 0 12px;font-size:.92rem}
+    .options{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+    .option{background:#fff;border:2px solid #e9ecf5;border-radius:20px;padding:14px;min-height:80px;font-weight:950;font-size:1rem;box-shadow:0 8px 18px #1720330f;transition:transform .15s,border-color .2s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+    .option:active{transform:scale(.97)}
+    .option .ic{font-size:2.4rem;line-height:1}
+    .option .lbl-es{font-size:1rem;color:var(--ink)}
+    .option .lbl-en{font-size:.78rem;color:#6b7280;font-weight:800;margin-top:2px}
+    .option.correct{border-color:var(--success);background:#ecfdf5;color:#087f5b;animation:pulseGood .5s}
+    .option.wrong{border-color:var(--danger);background:#fff5f5;color:#c92a2a;animation:shake .4s}
+    @keyframes pulseGood{50%{transform:scale(1.06)}}
+    @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+    .feedback{margin-top:10px;border-radius:18px;padding:12px;text-align:center;font-weight:1000;display:none}
+    .feedback.show{display:block;animation:bounceIn .4s}
+    .feedback.good{background:#ecfdf5;color:#087f5b}
+    .feedback.bad{background:#fff5f5;color:#c92a2a}
+    @keyframes bounceIn{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}
+
+    /* === MEMORY === */
+    .memory-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+    .mem{aspect-ratio:1;border-radius:18px;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;font-size:clamp(1rem,5vw,2rem);font-weight:1000;display:grid;place-items:center;text-align:center;padding:6px;box-shadow:0 8px 16px #1720331a;transition:transform .18s}
+    .mem.flipped{background:#fff;color:var(--ink);border:2px solid var(--primary)}
+    .mem.matched{background:#ecfdf5;color:#087f5b;border:2px solid var(--success);animation:pulseGood .5s}
+
+    /* === SCENE TAP === */
+    .scene-objects{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:10px;margin-top:12px}
+    .scene-obj{background:#fff;border:2px solid #fff;border-radius:18px;aspect-ratio:1;display:grid;place-items:center;font-size:2.8rem;cursor:pointer;transition:transform .15s,border-color .2s;box-shadow:0 6px 14px #1720331a;position:relative;padding:8px}
     .scene-obj:active{transform:scale(.92)}
     .scene-obj.correct{border-color:var(--success);background:#ecfdf5;animation:pulseGood .5s}
     .scene-obj.wrong{border-color:var(--danger);background:#fff5f5;animation:shake .4s}
     .scene-obj.faded{opacity:.35;pointer-events:none}
-    /* Speak game */
-    .mic-circle{width:140px;height:140px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--secondary));margin:14px auto;display:grid;place-items:center;font-size:60px;color:#fff;box-shadow:0 18px 40px #6d5df644;cursor:pointer;transition:transform .2s}
-    .mic-circle:active{transform:scale(.94)}
-    .mic-circle.listening{animation:pulseRing 1.2s infinite}
-    @keyframes pulseRing{0%{box-shadow:0 0 0 0 #ff66a366}70%{box-shadow:0 0 0 24px #ff66a300}100%{box-shadow:0 0 0 0 #ff66a300}}
-    .speak-target{font-size:clamp(2rem,9vw,3.6rem);font-weight:1000;text-align:center;color:#21175f;letter-spacing:-.04em;margin:8px 0}
-    .speak-result{margin-top:12px;text-align:center;font-weight:900;color:var(--muted);min-height:24px}
-    /* Categorize */
-    .cat-board{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
-    .cat-bin{background:#fff;border:2px dashed #cdd3e6;border-radius:22px;padding:14px;min-height:160px}
-    .cat-bin h4{font-size:1rem;margin-bottom:8px;text-align:center}
-    .cat-bin .items{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
-    .cat-bin.over{border-color:var(--primary);background:#efeefe}
-    .cat-tray{background:#f4f5fb;border-radius:22px;padding:12px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:12px;min-height:80px}
-    .cat-pill{background:#fff;border:2px solid #e9ecf5;border-radius:16px;padding:10px 14px;font-weight:950;font-size:.95rem;cursor:grab;user-select:none;box-shadow:0 4px 10px #1720330f;transition:transform .15s}
-    .cat-pill:active{cursor:grabbing;transform:scale(1.05)}
-    .cat-pill.placed{background:#ecfdf5;border-color:var(--success);color:#087f5b}
-    .cat-pill.dragging{opacity:.4}
-    /* Speed round */
-    .speed-bar{display:flex;align-items:center;gap:10px;background:#fff;border-radius:18px;padding:10px 14px;margin-bottom:10px;box-shadow:0 8px 18px #1720330f}
-    .speed-timer{flex:1;height:14px;background:#fef2f2;border-radius:999px;overflow:hidden}
-    .speed-timer>div{height:100%;background:linear-gradient(90deg,var(--success),var(--warning),var(--danger));border-radius:inherit;transition:width .1s linear}
-    .speed-lives{font-size:1.2rem;font-weight:1000;color:var(--danger);letter-spacing:2px}
-    .speed-score{font-weight:1000;color:var(--primary);font-size:1.2rem}
-    /* Dialog game */
-    .dialog-bubble{background:#fff;border-radius:22px;padding:14px 18px;margin:8px 0;max-width:80%;box-shadow:0 6px 14px #1720331a;animation:slideIn .35s}
+    .scene-obj svg{max-width:60%;max-height:60%}
+    .scene-obj small{font-size:.65rem;font-weight:900;color:var(--muted);position:absolute;bottom:4px}
+
+    /* === SENTENCE BUILDER === */
+    .sentence-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0}
+    .tile{background:#f3f4f8;border-radius:14px;padding:10px 14px;font-weight:1000;transition:transform .15s,opacity .2s;font-size:1rem}
+    .tile:active{transform:scale(.95)}
+    .dropzone{min-height:64px;background:#fff;border:2px dashed #cdd3e6;border-radius:18px;padding:8px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center;color:#9ca3af;font-weight:800}
+    .dropzone .tile{background:linear-gradient(135deg,#eef2ff,#fef3f9);color:var(--ink)}
+
+    /* === DIALOG === */
+    .dialog-area{display:flex;flex-direction:column;gap:6px;background:#f8fafc;border-radius:20px;padding:12px;min-height:180px;max-height:320px;overflow-y:auto;margin-bottom:10px}
+    .dialog-bubble{padding:12px 16px;margin:6px 0;max-width:80%;box-shadow:0 4px 10px #1720331a;animation:slideIn .35s;border-radius:18px;line-height:1.3}
+    .dialog-bubble small{display:block;opacity:.75;font-size:.78rem;margin-top:3px}
     .dialog-bubble.them{background:linear-gradient(135deg,#eef2ff,#fef3f9);align-self:flex-start;border-bottom-left-radius:6px}
     .dialog-bubble.you{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;align-self:flex-end;border-bottom-right-radius:6px;margin-left:auto}
     @keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-    .dialog-area{display:flex;flex-direction:column;gap:6px;background:#f8fafc;border-radius:22px;padding:14px;min-height:200px;max-height:340px;overflow-y:auto;margin-bottom:12px}
-    .dialog-char{display:flex;align-items:center;gap:8px;font-weight:900;font-size:.85rem;color:var(--muted);margin-top:6px}
-    .dialog-char .pic{font-size:1.6rem}
+    .dialog-char{display:flex;align-items:center;gap:6px;font-weight:900;font-size:.78rem;color:var(--muted);margin-top:4px}
+    .dialog-char .pic{font-size:1.4rem}
     .dialog-replies{display:grid;gap:8px}
-    .reply-btn{background:#fff;border:2px solid #e9ecf5;border-radius:18px;padding:14px;text-align:left;font-weight:950;display:flex;align-items:center;gap:10px;transition:transform .15s,border-color .2s}
+    .reply-btn{background:#fff;border:2px solid #e9ecf5;border-radius:16px;padding:12px;text-align:left;font-weight:950;display:flex;align-items:center;gap:10px;transition:transform .15s,border-color .2s;font-size:.95rem}
     .reply-btn:active{transform:scale(.98)}
-    .reply-btn .flag{font-size:1.4rem}
-    .reply-btn .es{color:var(--muted);font-weight:800;font-size:.85rem;display:block;margin-top:2px}
+    .reply-btn .flag{font-size:1.3rem;flex-shrink:0}
+    .reply-btn .es{color:var(--muted);font-weight:800;font-size:.82rem;display:block;margin-top:2px}
     .reply-btn.correct{border-color:var(--success);background:#ecfdf5}
     .reply-btn.wrong{border-color:var(--danger);background:#fff5f5}
-    /* Audio match (memory mejorado) */
-    .audio-mem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
-    .audio-mem{aspect-ratio:1;border-radius:22px;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;font-size:2.4rem;font-weight:1000;display:grid;place-items:center;cursor:pointer;box-shadow:0 10px 20px #1720331a;transition:transform .15s}
-    .audio-mem:active{transform:scale(.94)}
-    .audio-mem.revealed{background:#fff;color:var(--ink);border:2px solid var(--primary)}
-    .audio-mem.matched{background:#ecfdf5;border:2px solid var(--success);color:#087f5b;animation:pulseGood .5s}
-    /* Hearts/lives indicator */
-    .lives-row{display:flex;justify-content:center;gap:6px;margin:8px 0}
-    .heart{font-size:1.3rem;transition:transform .3s,opacity .3s}
-    .heart.lost{opacity:.25;transform:scale(.7)}
-    /* Star rating final */
-    .stars-row{display:flex;justify-content:center;gap:8px;margin:14px 0}
+
+    /* === SPEED ROUND === */
+    .speed-bar{display:flex;align-items:center;gap:10px;background:#fff;border-radius:16px;padding:8px 12px;margin-bottom:10px;box-shadow:0 6px 14px #1720330f}
+    .speed-timer{flex:1;height:12px;background:#fef2f2;border-radius:999px;overflow:hidden}
+    .speed-timer>div{height:100%;background:linear-gradient(90deg,var(--success),var(--warning),var(--danger));border-radius:inherit;transition:width .1s linear}
+    .speed-lives{font-size:1.1rem;font-weight:1000;letter-spacing:2px}
+    .speed-score{font-weight:1000;color:var(--primary);font-size:1.1rem}
+
+    /* === HEALTHY/UNHEALTHY SORT === */
+    .sort-board{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+    .sort-bin{background:#fff;border:3px dashed;border-radius:20px;padding:12px;min-height:140px}
+    .sort-bin.healthy{border-color:var(--healthy);background:linear-gradient(180deg,#fff,#ecfdf5)}
+    .sort-bin.unhealthy{border-color:var(--unhealthy);background:linear-gradient(180deg,#fff,#fef2f2)}
+    .sort-bin h4{font-size:.95rem;text-align:center;margin-bottom:8px;font-weight:1000}
+    .sort-bin.healthy h4{color:#087f5b}
+    .sort-bin.unhealthy h4{color:#c92a2a}
+    .sort-bin .items{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+    .sort-bin.over{transform:scale(1.03);box-shadow:0 0 0 4px #6d5df633}
+    .sort-tray{background:#f4f5fb;border-radius:18px;padding:12px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:10px;min-height:80px}
+    .sort-pill{background:#fff;border:2px solid #e9ecf5;border-radius:14px;padding:10px 12px;font-weight:950;font-size:.92rem;cursor:grab;user-select:none;box-shadow:0 4px 8px #1720330f;transition:transform .15s;display:flex;align-items:center;gap:6px}
+    .sort-pill .ic{font-size:1.4rem}
+    .sort-pill:active{cursor:grabbing;transform:scale(1.05)}
+    .sort-pill.placed-h{background:#ecfdf5;border-color:var(--success);color:#087f5b}
+    .sort-pill.placed-u{background:#fef2f2;border-color:var(--danger);color:#c92a2a}
+    .sort-pill.dragging{opacity:.4}
+
+    /* === COMPLETE === */
+    .stars-row{display:flex;justify-content:center;gap:8px;margin:12px 0}
     .star-big{font-size:3rem;opacity:.25;transform:scale(.7);transition:opacity .4s,transform .4s}
     .star-big.shown{opacity:1;transform:scale(1)}
-    /* Streak banner */
-    .streak-banner{background:linear-gradient(135deg,#FFD43B,#FF66A3);color:#fff;border-radius:18px;padding:10px 14px;text-align:center;font-weight:1000;margin-bottom:12px;animation:slideIn .35s;box-shadow:0 8px 20px #ff66a344}
-    /* Combo indicator */
-    .combo-pop{position:fixed;top:40%;left:50%;transform:translate(-50%,-50%);font-size:3.5rem;font-weight:1000;color:#fff;text-shadow:0 4px 16px #6d5df6cc,0 0 30px #ff66a3aa;z-index:60;pointer-events:none;animation:comboPop .9s forwards}
+    .big-emoji{font-size:clamp(4rem,18vw,8rem);line-height:1;margin:6px 0;display:inline-block;animation:bounceIn .55s cubic-bezier(.28,1.6,.5,1) both}
+
+    /* === BOTTOM NAV — sticky always visible === */
+    .bottom-bar{position:sticky;bottom:0;z-index:10;background:rgba(255,255,255,.97);backdrop-filter:blur(18px);border-top:1px solid #eef0f7;padding:10px 12px calc(10px + var(--safe-bottom));display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+    .nav-tab{background:transparent;color:#697084;border-radius:14px;padding:6px 4px;font-weight:950;min-height:50px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+    .nav-tab span{font-size:1.3rem;line-height:1}
+    .nav-tab b{font-size:.7rem}
+    .nav-tab.active{background:#171F35;color:#fff}
+
+    /* === LESSON BOTTOM ACTION (fixed during exercises) === */
+    .action-bar{position:sticky;bottom:0;z-index:11;background:linear-gradient(180deg,transparent,#FAFBFF 30%);padding:12px 0 calc(12px + var(--safe-bottom));margin-top:8px}
+    .action-bar .primary-btn{width:100%;font-size:1.05rem;min-height:58px;box-shadow:0 -4px 20px #6d5df633}
+    .action-bar.with-back{display:grid;grid-template-columns:auto 1fr;gap:8px}
+    .action-bar.with-back .ghost-btn{min-height:58px;padding:0 18px}
+
+    /* === COACH (mascota) === */
+    .coach{position:fixed;right:14px;bottom:calc(76px + var(--safe-bottom));z-index:20;width:56px;height:56px;border-radius:20px;background:linear-gradient(135deg,#FFD43B,#FF66A3);box-shadow:0 14px 28px #17203333;border:3px solid #fff;font-size:26px}
+    .toast{position:fixed;left:50%;bottom:calc(140px + var(--safe-bottom));transform:translateX(-50%) translateY(20px);z-index:30;background:#171F35;color:#fff;padding:12px 16px;border-radius:999px;font-weight:900;opacity:0;pointer-events:none;transition:.25s;max-width:92%;text-align:center;font-size:.92rem}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+    /* === LIBRARY & PRACTICE === */
+    .library-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+    .word-mini{background:#fff;border:1px solid #edf0f8;border-radius:20px;padding:12px;text-align:center}
+    .word-mini .e{font-size:2.4rem}
+    .word-mini b{display:block;margin-top:5px;font-size:.95rem}
+    .word-mini span{color:var(--muted);font-size:.82rem;font-weight:800}
+    .practice-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}
+    .practice-card{background:#fff;border:1px solid #edf0f8;border-radius:24px;padding:16px;box-shadow:0 10px 22px #17203312}
+    .practice-card h3{font-size:1.05rem;margin:6px 0 4px}
+    .practice-card p{color:var(--muted);font-weight:800;font-size:.88rem}
+    .audio-badge{display:inline-flex;align-items:center;gap:6px;background:#eef2ff;color:#4338ca;border-radius:999px;padding:6px 10px;font-weight:950;font-size:.78rem;margin-top:8px}
+    .quick-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;margin-top:8px}
+    .game-modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:14px}
+    .game-mode{background:#fff;border:2px solid #eef0f7;border-radius:20px;padding:14px;text-align:center;cursor:pointer;transition:transform .15s,border-color .2s;box-shadow:0 6px 14px #1720330f}
+    .game-mode:active{transform:scale(.97)}
+    .game-mode:hover{border-color:var(--primary)}
+    .game-mode .icon{font-size:2.2rem;margin-bottom:4px;display:block}
+    .game-mode b{display:block;font-size:.95rem;margin-bottom:2px}
+    .game-mode small{color:var(--muted);font-weight:800;font-size:.74rem}
+
+    /* === PARENTS === */
+    .parent-card{background:#fff;border:1px solid #edf0f8;border-radius:24px;padding:16px;box-shadow:0 10px 22px #17203312}
+    .parent-card h3{font-size:1.1rem;margin-bottom:8px}
+    .parent-card ul{padding-left:18px;color:#4b5563;font-weight:750;line-height:1.55;font-size:.92rem}
+    .parent-card label{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid #f1f3f7;font-weight:900;font-size:.95rem}
+    .parent-card label:first-of-type{border-top:0}
+    .parent-card .select{margin-top:6px}
+
+    /* === CONFETTI === */
+    .confetti{position:fixed;top:-18px;width:12px;height:12px;border-radius:4px;z-index:50;animation:fall 2.8s linear forwards}
+    @keyframes fall{to{transform:translateY(110dvh) rotate(720deg);opacity:0}}
+    .combo-pop{position:fixed;top:40%;left:50%;transform:translate(-50%,-50%);font-size:3.2rem;font-weight:1000;color:#fff;text-shadow:0 4px 16px #6d5df6cc,0 0 30px #ff66a3aa;z-index:60;pointer-events:none;animation:comboPop .9s forwards}
     @keyframes comboPop{0%{transform:translate(-50%,-50%) scale(.4);opacity:0}30%{transform:translate(-50%,-50%) scale(1.2);opacity:1}100%{transform:translate(-50%,-150%) scale(.9);opacity:0}}
 
-    @media(max-width:760px){.screen{padding:10px}.shell{border-radius:0;min-height:100dvh}.hero{padding-top:22px}.panel{padding:16px}.avatar-grid{grid-template-columns:repeat(6,1fr)}.topbar{padding:14px 14px 18px}.stats{grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}.stat{padding:9px 4px;border-radius:16px}.stat b{font-size:1.2rem}.stat span{font-size:.62rem}.content{padding:14px;padding-bottom:96px}.tabs{display:none}.bottom-tabs{position:sticky;bottom:0;z-index:12;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;background:#fffffff2;backdrop-filter:blur(16px);border-top:1px solid #eef0f7;padding:8px 10px calc(8px + var(--safe-bottom))}.coach{bottom:calc(86px + var(--safe-bottom));width:56px;height:56px;border-radius:20px}.lesson-grid{grid-template-columns:1fr}.path-header{display:block}.progress-pill{display:inline-flex;margin-top:10px}.options{grid-template-columns:1fr}.actions{grid-template-columns:1fr}.memory-grid{grid-template-columns:repeat(3,1fr)}.audio-mem-grid{grid-template-columns:repeat(3,1fr)}.scene-objects{grid-template-columns:repeat(3,1fr)}.bottom-nav{position:sticky;bottom:74px;background:#fafbffcc;backdrop-filter:blur(12px);padding-top:10px;padding-bottom:var(--safe-bottom)}}
-    @media(max-width:420px){.profiles{grid-template-columns:repeat(2,1fr)}.avatar-grid{grid-template-columns:repeat(5,1fr)}.memory-grid{grid-template-columns:repeat(2,1fr)}.audio-mem-grid{grid-template-columns:repeat(2,1fr)}.scene-objects{grid-template-columns:repeat(2,1fr)}.top-actions .secondary-text{display:none}.primary-btn,.secondary-btn,.ghost-btn{padding:13px 12px}.lesson{padding:16px}.card{padding:16px}.cat-board{grid-template-columns:1fr}}
+    @media(max-width:760px){
+      .screen{padding:0}
+      .shell{border-radius:0;min-height:100dvh}
+      .topbar{padding:12px 14px 16px}
+      .stats{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+      .stat{padding:7px 4px;border-radius:14px}
+      .stat b{font-size:1.1rem}
+      .stat span{font-size:.58rem}
+      .lesson-grid{grid-template-columns:1fr}
+      .options{grid-template-columns:1fr}
+      .actions{grid-template-columns:1fr 1fr}
+      .memory-grid{grid-template-columns:repeat(3,1fr)}
+      .scene-objects{grid-template-columns:repeat(3,1fr)}
+      .sort-board{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:420px){
+      .profiles{grid-template-columns:repeat(2,1fr)}
+      .avatar-grid{grid-template-columns:repeat(5,1fr)}
+      .memory-grid{grid-template-columns:repeat(2,1fr)}
+      .scene-objects{grid-template-columns:repeat(2,1fr)}
+      .primary-btn,.secondary-btn,.ghost-btn{padding:12px 10px}
+      .lesson{padding:14px}
+      .card{padding:14px}
+    }
   </style>
 </head>
 <body>
   <div class="app-bg"><div class="bubble b1"></div><div class="bubble b2"></div><div class="bubble b3"></div></div>
+
   <main id="loginScreen" class="screen">
     <section class="shell">
       <div class="hero">
         <div class="brand-mark">📚</div>
         <h1><span class="gradient-text">FACU</span><br>INGLÉS 1D</h1>
-        <p class="subtitle">App móvil de inglés inicial · Saludos · Colegio · Juegos · Audio</p>
+        <p class="subtitle">App de inglés para niños · Saludos · Colegio · Hábitos · Juegos</p>
       </div>
       <div class="panel">
         <div class="section-title"><span>👤 Perfiles</span><small>Progreso guardado en este dispositivo</small></div>
         <div id="profiles" class="profiles"></div>
         <div class="form-card">
-          <div class="section-title"><span>Crear nuevo perfil</span><small>Para niños de primer nivel</small></div>
+          <div class="section-title"><span>Crear nuevo perfil</span><small>Para niños de 6-8 años</small></div>
           <input id="nameInput" class="input" maxlength="18" placeholder="Nombre del niño" autocomplete="off" />
           <div id="avatarGrid" class="avatar-grid"></div>
           <button class="primary-btn full" onclick="createProfile()">✨ Crear y comenzar</button>
@@ -148,12 +334,17 @@
       </div>
     </section>
   </main>
+
   <main id="appScreen" class="screen hidden">
     <section class="shell">
       <header class="topbar">
         <div class="user-row">
           <div class="user-mini"><div id="profileAvatar" class="avatar">👦</div><div><div class="hello">Hello!</div><div id="profileName" class="user-title">Facu</div></div></div>
-          <div class="top-actions"><button class="icon-btn" onclick="speakHelp()" aria-label="Ayuda">🔊</button><button class="icon-btn" onclick="logout()" aria-label="Cambiar usuario">↩</button></div>
+          <div class="top-actions">
+            <button class="icon-btn" onclick="toggleSlow()" id="slowBtn" aria-label="Audio lento" title="Audio lento">🐢</button>
+            <button class="icon-btn" onclick="speakHelp()" aria-label="Ayuda">🔊</button>
+            <button class="icon-btn" onclick="logout()" aria-label="Cambiar usuario">↩</button>
+          </div>
         </div>
         <div class="stats">
           <div class="stat"><b id="stars">0</b><span>Estrellas</span></div>
@@ -162,282 +353,525 @@
           <div class="stat"><b id="streak">0</b><span>Racha</span></div>
         </div>
       </header>
-      <nav class="tabs" id="tabs">
-        <button class="tab active" onclick="showHome()">Ruta</button>
-        <button class="tab" onclick="showPractice()">Practicar</button>
-        <button class="tab" onclick="showLibrary()">Palabras</button>
-        <button class="tab" onclick="showParents()">Padres</button>
-      </nav>
       <div id="content" class="content"></div>
-      <nav class="bottom-tabs" id="bottomTabs" aria-label="Navegación principal">
-        <button class="bottom-tab active" onclick="showHome()"><span>🏠</span><b>Ruta</b></button>
-        <button class="bottom-tab" onclick="showPractice()"><span>🎮</span><b>Práctica</b></button>
-        <button class="bottom-tab" onclick="showLibrary()"><span>🔤</span><b>Palabras</b></button>
-        <button class="bottom-tab" onclick="showParents()"><span>👨‍👩‍👦</span><b>Padres</b></button>
+      <nav class="bottom-bar" id="bottomBar" aria-label="Navegación">
+        <button class="nav-tab active" onclick="showHome()"><span>🏠</span><b>Ruta</b></button>
+        <button class="nav-tab" onclick="showPractice()"><span>🎮</span><b>Práctica</b></button>
+        <button class="nav-tab" onclick="showLibrary()"><span>🔤</span><b>Palabras</b></button>
+        <button class="nav-tab" onclick="showParents()"><span>⚙️</span><b>Ajustes</b></button>
       </nav>
     </section>
   </main>
-  <button class="coach" onclick="speakHelp()">🦉</button>
-  <div id="toast" class="toast"></div>
-<script>
-const STORE='facuEnglishProMobileV2';
-const AVATARS=['👦','👧','🧒','👶','🦊','🐼','🦁','🐯','🐶','🐱','🦄','🐸','🦖','🐙','🦋','🚀','⚽','🎨','🎧','⭐'];
-let selectedAvatar='👦', currentUser=null, currentLesson=null, stepIndex=0, sessionScore=0, memoryState=null, sentenceState=null, comboCount=0, sessionLives=3;
 
-/* ============================================================
-   LECCIONES — ampliadas, en especial saludos/presentación/edad
-   ============================================================ */
+  <button class="coach hidden" id="coachBtn" onclick="speakHelp()">🦉</button>
+  <div id="toast" class="toast"></div>
+
+<script>
+/* === DATOS Y ESTADO === */
+const STORE='facuEnglishProMobileV3';
+const AVATARS=['👦','👧','🧒','👶','🦊','🐼','🦁','🐯','🐶','🐱','🦄','🐸','🦖','🐙','🦋','🚀','⚽','🎨','🎧','⭐'];
+let selectedAvatar='👦', currentUser=null, currentLesson=null, stepIndex=0, sessionScore=0;
+let memoryState=null, sentenceState=null, dialogState=null, speedState=null, sortState=null, tapState=null;
+let comboCount=0;
+let prefs={slow:false,voiceURI:null,calmMode:false};
+
+/* === ESCENAS SVG INLINE (ilustraciones simples para situaciones) === */
+const SCENES = {
+  classroom: `<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="0" y="140" width="400" height="60" fill="#a3a3a3"/>
+    <rect x="20" y="20" width="160" height="100" fill="#1f2937" rx="4"/>
+    <text x="100" y="75" fill="#fff" font-size="20" font-family="Arial" font-weight="bold" text-anchor="middle">A B C</text>
+    <rect x="220" y="100" width="60" height="40" fill="#92400e" rx="3"/>
+    <rect x="220" y="100" width="60" height="6" fill="#7c2d12"/>
+    <circle cx="250" cy="80" r="14" fill="#fbbf24"/>
+    <rect x="244" y="92" width="12" height="20" fill="#3b82f6"/>
+    <rect x="320" y="100" width="60" height="40" fill="#92400e" rx="3"/>
+    <rect x="320" y="100" width="60" height="6" fill="#7c2d12"/>
+    <circle cx="350" cy="80" r="14" fill="#f9a8d4"/>
+    <rect x="344" y="92" width="12" height="20" fill="#a855f7"/>
+  </svg>`,
+  home_morning: `<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="0" y="0" width="400" height="200" fill="#fef3c7"/>
+    <circle cx="60" cy="40" r="22" fill="#fbbf24"/>
+    <g stroke="#fbbf24" stroke-width="3"><line x1="60" y1="8" x2="60" y2="14"/><line x1="60" y1="66" x2="60" y2="72"/><line x1="28" y1="40" x2="34" y2="40"/><line x1="86" y1="40" x2="92" y2="40"/></g>
+    <rect x="120" y="100" width="160" height="80" fill="#a78bfa" rx="4"/>
+    <rect x="130" y="115" width="80" height="55" fill="#fff" rx="3"/>
+    <circle cx="170" cy="142" r="22" fill="#fbbf24"/>
+    <text x="240" y="145" fill="#fff" font-size="14" font-weight="bold" font-family="Arial">7:00</text>
+  </svg>`,
+  bedroom_night: `<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="0" y="0" width="400" height="200" fill="#1e1b4b"/>
+    <circle cx="340" cy="40" r="20" fill="#fef3c7"/>
+    <circle cx="350" cy="35" r="3" fill="#1e1b4b"/>
+    <circle cx="320" cy="50" r="2" fill="#1e1b4b"/>
+    <g fill="#fef9c3"><circle cx="60" cy="30" r="1.5"/><circle cx="100" cy="50" r="1.5"/><circle cx="180" cy="25" r="2"/><circle cx="240" cy="60" r="1.5"/><circle cx="280" cy="20" r="1.5"/></g>
+    <rect x="100" y="120" width="200" height="60" fill="#7c3aed" rx="6"/>
+    <rect x="110" y="100" width="60" height="30" fill="#fff" rx="3"/>
+    <circle cx="140" cy="115" r="10" fill="#fbbf24"/>
+    <text x="140" y="118" font-size="12" text-anchor="middle">😴</text>
+  </svg>`,
+  kitchen_breakfast: `<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="0" y="0" width="400" height="200" fill="#fef9c3"/>
+    <rect x="0" y="140" width="400" height="60" fill="#92400e"/>
+    <ellipse cx="120" cy="140" rx="40" ry="6" fill="#7c2d12" opacity=".3"/>
+    <rect x="80" y="90" width="80" height="50" fill="#fff" rx="6"/>
+    <ellipse cx="120" cy="100" rx="32" ry="8" fill="#fbbf24"/>
+    <rect x="220" y="80" width="60" height="60" fill="#dbeafe" rx="6"/>
+    <ellipse cx="250" cy="90" rx="22" ry="6" fill="#fff"/>
+    <text x="250" y="125" font-size="22" text-anchor="middle">🥛</text>
+    <text x="320" y="120" font-size="32">🍎</text>
+    <text x="40" y="80" font-size="22">🍞</text>
+  </svg>`,
+  park_play: `<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="0" y="0" width="400" height="140" fill="#bfdbfe"/>
+    <rect x="0" y="140" width="400" height="60" fill="#86efac"/>
+    <circle cx="60" cy="40" r="20" fill="#fbbf24"/>
+    <ellipse cx="100" cy="50" rx="30" ry="14" fill="#fff"/>
+    <ellipse cx="80" cy="55" rx="22" ry="12" fill="#fff"/>
+    <rect x="200" y="80" width="80" height="60" fill="#dc2626" rx="4"/>
+    <polygon points="200,80 240,50 280,80" fill="#7f1d1d"/>
+    <rect x="225" y="100" width="20" height="40" fill="#451a03"/>
+    <circle cx="240" cy="120" r="3" fill="#fbbf24"/>
+    <circle cx="80" cy="160" r="14" fill="#a855f7"/>
+    <text x="80" y="167" font-size="14" text-anchor="middle">⚽</text>
+  </svg>`,
+  family_living: `<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="0" y="0" width="400" height="200" fill="#fce7f3"/>
+    <rect x="0" y="150" width="400" height="50" fill="#92400e"/>
+    <rect x="60" y="100" width="280" height="50" fill="#a78bfa" rx="8"/>
+    <text x="100" y="130" font-size="36">👨</text>
+    <text x="160" y="130" font-size="36">👩</text>
+    <text x="220" y="130" font-size="32">👦</text>
+    <text x="270" y="132" font-size="30">👧</text>
+    <text x="320" y="135" font-size="26">🐶</text>
+  </svg>`,
+  healthy_plate: `<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="0" y="0" width="400" height="200" fill="#dcfce7"/>
+    <circle cx="200" cy="110" r="80" fill="#fff" stroke="#86efac" stroke-width="6"/>
+    <text x="160" y="105" font-size="36">🥦</text>
+    <text x="210" y="105" font-size="36">🍎</text>
+    <text x="170" y="155" font-size="36">🐟</text>
+    <text x="220" y="155" font-size="36">🥕</text>
+    <text x="40" y="50" font-size="24">💪</text>
+    <text x="340" y="50" font-size="24">😄</text>
+  </svg>`,
+  unhealthy_table: `<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="0" y="0" width="400" height="200" fill="#fee2e2"/>
+    <rect x="0" y="140" width="400" height="60" fill="#7f1d1d" opacity=".3"/>
+    <text x="60" y="120" font-size="42">🍔</text>
+    <text x="160" y="120" font-size="42">🍟</text>
+    <text x="260" y="120" font-size="42">🍭</text>
+    <text x="330" y="120" font-size="36">🥤</text>
+    <text x="180" y="50" font-size="30">⚠️</text>
+  </svg>`,
+  body_kid: `<svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="0" y="0" width="400" height="240" fill="#dbeafe"/>
+    <circle cx="200" cy="60" r="35" fill="#fde68a"/>
+    <circle cx="188" cy="55" r="3" fill="#000"/>
+    <circle cx="212" cy="55" r="3" fill="#000"/>
+    <path d="M 188 70 Q 200 80 212 70" stroke="#000" stroke-width="2" fill="none"/>
+    <rect x="170" y="95" width="60" height="80" fill="#a78bfa" rx="6"/>
+    <rect x="155" y="100" width="20" height="60" fill="#fde68a" rx="3"/>
+    <rect x="225" y="100" width="20" height="60" fill="#fde68a" rx="3"/>
+    <rect x="180" y="175" width="18" height="50" fill="#3b82f6" rx="3"/>
+    <rect x="202" y="175" width="18" height="50" fill="#3b82f6" rx="3"/>
+  </svg>`,
+  greetings_scene: `<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="0" y="0" width="400" height="200" fill="#fef3c7"/>
+    <circle cx="60" cy="40" r="20" fill="#fbbf24"/>
+    <text x="120" y="120" font-size="56">👦</text>
+    <text x="240" y="120" font-size="56">👧</text>
+    <text x="180" y="80" font-size="32">👋</text>
+    <text x="100" y="170" font-size="14" font-weight="bold" fill="#7c2d12">Hello!</text>
+    <text x="270" y="170" font-size="14" font-weight="bold" fill="#7c2d12">Hi!</text>
+  </svg>`,
+  numbers_count: `<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="0" y="0" width="400" height="200" fill="#f0f9ff"/>
+    <text x="40" y="80" font-size="40">🍎</text>
+    <text x="100" y="80" font-size="40">🍎</text>
+    <text x="160" y="80" font-size="40">🍎</text>
+    <text x="40" y="150" font-size="40">⭐</text>
+    <text x="100" y="150" font-size="40">⭐</text>
+    <text x="280" y="100" font-size="60" font-weight="bold" fill="#6D5DF6">3</text>
+    <text x="280" y="170" font-size="40" font-weight="bold" fill="#FF66A3">2</text>
+  </svg>`,
+  colors_palette: `<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="0" y="0" width="400" height="200" fill="#fff"/>
+    <circle cx="60" cy="60" r="30" fill="#dc2626"/>
+    <circle cx="140" cy="60" r="30" fill="#2563eb"/>
+    <circle cx="220" cy="60" r="30" fill="#facc15"/>
+    <circle cx="300" cy="60" r="30" fill="#16a34a"/>
+    <circle cx="100" cy="140" r="30" fill="#f97316"/>
+    <circle cx="180" cy="140" r="30" fill="#a855f7"/>
+    <circle cx="260" cy="140" r="30" fill="#ec4899"/>
+    <circle cx="340" cy="140" r="30" fill="#000"/>
+  </svg>`,
+  animals_farm: `<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="0" y="0" width="400" height="130" fill="#bfdbfe"/>
+    <rect x="0" y="130" width="400" height="70" fill="#86efac"/>
+    <text x="40" y="170" font-size="40">🐶</text>
+    <text x="110" y="170" font-size="40">🐱</text>
+    <text x="180" y="170" font-size="40">🐰</text>
+    <text x="250" y="170" font-size="40">🐴</text>
+    <text x="320" y="170" font-size="40">🐄</text>
+    <text x="180" y="60" font-size="28">🐦</text>
+  </svg>`
+};
+
+/* === LECCIONES (renovadas, con escenas e historias) ===
+   Cada palabra: w(en, es, icon, phonetic, syllables_array, phrase_en, phrase_es)
+*/
+function w(en,es,icon,phonetic,syl,phrase,phraseEs){return{en,es,icon,phonetic,syl,phrase,phraseEs:phraseEs||phrase}}
+
 const LESSONS=[
- {id:'greetings', level:'Starter 1', icon:'👋', title:'Saludos y despedidas', titleEn:'Greetings', goal:'Saludar, despedirse y responder en inglés.', tags:['Hello','Good morning','Bye'], words:[
-  w('Hello','Hola','👋','je-lou','Hello, teacher!'),
-  w('Hi','Hola (informal)','✋','jai','Hi, friend!'),
-  w('Good morning','Buenos días','🌞','gud mor-ning','Good morning, Mom!'),
-  w('Good afternoon','Buenas tardes','☀️','gud af-ter-nun','Good afternoon, friends!'),
-  w('Good evening','Buenas tardes/noches','🌆','gud iv-ning','Good evening, family!'),
-  w('Good night','Buenas noches','🌙','gud nait','Good night, Dad!'),
-  w('Goodbye','Adiós','👋','gud-bai','Goodbye, see you!'),
-  w('Bye-bye','Chao','👐','bai-bai','Bye-bye!'),
-  w('See you tomorrow','Nos vemos mañana','📅','si iu tu-mo-rou','See you tomorrow!'),
-  w('See you later','Hasta luego','⏰','si iu lei-ter','See you later, friend!'),
-  w('Have a nice day','Que tengas buen día','🌈','jav a nais dei','Have a nice day!')],
-  phrases:['Hello!','Good morning!','Goodbye!','See you tomorrow!','Have a nice day!','Good night, Mom!'],
+ // === STARTER 1 ===
+ {id:'greetings', level:'Starter 1', icon:'👋', scene:'greetings_scene', title:'Saludos y despedidas', titleEn:'Greetings', goal:'Saludar, despedirse y responder en inglés.', tags:['Hello','Good morning','Bye'], words:[
+  w('Hello','Hola','👋','je-lou',['Hel','lo'],'Hello, teacher!','¡Hola, profe!'),
+  w('Hi','Hola','✋','jai',['Hi'],'Hi, friend!','¡Hola, amigo!'),
+  w('Good morning','Buenos días','🌞','gud mor-ning',['Good','mor','ning'],'Good morning, Mom!','¡Buenos días, mamá!'),
+  w('Good afternoon','Buenas tardes','☀️','gud af-ter-nun',['Good','af','ter','noon'],'Good afternoon!','¡Buenas tardes!'),
+  w('Good night','Buenas noches','🌙','gud nait',['Good','night'],'Good night, Dad!','¡Buenas noches, papá!'),
+  w('Goodbye','Adiós','👋','gud-bai',['Good','bye'],'Goodbye, see you!','¡Adiós, hasta luego!'),
+  w('See you tomorrow','Hasta mañana','📅','si iu tu-mo-rou',['See','you','to','mo','rrow'],'See you tomorrow!','¡Hasta mañana!'),
+  w('Have a nice day','Que tengas buen día','🌈','jav a nais dei',['Have','a','nice','day'],'Have a nice day!','¡Que tengas buen día!')],
+  phrases:[{en:'Hello!',es:'¡Hola!'},{en:'Good morning!',es:'¡Buenos días!'},{en:'Goodbye!',es:'¡Adiós!'},{en:'See you tomorrow!',es:'¡Hasta mañana!'},{en:'Good night, Mom!',es:'¡Buenas noches, mamá!'}],
   dialog:[
-   {char:'👩‍🏫 Teacher',en:'Hello! Good morning, class.',es:'¡Hola! Buenos días, clase.',replies:[{en:'Good morning, teacher!',es:'¡Buenos días, profe!',ok:true},{en:'Goodbye!',es:'¡Adiós!',ok:false},{en:'I am tired',es:'Estoy cansado',ok:false}]},
-   {char:'👦 Friend',en:'Hi! How are you?',es:'¡Hola! ¿Cómo estás?',replies:[{en:'I am fine, thank you!',es:'Estoy bien, ¡gracias!',ok:true},{en:'Sit down please',es:'Siéntate por favor',ok:false},{en:'My pencil',es:'Mi lápiz',ok:false}]},
-   {char:'👵 Grandma',en:'Good night, sweetie.',es:'Buenas noches, cariño.',replies:[{en:'Good night, Grandma!',es:'¡Buenas noches, abuela!',ok:true},{en:'Hello!',es:'¡Hola!',ok:false},{en:'Stand up',es:'Ponte de pie',ok:false}]}
+   {char:'👩‍🏫 Teacher',scene:'classroom',en:'Hello! Good morning, class.',es:'¡Hola! Buenos días, clase.',replies:[{en:'Good morning, teacher!',es:'¡Buenos días, profe!',ok:true},{en:'Goodbye!',es:'¡Adiós!',ok:false},{en:'I am tired',es:'Estoy cansado',ok:false}]},
+   {char:'👦 Friend',scene:'park_play',en:'Hi! How are you?',es:'¡Hola! ¿Cómo estás?',replies:[{en:'I am fine, thank you!',es:'¡Estoy bien, gracias!',ok:true},{en:'Sit down please',es:'Siéntate por favor',ok:false},{en:'My pencil',es:'Mi lápiz',ok:false}]},
+   {char:'👵 Grandma',scene:'bedroom_night',en:'Good night, sweetie.',es:'Buenas noches, cariño.',replies:[{en:'Good night, Grandma!',es:'¡Buenas noches, abuela!',ok:true},{en:'Hello!',es:'¡Hola!',ok:false},{en:'Stand up',es:'Ponte de pie',ok:false}]}
   ]
  },
- {id:'about-me', level:'Starter 1', icon:'😊', title:'Mi nombre y mi edad', titleEn:'About me', goal:'Decir nombre, edad y preguntar cómo estás.', tags:['My name is','I am six','How are you?'], words:[
-  w('My name is...','Mi nombre es...','🧒','mai neim is','My name is Facu.'),
-  w('What is your name?','¿Cómo te llamas?','❓','uat is yor neim','What is your name?'),
-  w('Nice to meet you','Mucho gusto','🤝','nais tu mit iu','Nice to meet you!'),
-  w('How old are you?','¿Cuántos años tienes?','🎂','jau old ar iu','How old are you?'),
-  w('I am five years old','Tengo cinco años','5️⃣','ai am faiv yirs old','I am five years old.'),
-  w('I am six years old','Tengo seis años','6️⃣','ai am six yirs old','I am six years old.'),
-  w('I am seven years old','Tengo siete años','7️⃣','ai am se-ven yirs old','I am seven years old.'),
-  w('How are you?','¿Cómo estás?','🙂','jau ar iu','How are you today?'),
-  w('I am fine','Estoy bien','😄','ai am fain','I am fine, thank you.'),
-  w('I am happy today','Estoy feliz hoy','😀','ai am ja-pi tu-dei','I am happy today!'),
-  w('And you?','¿Y tú?','↩️','and iu','I am fine. And you?'),
-  w('Where are you from?','¿De dónde eres?','🌍','uer ar iu from','Where are you from?'),
-  w('I am from Chile','Soy de Chile','🇨🇱','ai am from chi-le','I am from Chile.')],
-  phrases:['My name is Facu','I am six years old','I am fine, thank you','Nice to meet you','I am from Chile','And you?'],
+ {id:'about-me', level:'Starter 1', icon:'😊', scene:'family_living', title:'Mi nombre y mi edad', titleEn:'About me', goal:'Decir nombre, edad y cómo estás.', tags:['My name is','I am 7','How are you?'], words:[
+  w('My name is...','Mi nombre es...','🧒','mai neim is',['My','name','is'],'My name is Facu.','Mi nombre es Facu.'),
+  w('What is your name?','¿Cómo te llamas?','❓','uat is yor neim',['What','is','your','name'],'What is your name?','¿Cómo te llamas?'),
+  w('Nice to meet you','Mucho gusto','🤝','nais tu mit iu',['Nice','to','meet','you'],'Nice to meet you!','¡Mucho gusto!'),
+  w('How old are you?','¿Cuántos años tienes?','🎂','jau old ar iu',['How','old','are','you'],'How old are you?','¿Cuántos años tienes?'),
+  w('I am six','Tengo seis años','6️⃣','ai am six',['I','am','six'],'I am six years old.','Tengo seis años.'),
+  w('I am seven','Tengo siete años','7️⃣','ai am se-ven',['I','am','sev','en'],'I am seven years old.','Tengo siete años.'),
+  w('I am eight','Tengo ocho años','8️⃣','ai am eit',['I','am','eight'],'I am eight years old.','Tengo ocho años.'),
+  w('How are you?','¿Cómo estás?','🙂','jau ar iu',['How','are','you'],'How are you today?','¿Cómo estás hoy?'),
+  w('I am fine','Estoy bien','😄','ai am fain',['I','am','fine'],'I am fine, thank you.','Estoy bien, gracias.'),
+  w('And you?','¿Y tú?','↩️','and iu',['And','you'],'I am fine. And you?','Estoy bien. ¿Y tú?'),
+  w('I am from Chile','Soy de Chile','🇨🇱','ai am from chi-le',['I','am','from','Chi','le'],'I am from Chile.','Soy de Chile.')],
+  phrases:[{en:'My name is Facu',es:'Mi nombre es Facu'},{en:'I am seven years old',es:'Tengo siete años'},{en:'I am fine, thank you',es:'Estoy bien, gracias'},{en:'Nice to meet you',es:'Mucho gusto'},{en:'I am from Chile',es:'Soy de Chile'}],
   dialog:[
-   {char:'👩 New friend',en:'Hi! What is your name?',es:'¡Hola! ¿Cómo te llamas?',replies:[{en:'My name is Facu',es:'Mi nombre es Facu',ok:true},{en:'I am fine',es:'Estoy bien',ok:false},{en:'Goodbye',es:'Adiós',ok:false}]},
-   {char:'👨‍🏫 Teacher',en:'How old are you, Facu?',es:'¿Cuántos años tienes, Facu?',replies:[{en:'I am six years old',es:'Tengo seis años',ok:true},{en:'My name is Facu',es:'Mi nombre es Facu',ok:false},{en:'I see a dog',es:'Veo un perro',ok:false}]},
-   {char:'👧 Girl',en:'Nice to meet you! How are you?',es:'¡Mucho gusto! ¿Cómo estás?',replies:[{en:'I am fine, and you?',es:'Estoy bien, ¿y tú?',ok:true},{en:'I am six',es:'Tengo seis',ok:false},{en:'Good night',es:'Buenas noches',ok:false}]},
-   {char:'🌎 Tourist',en:'Where are you from?',es:'¿De dónde eres?',replies:[{en:'I am from Chile',es:'Soy de Chile',ok:true},{en:'I am happy',es:'Estoy feliz',ok:false},{en:'Thank you',es:'Gracias',ok:false}]}
+   {char:'👩 New friend',scene:'park_play',en:'Hi! What is your name?',es:'¡Hola! ¿Cómo te llamas?',replies:[{en:'My name is Facu',es:'Mi nombre es Facu',ok:true},{en:'I am fine',es:'Estoy bien',ok:false},{en:'Goodbye',es:'Adiós',ok:false}]},
+   {char:'👨‍🏫 Teacher',scene:'classroom',en:'How old are you?',es:'¿Cuántos años tienes?',replies:[{en:'I am seven years old',es:'Tengo siete años',ok:true},{en:'My name is Facu',es:'Mi nombre es Facu',ok:false},{en:'I see a dog',es:'Veo un perro',ok:false}]},
+   {char:'👧 Girl',scene:'family_living',en:'Nice to meet you! How are you?',es:'¡Mucho gusto! ¿Cómo estás?',replies:[{en:'I am fine, and you?',es:'Estoy bien, ¿y tú?',ok:true},{en:'I am six',es:'Tengo seis',ok:false},{en:'Good night',es:'Buenas noches',ok:false}]}
   ]
  },
- {id:'classroom', level:'Starter 1', icon:'🏫', title:'Instrucciones de sala', titleEn:'Classroom commands', goal:'Entender instrucciones básicas del colegio bilingüe.', tags:['Listen','Repeat','Sit down'], words:[
-  w('Listen','Escucha','👂','li-sen','Listen, please.'),
-  w('Repeat','Repite','🔁','ri-pit','Repeat after me.'),
-  w('Look','Mira','👀','luk','Look at the board.'),
-  w('Sit down','Siéntate','🪑','sit daun','Sit down, please.'),
-  w('Stand up','Ponte de pie','🧍','stand ap','Stand up, please.'),
-  w('Raise your hand','Levanta la mano','✋','reiz yor jand','Raise your hand.'),
-  w('Open your book','Abre tu libro','📖','o-pen yor buk','Open your book, page five.'),
-  w('Close your book','Cierra tu libro','📘','klous yor buk','Close your book, please.'),
-  w('Quiet please','Silencio por favor','🤫','kuai-et pliz','Quiet please, children.')],
-  phrases:['Listen, please','Repeat after me','Stand up','Sit down','Open your book','Quiet please'],
+ {id:'classroom', level:'Starter 1', icon:'🏫', scene:'classroom', title:'En la sala de clases', titleEn:'Classroom', goal:'Entender instrucciones del profe.', tags:['Listen','Sit down','Stand up'], words:[
+  w('Listen','Escucha','👂','li-sen',['Lis','ten'],'Listen, please.','Escucha, por favor.'),
+  w('Repeat','Repite','🔁','ri-pit',['Re','peat'],'Repeat after me.','Repite después de mí.'),
+  w('Look','Mira','👀','luk',['Look'],'Look at the board.','Mira la pizarra.'),
+  w('Sit down','Siéntate','🪑','sit daun',['Sit','down'],'Sit down, please.','Siéntate, por favor.'),
+  w('Stand up','Levántate','🧍','stand ap',['Stand','up'],'Stand up, please.','Levántate, por favor.'),
+  w('Raise your hand','Levanta la mano','✋','reiz yor jand',['Raise','your','hand'],'Raise your hand.','Levanta la mano.'),
+  w('Open your book','Abre tu libro','📖','o-pen yor buk',['O','pen','your','book'],'Open your book.','Abre tu libro.'),
+  w('Quiet please','Silencio por favor','🤫','kuai-et pliz',['Qui','et','please'],'Quiet please, children.','Silencio por favor, niños.')],
+  phrases:[{en:'Listen, please',es:'Escucha, por favor'},{en:'Sit down',es:'Siéntate'},{en:'Stand up',es:'Levántate'},{en:'Open your book',es:'Abre tu libro'},{en:'Raise your hand',es:'Levanta la mano'}],
   dialog:[
-   {char:'👩‍🏫 Teacher',en:'Open your book, please.',es:'Abre tu libro, por favor.',replies:[{en:'Yes, teacher.',es:'Sí, profe.',ok:true},{en:'Goodbye!',es:'¡Adiós!',ok:false},{en:'I am happy',es:'Estoy feliz',ok:false}]},
-   {char:'👨‍🏫 Teacher',en:'Quiet please. Listen to me.',es:'Silencio por favor. Escúchame.',replies:[{en:'OK, teacher.',es:'OK, profe.',ok:true},{en:'I see a cat',es:'Veo un gato',ok:false},{en:'Stand up',es:'Ponte de pie',ok:false}]}
+   {char:'👩‍🏫 Teacher',scene:'classroom',en:'Open your book, please.',es:'Abre tu libro, por favor.',replies:[{en:'Yes, teacher!',es:'¡Sí, profe!',ok:true},{en:'Goodbye!',es:'¡Adiós!',ok:false},{en:'I am happy',es:'Estoy feliz',ok:false}]},
+   {char:'👨‍🏫 Teacher',scene:'classroom',en:'Quiet please. Listen to me.',es:'Silencio por favor. Escúchame.',replies:[{en:'OK, teacher.',es:'OK, profe.',ok:true},{en:'I see a cat',es:'Veo un gato',ok:false},{en:'Stand up',es:'Levántate',ok:false}]}
   ]
  },
- {id:'magic-words', level:'Starter 1', icon:'💛', title:'Palabras mágicas', titleEn:'Magic words', goal:'Usar cortesía básica y convivencia.', tags:['Please','Thank you','Sorry'], words:[
-  w('Please','Por favor','🙏','pliz','Water, please.'),
-  w('Thank you','Gracias','💝','zank iu','Thank you, teacher.'),
-  w('Thanks','Gracias (informal)','😊','zanks','Thanks a lot!'),
-  w('You are welcome','De nada','🎁','iu ar wel-com','You are welcome.'),
-  w('Sorry','Lo siento / perdón','😔','so-ri','Sorry, my friend.'),
-  w('Excuse me','Permiso / disculpe','🙋','ex-kius mi','Excuse me, teacher.'),
-  w('May I go?','¿Puedo ir?','🚪','mei ai gou','May I go to the bathroom?'),
-  w('Can you help me?','¿Me ayudas?','🆘','can iu jelp mi','Can you help me, please?')],
-  phrases:['Please','Thank you','Sorry','Excuse me','You are welcome','Can you help me?'],
+ {id:'magic-words', level:'Starter 1', icon:'💛', scene:'family_living', title:'Palabras mágicas', titleEn:'Magic words', goal:'Cortesía: por favor, gracias, perdón.', tags:['Please','Thank you','Sorry'], words:[
+  w('Please','Por favor','🙏','pliz',['Please'],'Water, please.','Agua, por favor.'),
+  w('Thank you','Gracias','💝','zank iu',['Thank','you'],'Thank you, teacher.','Gracias, profe.'),
+  w('You are welcome','De nada','🎁','iu ar wel-com',['You','are','wel','come'],'You are welcome.','De nada.'),
+  w('Sorry','Lo siento','😔','so-ri',['Sor','ry'],'Sorry, my friend.','Lo siento, amigo.'),
+  w('Excuse me','Disculpa','🙋','ex-kius mi',['Ex','cuse','me'],'Excuse me, teacher.','Disculpa, profe.'),
+  w('Can you help me?','¿Me ayudas?','🆘','can iu jelp mi',['Can','you','help','me'],'Can you help me, please?','¿Me ayudas, por favor?')],
+  phrases:[{en:'Please',es:'Por favor'},{en:'Thank you',es:'Gracias'},{en:'Sorry',es:'Lo siento'},{en:'You are welcome',es:'De nada'},{en:'Can you help me?',es:'¿Me ayudas?'}],
   dialog:[
-   {char:'👦 Friend',en:'Here is your pencil.',es:'Aquí tienes tu lápiz.',replies:[{en:'Thank you!',es:'¡Gracias!',ok:true},{en:'Goodbye!',es:'¡Adiós!',ok:false},{en:'I am six',es:'Tengo seis',ok:false}]},
-   {char:'👧 Girl',en:'Thank you very much!',es:'¡Muchas gracias!',replies:[{en:'You are welcome.',es:'De nada.',ok:true},{en:'Sorry',es:'Lo siento',ok:false},{en:'Sit down',es:'Siéntate',ok:false}]}
+   {char:'👦 Friend',scene:'classroom',en:'Here is your pencil.',es:'Aquí tienes tu lápiz.',replies:[{en:'Thank you!',es:'¡Gracias!',ok:true},{en:'Goodbye!',es:'¡Adiós!',ok:false},{en:'I am six',es:'Tengo seis',ok:false}]},
+   {char:'👧 Girl',scene:'classroom',en:'Thank you very much!',es:'¡Muchas gracias!',replies:[{en:'You are welcome.',es:'De nada.',ok:true},{en:'Sorry',es:'Lo siento',ok:false},{en:'Sit down',es:'Siéntate',ok:false}]}
   ]
  },
- {id:'feelings', level:'Starter 1', icon:'😀', title:'Emociones', titleEn:'Feelings', goal:'Expresar cómo me siento.', tags:['Happy','Sad','Angry'], words:[
-  w('Happy','Feliz','😀','ja-pi','I am happy.'),
-  w('Sad','Triste','😢','sad','I am sad.'),
-  w('Angry','Enojado','😠','an-gri','I am angry.'),
-  w('Tired','Cansado','😴','tai-erd','I am tired.'),
-  w('Scared','Asustado','😨','skerd','I am scared.'),
-  w('Excited','Emocionado','🤩','ex-sai-ted','I am excited!'),
-  w('Hungry','Con hambre','🍔','jan-gri','I am hungry.'),
-  w('Thirsty','Con sed','🥤','zerst-i','I am thirsty.')],
-  phrases:['I am happy','I am sad','I am tired','I am excited','I am hungry','I am thirsty']
+ {id:'feelings', level:'Starter 1', icon:'😀', title:'¿Cómo me siento?', titleEn:'Feelings', goal:'Decir cómo me siento hoy.', tags:['Happy','Sad','Tired'], words:[
+  w('Happy','Feliz','😀','ja-pi',['Hap','py'],'I am happy.','Estoy feliz.'),
+  w('Sad','Triste','😢','sad',['Sad'],'I am sad.','Estoy triste.'),
+  w('Angry','Enojado','😠','an-gri',['An','gry'],'I am angry.','Estoy enojado.'),
+  w('Tired','Cansado','😴','tai-erd',['Ti','red'],'I am tired.','Estoy cansado.'),
+  w('Excited','Emocionado','🤩','ex-sai-ted',['Ex','ci','ted'],'I am excited!','¡Estoy emocionado!'),
+  w('Hungry','Con hambre','🍔','jan-gri',['Hun','gry'],'I am hungry.','Tengo hambre.'),
+  w('Thirsty','Con sed','🥤','zerst-i',['Thirst','y'],'I am thirsty.','Tengo sed.')],
+  phrases:[{en:'I am happy',es:'Estoy feliz'},{en:'I am sad',es:'Estoy triste'},{en:'I am tired',es:'Estoy cansado'},{en:'I am hungry',es:'Tengo hambre'},{en:'I am thirsty',es:'Tengo sed'}]
  },
- {id:'colors', level:'Starter 1', icon:'🎨', title:'Colores', titleEn:'Colors', goal:'Reconocer y decir colores básicos.', tags:['Red','Blue','Green'], words:[
-  w('Red','Rojo','🔴','red','It is red.'),
-  w('Blue','Azul','🔵','blu','It is blue.'),
-  w('Yellow','Amarillo','🟡','ie-lou','It is yellow.'),
-  w('Green','Verde','🟢','grin','It is green.'),
-  w('Orange','Naranja','🟠','o-rinch','It is orange.'),
-  w('Purple','Morado','🟣','per-pol','It is purple.'),
-  w('Pink','Rosado','💗','pink','It is pink.'),
-  w('Black','Negro','⚫','blak','It is black.'),
-  w('White','Blanco','⚪','uait','It is white.')],
-  phrases:['It is red','It is blue','It is green','It is yellow','It is pink','It is white']
+ {id:'colors', level:'Starter 1', icon:'🎨', scene:'colors_palette', title:'Colores', titleEn:'Colors', goal:'Reconocer y decir colores.', tags:['Red','Blue','Green'], words:[
+  w('Red','Rojo','🔴','red',['Red'],'It is red.','Es rojo.'),
+  w('Blue','Azul','🔵','blu',['Blue'],'It is blue.','Es azul.'),
+  w('Yellow','Amarillo','🟡','ie-lou',['Yel','low'],'It is yellow.','Es amarillo.'),
+  w('Green','Verde','🟢','grin',['Green'],'It is green.','Es verde.'),
+  w('Orange','Naranja','🟠','o-rinch',['Or','ange'],'It is orange.','Es naranja.'),
+  w('Purple','Morado','🟣','per-pol',['Pur','ple'],'It is purple.','Es morado.'),
+  w('Pink','Rosado','💗','pink',['Pink'],'It is pink.','Es rosado.'),
+  w('Black','Negro','⚫','blak',['Black'],'It is black.','Es negro.'),
+  w('White','Blanco','⚪','uait',['White'],'It is white.','Es blanco.')],
+  phrases:[{en:'It is red',es:'Es rojo'},{en:'It is blue',es:'Es azul'},{en:'It is green',es:'Es verde'},{en:'It is yellow',es:'Es amarillo'}]
  },
- {id:'numbers', level:'Starter 1', icon:'🔢', title:'Números 1 al 10', titleEn:'Numbers', goal:'Contar objetos del 1 al 10.', tags:['One','Two','Ten'], words:[
-  w('One','Uno','1️⃣','uan','One pencil.'),
-  w('Two','Dos','2️⃣','tu','Two books.'),
-  w('Three','Tres','3️⃣','zri','Three apples.'),
-  w('Four','Cuatro','4️⃣','for','Four dogs.'),
-  w('Five','Cinco','5️⃣','faiv','Five stars.'),
-  w('Six','Seis','6️⃣','six','Six crayons.'),
-  w('Seven','Siete','7️⃣','se-ven','Seven balls.'),
-  w('Eight','Ocho','8️⃣','eit','Eight cars.'),
-  w('Nine','Nueve','9️⃣','nain','Nine cats.'),
-  w('Ten','Diez','🔟','ten','Ten fingers.')],
-  phrases:['One pencil','Two books','Five stars','Ten fingers','Three apples','Six crayons']
+ {id:'numbers', level:'Starter 1', icon:'🔢', scene:'numbers_count', title:'Números 1 al 10', titleEn:'Numbers', goal:'Contar del 1 al 10.', tags:['One','Two','Ten'], words:[
+  w('One','Uno','1️⃣','uan',['One'],'One pencil.','Un lápiz.'),
+  w('Two','Dos','2️⃣','tu',['Two'],'Two books.','Dos libros.'),
+  w('Three','Tres','3️⃣','zri',['Three'],'Three apples.','Tres manzanas.'),
+  w('Four','Cuatro','4️⃣','for',['Four'],'Four dogs.','Cuatro perros.'),
+  w('Five','Cinco','5️⃣','faiv',['Five'],'Five stars.','Cinco estrellas.'),
+  w('Six','Seis','6️⃣','six',['Six'],'Six crayons.','Seis crayones.'),
+  w('Seven','Siete','7️⃣','se-ven',['Sev','en'],'Seven balls.','Siete pelotas.'),
+  w('Eight','Ocho','8️⃣','eit',['Eight'],'Eight cars.','Ocho autos.'),
+  w('Nine','Nueve','9️⃣','nain',['Nine'],'Nine cats.','Nueve gatos.'),
+  w('Ten','Diez','🔟','ten',['Ten'],'Ten fingers.','Diez dedos.')],
+  phrases:[{en:'One pencil',es:'Un lápiz'},{en:'Two books',es:'Dos libros'},{en:'Five stars',es:'Cinco estrellas'},{en:'Ten fingers',es:'Diez dedos'}]
  },
- {id:'school-objects', level:'Starter 1', icon:'✏️', title:'Útiles escolares', titleEn:'School objects', goal:'Nombrar objetos de la sala y mochila.', tags:['Pencil','Book','Bag'], words:[
-  w('Pencil','Lápiz','✏️','pen-sil','This is my pencil.'),
-  w('Pen','Lapicera','🖊️','pen','A blue pen.'),
-  w('Eraser','Goma','🧽','i-rei-ser','I need an eraser.'),
-  w('Book','Libro','📘','buk','This is my book.'),
-  w('Notebook','Cuaderno','📓','nout-buk','My notebook is red.'),
-  w('Crayon','Crayón','🖍️','crei-on','A red crayon.'),
-  w('Bag','Mochila','🎒','bag','My school bag.'),
-  w('Chair','Silla','🪑','cher','This is a chair.'),
-  w('Table','Mesa','🟫','tei-bol','This is a table.'),
-  w('Scissors','Tijeras','✂️','si-sors','The scissors are sharp.')],
-  phrases:['This is my pencil','This is my book','My school bag','A red crayon','My notebook is red']
+ {id:'school-objects', level:'Starter 1', icon:'✏️', scene:'classroom', title:'Útiles escolares', titleEn:'School objects', goal:'Nombrar útiles del colegio.', tags:['Pencil','Book','Bag'], words:[
+  w('Pencil','Lápiz','✏️','pen-sil',['Pen','cil'],'This is my pencil.','Este es mi lápiz.'),
+  w('Pen','Lapicera','🖊️','pen',['Pen'],'A blue pen.','Una lapicera azul.'),
+  w('Eraser','Goma','🧽','i-rei-ser',['E','ras','er'],'I need an eraser.','Necesito una goma.'),
+  w('Book','Libro','📘','buk',['Book'],'This is my book.','Este es mi libro.'),
+  w('Notebook','Cuaderno','📓','nout-buk',['Note','book'],'My notebook is red.','Mi cuaderno es rojo.'),
+  w('Crayon','Crayón','🖍️','crei-on',['Cray','on'],'A red crayon.','Un crayón rojo.'),
+  w('Bag','Mochila','🎒','bag',['Bag'],'My school bag.','Mi mochila.'),
+  w('Chair','Silla','🪑','cher',['Chair'],'This is a chair.','Esta es una silla.'),
+  w('Table','Mesa','🟫','tei-bol',['Ta','ble'],'This is a table.','Esta es una mesa.'),
+  w('Scissors','Tijeras','✂️','si-sors',['Scis','sors'],'The scissors are sharp.','Las tijeras están afiladas.')],
+  phrases:[{en:'This is my pencil',es:'Este es mi lápiz'},{en:'This is my book',es:'Este es mi libro'},{en:'My school bag',es:'Mi mochila'},{en:'A red crayon',es:'Un crayón rojo'}]
  },
- {id:'family', level:'Starter 2', icon:'👨‍👩‍👧‍👦', title:'La familia', titleEn:'Family', goal:'Hablar de miembros de la familia.', tags:['Mother','Father','Brother'], words:[
-  w('Mother','Mamá','👩','ma-der','This is my mother.'),
-  w('Father','Papá','👨','fa-der','This is my father.'),
-  w('Sister','Hermana','👧','sis-ter','This is my sister.'),
-  w('Brother','Hermano','👦','bra-der','This is my brother.'),
-  w('Baby','Bebé','👶','bei-bi','The baby is little.'),
-  w('Grandma','Abuela','👵','grand-ma','I love my grandma.'),
-  w('Grandpa','Abuelo','👴','grand-pa','I love my grandpa.'),
-  w('Aunt','Tía','👩‍🦱','ant','This is my aunt.'),
-  w('Uncle','Tío','👨‍🦱','an-kol','This is my uncle.')],
-  phrases:['This is my mother','This is my father','I love my family','This is my brother','I love my grandma']
+ // === STARTER 2 ===
+ {id:'family', level:'Starter 2', icon:'👨‍👩‍👧‍👦', scene:'family_living', title:'Mi familia', titleEn:'Family', goal:'Hablar de la familia.', tags:['Mother','Father','Brother'], words:[
+  w('Mother','Mamá','👩','ma-der',['Moth','er'],'This is my mother.','Esta es mi mamá.'),
+  w('Father','Papá','👨','fa-der',['Fath','er'],'This is my father.','Este es mi papá.'),
+  w('Sister','Hermana','👧','sis-ter',['Sis','ter'],'This is my sister.','Esta es mi hermana.'),
+  w('Brother','Hermano','👦','bra-der',['Broth','er'],'This is my brother.','Este es mi hermano.'),
+  w('Baby','Bebé','👶','bei-bi',['Ba','by'],'The baby is little.','El bebé es pequeño.'),
+  w('Grandma','Abuela','👵','grand-ma',['Grand','ma'],'I love my grandma.','Amo a mi abuela.'),
+  w('Grandpa','Abuelo','👴','grand-pa',['Grand','pa'],'I love my grandpa.','Amo a mi abuelo.')],
+  phrases:[{en:'This is my mother',es:'Esta es mi mamá'},{en:'This is my father',es:'Este es mi papá'},{en:'I love my family',es:'Amo a mi familia'},{en:'This is my brother',es:'Este es mi hermano'}]
  },
- {id:'body', level:'Starter 2', icon:'🖐️', title:'Partes del cuerpo', titleEn:'Body parts', goal:'Reconocer partes del cuerpo en canciones y juegos.', tags:['Head','Hands','Feet'], words:[
-  w('Head','Cabeza','🙂','jed','Touch your head.'),
-  w('Eyes','Ojos','👀','ais','Touch your eyes.'),
-  w('Nose','Nariz','👃','nous','Touch your nose.'),
-  w('Ears','Orejas','👂','irs','Touch your ears.'),
-  w('Mouth','Boca','👄','mauz','Open your mouth.'),
-  w('Hands','Manos','👐','jands','Clap your hands.'),
-  w('Arms','Brazos','💪','arms','Move your arms.'),
-  w('Legs','Piernas','🦵','legs','Move your legs.'),
-  w('Feet','Pies','🦶','fit','Stamp your feet.')],
-  phrases:['Touch your head','Clap your hands','Open your mouth','Stamp your feet','Touch your nose']
+ {id:'body', level:'Starter 2', icon:'🖐️', scene:'body_kid', title:'Mi cuerpo', titleEn:'Body parts', goal:'Reconocer partes del cuerpo.', tags:['Head','Hands','Feet'], words:[
+  w('Head','Cabeza','🙂','jed',['Head'],'Touch your head.','Toca tu cabeza.'),
+  w('Eyes','Ojos','👀','ais',['Eyes'],'Touch your eyes.','Toca tus ojos.'),
+  w('Nose','Nariz','👃','nous',['Nose'],'Touch your nose.','Toca tu nariz.'),
+  w('Ears','Orejas','👂','irs',['Ears'],'Touch your ears.','Toca tus orejas.'),
+  w('Mouth','Boca','👄','mauz',['Mouth'],'Open your mouth.','Abre tu boca.'),
+  w('Hands','Manos','👐','jands',['Hands'],'Clap your hands.','Aplaude.'),
+  w('Arms','Brazos','💪','arms',['Arms'],'Move your arms.','Mueve tus brazos.'),
+  w('Legs','Piernas','🦵','legs',['Legs'],'Move your legs.','Mueve tus piernas.'),
+  w('Feet','Pies','🦶','fit',['Feet'],'Stamp your feet.','Pisa con tus pies.')],
+  phrases:[{en:'Touch your head',es:'Toca tu cabeza'},{en:'Clap your hands',es:'Aplaude'},{en:'Open your mouth',es:'Abre tu boca'},{en:'Touch your nose',es:'Toca tu nariz'}]
  },
- {id:'animals', level:'Starter 2', icon:'🐶', title:'Animales', titleEn:'Animals', goal:'Nombrar animales comunes y mascotas.', tags:['Dog','Cat','Bird'], words:[
-  w('Dog','Perro','🐶','dog','I see a dog.'),
-  w('Cat','Gato','🐱','cat','I see a cat.'),
-  w('Bird','Pájaro','🐦','berd','A blue bird.'),
-  w('Fish','Pez','🐟','fish','A little fish.'),
-  w('Rabbit','Conejo','🐰','ra-bit','A white rabbit.'),
-  w('Turtle','Tortuga','🐢','ter-tol','A slow turtle.'),
-  w('Horse','Caballo','🐴','jors','A big horse.'),
-  w('Cow','Vaca','🐄','kau','A brown cow.')],
-  phrases:['I see a dog','I see a cat','A little fish','A white rabbit','A big horse']
+ {id:'animals', level:'Starter 2', icon:'🐶', scene:'animals_farm', title:'Animales', titleEn:'Animals', goal:'Nombrar animales.', tags:['Dog','Cat','Bird'], words:[
+  w('Dog','Perro','🐶','dog',['Dog'],'I see a dog.','Veo un perro.'),
+  w('Cat','Gato','🐱','cat',['Cat'],'I see a cat.','Veo un gato.'),
+  w('Bird','Pájaro','🐦','berd',['Bird'],'A blue bird.','Un pájaro azul.'),
+  w('Fish','Pez','🐟','fish',['Fish'],'A little fish.','Un pez pequeño.'),
+  w('Rabbit','Conejo','🐰','ra-bit',['Rab','bit'],'A white rabbit.','Un conejo blanco.'),
+  w('Horse','Caballo','🐴','jors',['Horse'],'A big horse.','Un caballo grande.'),
+  w('Cow','Vaca','🐄','kau',['Cow'],'A brown cow.','Una vaca café.')],
+  phrases:[{en:'I see a dog',es:'Veo un perro'},{en:'I see a cat',es:'Veo un gato'},{en:'A little fish',es:'Un pez pequeño'},{en:'A big horse',es:'Un caballo grande'}]
  },
- {id:'food', level:'Starter 2', icon:'🍎', title:'Comida y colación', titleEn:'Food', goal:'Pedir y reconocer alimentos básicos.', tags:['Apple','Water','Milk'], words:[
-  w('Apple','Manzana','🍎','a-pol','I like apples.'),
-  w('Banana','Plátano','🍌','ba-na-na','I like bananas.'),
-  w('Water','Agua','💧','uo-ter','Water, please.'),
-  w('Milk','Leche','🥛','milk','I drink milk.'),
-  w('Bread','Pan','🍞','bred','I eat bread.'),
-  w('Cookie','Galleta','🍪','cu-ki','One cookie, please.'),
-  w('Juice','Jugo','🧃','dchus','Apple juice, please.'),
-  w('Cheese','Queso','🧀','chiis','I like cheese.')],
-  phrases:['I like apples','Water, please','I drink milk','One cookie, please','Apple juice, please']
+ {id:'food', level:'Starter 2', icon:'🍎', scene:'kitchen_breakfast', title:'Comida', titleEn:'Food', goal:'Pedir y reconocer comidas.', tags:['Apple','Water','Milk'], words:[
+  w('Apple','Manzana','🍎','a-pol',['Ap','ple'],'I like apples.','Me gustan las manzanas.'),
+  w('Banana','Plátano','🍌','ba-na-na',['Ba','na','na'],'I like bananas.','Me gustan los plátanos.'),
+  w('Water','Agua','💧','uo-ter',['Wa','ter'],'Water, please.','Agua, por favor.'),
+  w('Milk','Leche','🥛','milk',['Milk'],'I drink milk.','Tomo leche.'),
+  w('Bread','Pan','🍞','bred',['Bread'],'I eat bread.','Como pan.'),
+  w('Juice','Jugo','🧃','dchus',['Juice'],'Apple juice, please.','Jugo de manzana, por favor.'),
+  w('Cheese','Queso','🧀','chiis',['Cheese'],'I like cheese.','Me gusta el queso.'),
+  w('Rice','Arroz','🍚','rais',['Rice'],'I eat rice.','Como arroz.')],
+  phrases:[{en:'I like apples',es:'Me gustan las manzanas'},{en:'Water, please',es:'Agua, por favor'},{en:'I drink milk',es:'Tomo leche'},{en:'I eat bread',es:'Como pan'}]
  },
- {id:'routines', level:'Starter 2', icon:'🪥', title:'Rutinas diarias', titleEn:'Daily routines', goal:'Decir acciones simples del día a día.', tags:['Wake up','Brush teeth','Go to bed'], words:[
-  w('Wake up','Despertar','⏰','ueik ap','I wake up at seven.'),
-  w('Brush my teeth','Cepillar mis dientes','🪥','brash mai tiz','I brush my teeth.'),
-  w('Wash my hands','Lavar mis manos','🧼','uash mai jands','I wash my hands.'),
-  w('Eat breakfast','Tomar desayuno','🥣','it brek-fast','I eat breakfast.'),
-  w('Go to school','Ir al colegio','🏫','gou tu skul','I go to school.'),
-  w('Play','Jugar','⚽','plei','I play with friends.'),
-  w('Read a book','Leer un libro','📖','rid a buk','I read a book.'),
-  w('Go to bed','Ir a dormir','🛏️','gou tu bed','I go to bed.')],
-  phrases:['I wake up','I brush my teeth','I go to school','I go to bed','I play with friends']
+ {id:'routines', level:'Starter 2', icon:'🪥', scene:'home_morning', title:'Rutinas diarias', titleEn:'Daily routines', goal:'Acciones del día a día.', tags:['Wake up','Brush teeth','Go to bed'], words:[
+  w('Wake up','Despertar','⏰','ueik ap',['Wake','up'],'I wake up at seven.','Me despierto a las siete.'),
+  w('Brush my teeth','Lavarme los dientes','🪥','brash mai tiz',['Brush','my','teeth'],'I brush my teeth.','Me lavo los dientes.'),
+  w('Wash my hands','Lavarme las manos','🧼','uash mai jands',['Wash','my','hands'],'I wash my hands.','Me lavo las manos.'),
+  w('Eat breakfast','Tomar desayuno','🥣','it brek-fast',['Eat','break','fast'],'I eat breakfast.','Tomo desayuno.'),
+  w('Go to school','Ir al colegio','🏫','gou tu skul',['Go','to','school'],'I go to school.','Voy al colegio.'),
+  w('Play','Jugar','⚽','plei',['Play'],'I play with friends.','Juego con amigos.'),
+  w('Read a book','Leer un libro','📖','rid a buk',['Read','a','book'],'I read a book.','Leo un libro.'),
+  w('Go to bed','Ir a dormir','🛏️','gou tu bed',['Go','to','bed'],'I go to bed.','Voy a dormir.')],
+  phrases:[{en:'I wake up',es:'Me despierto'},{en:'I brush my teeth',es:'Me lavo los dientes'},{en:'I go to school',es:'Voy al colegio'},{en:'I go to bed',es:'Voy a dormir'}]
+ },
+ // === STARTER 3 — HÁBITOS SALUDABLES ===
+ {id:'healthy-habits', level:'Starter 3', icon:'💪', scene:'healthy_plate', title:'Hábitos saludables', titleEn:'Healthy habits', goal:'Aprender qué es bueno para la salud.', tags:['Healthy','Exercise','Sleep'], words:[
+  w('Healthy','Saludable','💚','jel-zi',['Heal','thy'],'Apples are healthy.','Las manzanas son saludables.'),
+  w('Drink water','Tomar agua','💧','drink uo-ter',['Drink','wa','ter'],'I drink water every day.','Tomo agua todos los días.'),
+  w('Eat fruit','Comer fruta','🍎','it frut',['Eat','fruit'],'I eat fruit at school.','Como fruta en el colegio.'),
+  w('Eat vegetables','Comer verduras','🥦','it vech-ta-bols',['Eat','veg','e','ta','bles'],'I eat vegetables for lunch.','Como verduras en el almuerzo.'),
+  w('Exercise','Hacer ejercicio','🏃','ek-ser-saiz',['Ex','er','cise'],'I exercise every day.','Hago ejercicio todos los días.'),
+  w('Sleep early','Dormir temprano','🌙','slip er-li',['Sleep','ear','ly'],'I sleep early.','Duermo temprano.'),
+  w('Wash my hands','Lavar mis manos','🧼','uash mai jands',['Wash','my','hands'],'I wash my hands before eating.','Me lavo las manos antes de comer.'),
+  w('Brush my teeth','Lavar mis dientes','🪥','brash mai tiz',['Brush','my','teeth'],'I brush my teeth twice a day.','Me lavo los dientes dos veces al día.')],
+  phrases:[{en:'I drink water',es:'Tomo agua'},{en:'I eat fruit',es:'Como fruta'},{en:'I exercise every day',es:'Hago ejercicio todos los días'},{en:'I sleep early',es:'Duermo temprano'},{en:'I am healthy',es:'Soy saludable'}],
+  dialog:[
+   {char:'👩 Mom',scene:'kitchen_breakfast',en:'Time for breakfast! What do you want?',es:'¡Hora del desayuno! ¿Qué quieres?',replies:[{en:'An apple, please.',es:'Una manzana, por favor.',ok:true},{en:'Candy and soda.',es:'Dulces y bebida.',ok:false},{en:'Goodbye!',es:'¡Adiós!',ok:false}]},
+   {char:'👨‍🏫 Teacher',scene:'classroom',en:'Did you wash your hands?',es:'¿Te lavaste las manos?',replies:[{en:'Yes, I washed my hands.',es:'Sí, me lavé las manos.',ok:true},{en:'I am tired.',es:'Estoy cansado.',ok:false},{en:'I see a cat.',es:'Veo un gato.',ok:false}]}
+  ]
+ },
+ {id:'unhealthy-habits', level:'Starter 3', icon:'⚠️', scene:'unhealthy_table', title:'Hábitos NO saludables', titleEn:'Unhealthy habits', goal:'Reconocer qué cosas hacen daño.', tags:['Junk food','Soda','Too much screen'], words:[
+  w('Unhealthy','No saludable','🚫','an-jel-zi',['Un','heal','thy'],'Candy is unhealthy.','Los dulces no son saludables.'),
+  w('Candy','Dulces','🍬','can-di',['Can','dy'],'Too much candy is bad.','Mucho dulce es malo.'),
+  w('Soda','Bebida','🥤','sou-da',['So','da'],'Soda has lots of sugar.','La bebida tiene mucho azúcar.'),
+  w('Chips','Papas fritas','🍟','chips',['Chips'],'Chips are not healthy.','Las papas fritas no son saludables.'),
+  w('Cake','Torta','🍰','keik',['Cake'],'Cake only sometimes.','Torta solo a veces.'),
+  w('Too much sugar','Mucha azúcar','🍭','tu mach shu-ger',['Too','much','sug','ar'],'Too much sugar is bad.','Mucha azúcar es malo.'),
+  w('Too much screen','Mucha pantalla','📱','tu mach skrin',['Too','much','screen'],'Too much screen hurts my eyes.','Mucha pantalla daña mis ojos.'),
+  w('Not sleeping','No dormir','😵','nat sli-ping',['Not','sleep','ing'],'Not sleeping makes me tired.','No dormir me hace estar cansado.')],
+  phrases:[{en:'Too much candy is bad',es:'Mucho dulce es malo'},{en:'I drink water, not soda',es:'Tomo agua, no bebida'},{en:'I should not eat too much sugar',es:'No debo comer mucha azúcar'},{en:'I sleep early',es:'Duermo temprano'}],
+  dialog:[
+   {char:'👴 Grandpa',scene:'family_living',en:'Do you want some candy?',es:'¿Quieres dulces?',replies:[{en:'No, thank you. I want fruit.',es:'No, gracias. Quiero fruta.',ok:true},{en:'Yes, all the candy please!',es:'¡Sí, todos los dulces por favor!',ok:false},{en:'Goodbye!',es:'¡Adiós!',ok:false}]},
+   {char:'👩 Mom',scene:'home_morning',en:'It is bedtime. Turn off the screen.',es:'Es hora de dormir. Apaga la pantalla.',replies:[{en:'OK, Mom. Good night!',es:'OK, mamá. ¡Buenas noches!',ok:true},{en:'No, I want soda!',es:'¡No, quiero bebida!',ok:false},{en:'I am from Chile',es:'Soy de Chile',ok:false}]}
+  ],
+  // Lista para juego de clasificación
+  sortItems:[
+   {en:'Apple',es:'Manzana',icon:'🍎',healthy:true},
+   {en:'Water',es:'Agua',icon:'💧',healthy:true},
+   {en:'Vegetables',es:'Verduras',icon:'🥦',healthy:true},
+   {en:'Fish',es:'Pescado',icon:'🐟',healthy:true},
+   {en:'Milk',es:'Leche',icon:'🥛',healthy:true},
+   {en:'Sleep early',es:'Dormir temprano',icon:'😴',healthy:true},
+   {en:'Exercise',es:'Ejercicio',icon:'🏃',healthy:true},
+   {en:'Candy',es:'Dulces',icon:'🍬',healthy:false},
+   {en:'Soda',es:'Bebida',icon:'🥤',healthy:false},
+   {en:'Chips',es:'Papas fritas',icon:'🍟',healthy:false},
+   {en:'Too much screen',es:'Mucha pantalla',icon:'📱',healthy:false},
+   {en:'Lots of sugar',es:'Mucha azúcar',icon:'🍭',healthy:false}
+  ]
  }
 ];
 
-function w(en,es,icon,phonetic,phrase){return{en,es,icon,phonetic,phrase}}
+/* === HELPERS === */
 function $(id){return document.getElementById(id)}
 function appState(){return JSON.parse(localStorage.getItem(STORE)||'{"users":[]}')}
 function saveState(s){localStorage.setItem(STORE,JSON.stringify(s))}
 function userData(){return currentUser?.data||{stars:0,badges:0,completed:[],streak:0,lastDay:null,wordsSeen:{}}}
 function setCurrentUser(u){currentUser=u;localStorage.setItem(STORE+'_current',u?u.id:'')}
 function persistUser(){const s=appState();const idx=s.users.findIndex(u=>u.id===currentUser.id);if(idx>=0){s.users[idx]=currentUser;saveState(s)}}
+function persistPrefs(){if(currentUser){currentUser.prefs=prefs;persistUser()}}
+function loadPrefs(){if(currentUser?.prefs)prefs={...prefs,...currentUser.prefs}}
 function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.classList.remove('show'),2200)}
+function todayKey(){return new Date().toISOString().slice(0,10)}
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p)}catch(e){}}
+function shuffled(arr){return [...arr].sort(()=>Math.random()-.5)}
+function escapeAttr(s){return String(s).replace(/'/g,'&#39;').replace(/"/g,'&quot;').replace(/\\/g,'\\\\')}
 
 /* ============================================================
-   AUDIO BILINGÜE INTELIGENTE
-   - speakEN: pronuncia en inglés
-   - speakES: pronuncia en español
-   - speakMixed: divide texto con marcadores [[en]]...[[/en]] y reproduce cada parte con la voz correcta
+   AUDIO MEJORADO
+   - Voces priorizadas con detección de calidad
+   - Cola de utterances para no cortarse
+   - Velocidad ajustable (lenta/normal)
+   - Pre-warm para evitar primer-use lag
    ============================================================ */
 let cachedVoices=[];
-function refreshVoices(){if('speechSynthesis'in window){cachedVoices=window.speechSynthesis.getVoices()||[]}}
-if('speechSynthesis'in window){refreshVoices();window.speechSynthesis.onvoiceschanged=refreshVoices}
+let voicesReady=false;
+let speechQueue=[];
+let speaking=false;
 
-function preferredVoice(lang){
+function refreshVoices(){
+  if(!('speechSynthesis'in window))return;
+  cachedVoices=window.speechSynthesis.getVoices()||[];
+  voicesReady=cachedVoices.length>0;
+}
+if('speechSynthesis'in window){
   refreshVoices();
-  const prefix=lang.slice(0,2).toLowerCase();
-  // Prioritize high-quality voices for English
-  if(prefix==='en'){
-    // Look for natural/enhanced voices first
-    const premium=cachedVoices.find(v=>v.lang&&v.lang.toLowerCase().startsWith('en')&&/(samantha|alex|google.*us|microsoft.*zira|microsoft.*aria|natural|enhanced|premium)/i.test(v.name));
-    if(premium)return premium;
-    const usFemale=cachedVoices.find(v=>v.lang&&v.lang.toLowerCase()==='en-us'&&/female|woman|zira|samantha|aria|jenny/i.test(v.name));
-    if(usFemale)return usFemale;
-    const us=cachedVoices.find(v=>v.lang&&v.lang.toLowerCase()==='en-us');
-    if(us)return us;
+  window.speechSynthesis.onvoiceschanged=()=>{refreshVoices()};
+}
+
+function bestVoiceFor(lang){
+  refreshVoices();
+  const target=lang.toLowerCase();
+  const prefix=target.slice(0,2);
+
+  // Si el usuario eligió una voz específica
+  if(prefs.voiceURI){
+    const u=cachedVoices.find(v=>v.voiceURI===prefs.voiceURI&&v.lang.toLowerCase().startsWith(prefix));
+    if(u)return u;
   }
+
+  // Inglés: priorizar voces de alta calidad para niños
+  if(prefix==='en'){
+    const pri=['Samantha','Google US English','Microsoft Aria','Microsoft Jenny','Google UK English Female','Karen','Moira','Tessa','Microsoft Zira','Daniel','Alex'];
+    for(const name of pri){
+      const v=cachedVoices.find(v=>v.name&&v.name.includes(name)&&v.lang.toLowerCase().startsWith('en'));
+      if(v)return v;
+    }
+    // Cualquier voz en-US o en-GB
+    const usgb=cachedVoices.find(v=>['en-us','en-gb'].includes(v.lang.toLowerCase()));
+    if(usgb)return usgb;
+    const en=cachedVoices.find(v=>v.lang&&v.lang.toLowerCase().startsWith('en'));
+    if(en)return en;
+  }
+
+  // Español: priorizar Chile, luego latam, luego cualquiera
   if(prefix==='es'){
-    const cl=cachedVoices.find(v=>v.lang&&v.lang.toLowerCase()==='es-cl');
-    if(cl)return cl;
+    const pri=['es-cl','es-419','es-mx','es-us','es-co','es-ar','es-pe'];
+    for(const code of pri){
+      const v=cachedVoices.find(v=>v.lang.toLowerCase()===code);
+      if(v)return v;
+    }
     const es=cachedVoices.find(v=>v.lang&&v.lang.toLowerCase().startsWith('es'));
     if(es)return es;
   }
-  const exact=cachedVoices.find(v=>v.lang&&v.lang.toLowerCase()===lang.toLowerCase());
-  if(exact)return exact;
-  const native=cachedVoices.find(v=>v.lang&&v.lang.toLowerCase().startsWith(prefix));
-  return native||null;
+
+  return cachedVoices.find(v=>v.lang.toLowerCase().startsWith(prefix))||null;
 }
 
-function speak(text,lang='en-US',rate=null){
-  return new Promise(res=>{
-    try{
-      if(!('speechSynthesis'in window)){toast(text);return res()}
-      speechSynthesis.cancel();
-      const u=new SpeechSynthesisUtterance(text);
-      u.lang=lang;
-      const v=preferredVoice(lang);
-      if(v)u.voice=v;
-      // Rates tuned for clarity for kids
-      u.rate=rate||(lang.startsWith('en')?.78:.92);
-      u.pitch=lang.startsWith('en')?1.05:1.1;
-      u.volume=1;
-      u.onend=res;
-      u.onerror=res;
-      speechSynthesis.speak(u);
-    }catch(e){res()}
+// Cola para no cortarse cuando se llaman varios speak() seguidos
+function speak(text,lang='en-US',rateOverride=null){
+  return new Promise(resolve=>{
+    speechQueue.push({text,lang,rateOverride,resolve});
+    if(!speaking)processSpeechQueue();
   });
 }
+async function processSpeechQueue(){
+  if(speaking||speechQueue.length===0)return;
+  speaking=true;
+  const item=speechQueue.shift();
+  try{
+    if(!('speechSynthesis'in window)){toast(item.text);item.resolve();speaking=false;processSpeechQueue();return}
+
+    // Esperar a que las voces estén listas (max 1s)
+    if(!voicesReady){
+      for(let i=0;i<10&&!voicesReady;i++){await new Promise(r=>setTimeout(r,100));refreshVoices()}
+    }
+
+    speechSynthesis.cancel();
+    await new Promise(r=>setTimeout(r,30)); // pequeño delay tras cancel
+
+    const u=new SpeechSynthesisUtterance(item.text);
+    u.lang=item.lang;
+    const v=bestVoiceFor(item.lang);
+    if(v)u.voice=v;
+    // Ajuste de velocidad: lenta para niños aprendiendo
+    let rate=item.rateOverride;
+    if(!rate){
+      if(item.lang.startsWith('en'))rate=prefs.slow?.55:.78;
+      else rate=prefs.slow?.75:.95;
+    }
+    u.rate=rate;
+    u.pitch=item.lang.startsWith('en')?1.08:1.12;
+    u.volume=1;
+    let resolved=false;
+    const finish=()=>{if(!resolved){resolved=true;item.resolve();speaking=false;setTimeout(processSpeechQueue,50)}};
+    u.onend=finish;
+    u.onerror=finish;
+    speechSynthesis.speak(u);
+    // Safety: si no responde en 6s, continuar
+    setTimeout(finish,6000+text.length*60);
+  }catch(e){item.resolve();speaking=false;processSpeechQueue()}
+}
+
 function speakEN(text,rate){return speak(text,'en-US',rate)}
 function speakES(text,rate){return speak(text,'es-CL',rate)}
 
-// Pronuncia texto mixto. Usa [[en]]...[[/en]] dentro de un texto en español
-// para palabras/frases que deben sonar en inglés.
+// Reproduce una palabra/frase 2 veces para reforzar
+async function speakENtwice(text){
+  await speakEN(text);
+  await new Promise(r=>setTimeout(r,300));
+  await speakEN(text);
+}
+
+// Frase mixta: marcadores [[en]]...[[/en]] dentro de español
 async function speakMixed(text){
-  // Si no hay marcadores, intentar en español por defecto
   if(!text.includes('[[en]]'))return speakES(text);
   const parts=text.split(/(\[\[en\]\][\s\S]*?\[\[\/en\]\])/g).filter(Boolean);
   for(const p of parts){
@@ -451,20 +885,15 @@ async function speakMixed(text){
   }
 }
 
-// Helper: di la palabra/frase con introducción bilingüe
-async function sayBilingual(en,es){
-  await speakEN(en);
-  await new Promise(r=>setTimeout(r,250));
-  await speakES(es);
+function toggleSlow(){
+  prefs.slow=!prefs.slow;
+  $('slowBtn').style.background=prefs.slow?'#fff':'#ffffff22';
+  $('slowBtn').style.color=prefs.slow?'#6D5DF6':'#fff';
+  toast(prefs.slow?'🐢 Audio LENTO activado':'⚡ Audio normal');
+  persistPrefs();
 }
 
-function normalize(str){return String(str).replace(/'/g,'&#39;').replace(/"/g,'&quot;')}
-function todayKey(){return new Date().toISOString().slice(0,10)}
-function vibrate(pattern){if(navigator.vibrate)try{navigator.vibrate(pattern)}catch(e){}}
-
-/* ============================================================
-   AUDIO FEEDBACK SOUNDS (Web Audio API)
-   ============================================================ */
+/* === SOUND EFFECTS === */
 let audioCtx=null;
 function getCtx(){if(!audioCtx){try{audioCtx=new(window.AudioContext||window.webkitAudioContext)()}catch(e){}}return audioCtx}
 function playTone(freq,duration=120,type='sine',vol=.18){
@@ -481,253 +910,344 @@ function sfxCorrect(){playTone(660,120,'sine',.18);setTimeout(()=>playTone(880,1
 function sfxWrong(){playTone(220,200,'sawtooth',.14);setTimeout(()=>playTone(180,260,'sawtooth',.12),150)}
 function sfxTap(){playTone(440,60,'triangle',.1)}
 function sfxLevelUp(){const notes=[523,659,784,1047];notes.forEach((f,i)=>setTimeout(()=>playTone(f,180,'sine',.18),i*120))}
+function comboPop(text){const el=document.createElement('div');el.className='combo-pop';el.textContent=text;document.body.appendChild(el);setTimeout(()=>el.remove(),900)}
 
-function comboPop(text){
-  const el=document.createElement('div');el.className='combo-pop';el.textContent=text;
-  document.body.appendChild(el);setTimeout(()=>el.remove(),900);
-}
-
-/* ============================================================
-   PROFILES & LOGIN
-   ============================================================ */
-function renderAvatars(){ $('avatarGrid').innerHTML=AVATARS.map((a,i)=>`<button class="avatar-choice ${i===0?'selected':''}" onclick="selectAvatar('${a}',this)">${a}</button>`).join('') }
+/* === PROFILES & LOGIN === */
+function renderAvatars(){$('avatarGrid').innerHTML=AVATARS.map((a,i)=>`<button class="avatar-choice ${i===0?'selected':''}" onclick="selectAvatar('${a}',this)">${a}</button>`).join('')}
 function selectAvatar(a,el){selectedAvatar=a;document.querySelectorAll('.avatar-choice').forEach(x=>x.classList.remove('selected'));el.classList.add('selected');sfxTap()}
-function renderProfiles(){const s=appState();$('profiles').innerHTML=s.users.length?s.users.map(u=>`<article class="profile-card"><button class="avatar" onclick="login('${u.id}')">${u.avatar}</button><div class="profile-name">${u.name}</div><div class="profile-meta"><span>⭐ ${u.data.stars||0}</span><span>📚 ${(u.data.completed||[]).length}</span></div><button class="delete-mini" onclick="deleteProfile('${u.id}')">Eliminar</button></article>`).join(''):`<div class="add-card" style="grid-column:1/-1"><div style="font-size:42px">✨</div><b>Aún no hay perfiles</b><p style="color:var(--muted);font-weight:800;margin-top:6px">Crea uno para comenzar.</p></div>`}
-function createProfile(){const name=$('nameInput').value.trim();if(!name){speakES('Primero escribe el nombre.');return}const s=appState();if(s.users.some(u=>u.name.toLowerCase()===name.toLowerCase())){speakES('Ese nombre ya existe.');return}const u={id:String(Date.now()),name,avatar:selectedAvatar,data:{stars:0,badges:0,completed:[],streak:0,lastDay:null,wordsSeen:{}}};s.users.push(u);saveState(s);$('nameInput').value='';renderProfiles();login(u.id)}
-function deleteProfile(id){const s=appState();const u=s.users.find(x=>x.id===id);if(!u||!confirm('¿Eliminar el perfil de '+u.name+'?'))return;s.users=s.users.filter(x=>x.id!==id);saveState(s);if(currentUser?.id===id)logout();renderProfiles()}
+function renderProfiles(){
+  const s=appState();
+  $('profiles').innerHTML=s.users.length?s.users.map(u=>`
+    <article class="profile-card">
+      <button class="avatar" onclick="login('${u.id}')">${u.avatar}</button>
+      <div class="profile-name">${u.name}</div>
+      <div class="profile-meta"><span>⭐ ${u.data.stars||0}</span><span>📚 ${(u.data.completed||[]).length}</span></div>
+      <button class="delete-mini" onclick="deleteProfile('${u.id}')">Eliminar</button>
+    </article>`).join(''):`<div class="add-card" style="grid-column:1/-1"><div style="font-size:42px">✨</div><b>Aún no hay perfiles</b><p style="color:var(--muted);font-weight:800;margin-top:6px">Crea uno para comenzar.</p></div>`;
+}
+function createProfile(){
+  const name=$('nameInput').value.trim();
+  if(!name){speakES('Primero escribe el nombre.');return}
+  const s=appState();
+  if(s.users.some(u=>u.name.toLowerCase()===name.toLowerCase())){speakES('Ese nombre ya existe.');return}
+  const u={id:String(Date.now()),name,avatar:selectedAvatar,data:{stars:0,badges:0,completed:[],streak:0,lastDay:null,wordsSeen:{}},prefs:{slow:false}};
+  s.users.push(u);saveState(s);$('nameInput').value='';renderProfiles();login(u.id);
+}
+function deleteProfile(id){
+  const s=appState();const u=s.users.find(x=>x.id===id);
+  if(!u||!confirm('¿Eliminar el perfil de '+u.name+'?'))return;
+  s.users=s.users.filter(x=>x.id!==id);saveState(s);
+  if(currentUser?.id===id)logout();renderProfiles();
+}
 async function login(id){
   const s=appState();const u=s.users.find(x=>x.id===id);if(!u)return;
   setCurrentUser(u);
-  $('loginScreen').classList.add('hidden');$('appScreen').classList.remove('hidden');
-  $('profileAvatar').textContent=u.avatar;$('profileName').textContent=u.name;
+  loadPrefs();
+  $('loginScreen').classList.add('hidden');
+  $('appScreen').classList.remove('hidden');
+  $('coachBtn').classList.remove('hidden');
+  $('profileAvatar').textContent=u.avatar;
+  $('profileName').textContent=u.name;
+  $('slowBtn').style.background=prefs.slow?'#fff':'#ffffff22';
+  $('slowBtn').style.color=prefs.slow?'#6D5DF6':'#fff';
   updateStats();showHome();
-  // Bienvenida bilingüe: primero en inglés con pronunciación correcta, luego en español
+  // Bienvenida bilingüe — primero inglés con voz inglesa, luego español
   await speakEN('Hello '+u.name+'! Welcome back.');
-  await new Promise(r=>setTimeout(r,200));
   await speakES('¡Hola, '+u.name+'! Vamos a aprender inglés.');
 }
-function logout(){setCurrentUser(null);$('appScreen').classList.add('hidden');$('loginScreen').classList.remove('hidden');renderProfiles();speakES('Elige un perfil para continuar.')}
+function logout(){
+  setCurrentUser(null);
+  $('appScreen').classList.add('hidden');
+  $('loginScreen').classList.remove('hidden');
+  $('coachBtn').classList.add('hidden');
+  renderProfiles();
+  speakES('Elige un perfil para continuar.');
+}
 function updateStats(){const d=userData();$('stars').textContent=d.stars||0;$('done').textContent=(d.completed||[]).length;$('badges').textContent=d.badges||0;$('streak').textContent=d.streak||0}
-function setTab(n){document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===n));document.querySelectorAll('.bottom-tab').forEach((t,i)=>t.classList.toggle('active',i===n))}
+function setNavTab(n){document.querySelectorAll('.nav-tab').forEach((t,i)=>t.classList.toggle('active',i===n))}
 function isUnlocked(i){const d=userData();return i===0||d.completed.includes(LESSONS[i-1].id)}
 
-/* ============================================================
-   HOME / RUTA
-   ============================================================ */
-function showHome(){setTab(0);const d=userData();const pct=Math.round(((d.completed||[]).length/LESSONS.length)*100);$('content').innerHTML=`<div class="path-header"><div><h2>Ruta de aprendizaje</h2><p>De saludos básicos a frases cortas de primer nivel bilingüe.</p></div><div class="progress-pill">${pct}% completado</div></div><div class="lesson-grid">${LESSONS.map((l,i)=>{const done=d.completed.includes(l.id), lock=!isUnlocked(i);return `<article class="lesson ${done?'done':''} ${lock?'locked':''}" onclick="${lock?'speakES(\'Completa la lección anterior primero.\')':'startLesson(\''+l.id+'\')'}"><div class="lesson-top"><div class="lesson-icon">${l.icon}</div><div class="level">${lock?'🔒 Bloqueada':done?'✅ Hecha':l.level}</div></div><h3>${l.title}</h3><p>${l.goal}</p><div class="chips">${l.tags.map(t=>`<span class="chip">${t}</span>`).join('')}</div><div class="status"><span>${l.titleEn}</span><small>${l.words.length} palabras · ${l.dialog?'5':'4'} actividades</small></div></article>`}).join('')}</div>`}
+/* === HOME === */
+function showHome(){
+  setNavTab(0);
+  const d=userData();
+  const pct=Math.round(((d.completed||[]).length/LESSONS.length)*100);
+  // Agrupar por nivel
+  const levels={};
+  LESSONS.forEach((l,i)=>{(levels[l.level]=levels[l.level]||[]).push({...l,i})});
+  let html=`<div class="path-header"><div><h2>Ruta de aprendizaje</h2><p>De saludos básicos a hábitos saludables.</p></div><div class="progress-pill">${pct}% completado</div></div>`;
+  for(const lvl of Object.keys(levels)){
+    html+=`<div class="level-header">${lvl}</div><div class="lesson-grid">${levels[lvl].map(l=>{
+      const done=d.completed.includes(l.id), lock=!isUnlocked(l.i);
+      const acts=(l.dialog?5:4)+(l.sortItems?1:0);
+      return `<article class="lesson ${done?'done':''} ${lock?'locked':''}" onclick="${lock?"speakES('Completa la lección anterior primero.')":"startLesson('"+l.id+"')"}">
+        <div class="lesson-top"><div class="lesson-icon">${l.icon}</div><div class="level">${lock?'🔒 Bloqueada':done?'✅ Hecha':'Nivel '+l.level.split(' ')[1]}</div></div>
+        <h3>${l.title}</h3>
+        <p>${l.goal}</p>
+        <div class="chips">${l.tags.map(t=>`<span class="chip">${t}</span>`).join('')}</div>
+        <div class="status"><span>${l.titleEn}</span><small>${l.words.length} palabras · ${acts} actividades</small></div>
+      </article>`;
+    }).join('')}</div>`;
+  }
+  $('content').innerHTML=html;
+}
 
-/* ============================================================
-   LESSON FLOW
-   ============================================================ */
+/* === LESSON FLOW === */
 function startLesson(id){
   currentLesson=LESSONS.find(l=>l.id===id);
-  stepIndex=0;sessionScore=0;comboCount=0;sessionLives=3;
+  stepIndex=0;sessionScore=0;comboCount=0;
   showStep();
-  // Intro bilingüe: español primero (contexto), inglés después (palabras clave en su voz)
-  speakES('Lección: '+currentLesson.title).then(()=>{
-    setTimeout(()=>speakEN("Let's learn "+currentLesson.titleEn+"!"),200);
-  });
+  speakES('Lección: '+currentLesson.title).then(()=>setTimeout(()=>speakEN("Let's learn "+currentLesson.titleEn+"!"),200));
 }
 
 function stepsForLesson(){
-  // Flow: flashcards de cada palabra → escuchar → tap-the-thing → memorice → ordenar frase → diálogo (si existe) → completar
-  const flashes=currentLesson.words.map((_,i)=>({type:'flash',idx:i}));
-  const games=[{type:'listen'},{type:'tap'},{type:'match'},{type:'sentence'}];
-  if(currentLesson.dialog&&currentLesson.dialog.length)games.push({type:'dialog'});
-  // For greetings/about-me, agregar speed round extra
-  if(['greetings','about-me','classroom'].includes(currentLesson.id))games.push({type:'speed'});
-  games.push({type:'complete'});
-  return flashes.concat(games);
+  // Ahora: cada palabra es UNA flashcard, y luego hay un mini-test inmediato (cada 2 palabras)
+  // Esto es metodología mejor para 7 años: ver palabra → escuchar → mini quiz → siguiente palabra
+  const steps=[];
+  const words=currentLesson.words;
+  for(let i=0;i<words.length;i++){
+    steps.push({type:'flash',idx:i});
+    // Mini-quiz cada 2 palabras (refuerzo inmediato)
+    if((i+1)%2===0&&i<words.length-1){
+      steps.push({type:'micro',from:Math.max(0,i-1),to:i});
+    }
+  }
+  // Juegos al final
+  steps.push({type:'listen'});
+  steps.push({type:'tap'});
+  steps.push({type:'match'});
+  steps.push({type:'sentence'});
+  if(currentLesson.sortItems)steps.push({type:'sort'});
+  if(currentLesson.dialog&&currentLesson.dialog.length)steps.push({type:'dialog'});
+  if(['greetings','about-me','classroom','healthy-habits'].includes(currentLesson.id))steps.push({type:'speed'});
+  steps.push({type:'complete'});
+  return steps;
 }
 
 function showStep(){
-  const steps=stepsForLesson();const step=steps[stepIndex];
+  const steps=stepsForLesson();
+  const step=steps[stepIndex];
   const pct=Math.round((stepIndex/Math.max(1,steps.length-1))*100);
-  $('content').innerHTML=`<div class="activity"><div class="lesson-head"><div class="lesson-head-left"><div class="mini-icon">${currentLesson.icon}</div><div><h2>${currentLesson.title}</h2><p>${currentLesson.titleEn} · Paso ${Math.min(stepIndex+1,steps.length)} de ${steps.length}</p></div></div><button class="secondary-btn" onclick="showHome()">Menú</button></div><div class="stepbar"><div style="width:${pct}%"></div></div><div id="activityBody"></div></div>`;
+  $('content').innerHTML=`<div class="activity">
+    <div class="activity-head">
+      <div class="left">
+        <div class="mini-icon">${currentLesson.icon}</div>
+        <div>
+          <h2>${currentLesson.title}</h2>
+          <p>Paso ${Math.min(stepIndex+1,steps.length)} de ${steps.length}</p>
+        </div>
+      </div>
+      <button class="exit-btn" onclick="exitLesson()">✕ Salir</button>
+    </div>
+    <div class="stepbar"><div style="width:${pct}%"></div></div>
+    <div id="activityBody"></div>
+  </div>`;
   if(step.type==='flash')renderFlash(step.idx);
+  else if(step.type==='micro')renderMicroQuiz(step.from,step.to);
   else if(step.type==='listen')renderListenGame();
   else if(step.type==='tap')renderTapGame();
   else if(step.type==='match')renderMatchGame();
   else if(step.type==='sentence')renderSentenceGame();
+  else if(step.type==='sort')renderSortGame();
   else if(step.type==='dialog')renderDialogGame();
   else if(step.type==='speed')renderSpeedGame();
   else if(step.type==='complete')renderComplete();
   updateStats();
 }
 
-function renderFlash(i){
-  const v=currentLesson.words[i];markSeen(v.en);
-  $('activityBody').innerHTML=`<section class="card flash-main">
-    <div class="audio-badge">🇺🇸 Audio en inglés</div>
-    <div class="big-emoji">${v.icon}</div>
-    <div class="word">${v.en}</div>
-    <div class="phonetic">/${v.phonetic}/</div>
-    <div class="translation">${v.es}</div>
-    <div class="phrase">Frase modelo: <b>${v.phrase}</b></div>
-    <div class="actions">
-      <button class="primary-btn" onclick="playWord(${i})">🔊 Palabra en inglés</button>
-      <button class="secondary-btn" onclick="playPhrase(${i})">💬 Frase en inglés</button>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px">
-      <button class="ghost-btn" onclick="speakES('${normalize(v.es)}')">🇪🇸 Significado</button>
-      <button class="ghost-btn" onclick="sayBilingual('${normalize(v.en)}','${normalize(v.es)}')">🔁 Inglés y español</button>
-    </div>
-    <div class="bottom-nav">
-      <button class="ghost-btn" onclick="prevStep()">← Atrás</button>
-      <button class="primary-btn" onclick="nextStep()">Siguiente →</button>
-    </div>
-  </section>`;
-  // Auto-play: primero la palabra en inglés (la voz del idioma que aprende)
-  setTimeout(()=>playWord(i),250);
+function exitLesson(){
+  if(confirm('¿Salir de la lección? Tu progreso de la sesión actual se perderá.')){
+    showHome();
+  }
 }
 
-async function playWord(i){const v=currentLesson.words[i];await speakEN(v.en)}
-async function playPhrase(i){await speakEN(currentLesson.words[i].phrase)}
-function markSeen(word){const d=userData();d.wordsSeen=d.wordsSeen||{};d.wordsSeen[word]=(d.wordsSeen[word]||0)+1;currentUser.data=d;persistUser()}
-function nextStep(){stepIndex++;showStep()}
-function prevStep(){if(stepIndex>0){stepIndex--;showStep()}else showHome()}
-function shuffled(arr){return [...arr].sort(()=>Math.random()-.5)}
-
-/* ============================================================
-   GAME 1: ESCUCHA Y ELIGE
-   ============================================================ */
-function renderListenGame(){
-  const items=shuffled(currentLesson.words).slice(0,4);
-  const correct=items[Math.floor(Math.random()*items.length)];
-  window.listenCorrect=correct.en;window.listenCorrectKey=correct.en;
-  $('activityBody').innerHTML=`<section class="card">
-    <div class="question">🎧 Escucha y elige</div>
-    <p class="game-note">Escucha la palabra en inglés y toca su significado en español.</p>
-    <button class="primary-btn full" onclick="speakEN(window.listenCorrect)">🔊 Reproducir otra vez</button>
-    <div class="options">${items.map(v=>`<button class="option" onclick="answerListen(this,'${normalize(v.en)}')"><span style="font-size:2rem;display:block">${v.icon}</span>${v.es}<small style="display:block;color:#6b7280;margin-top:4px">${v.en}</small></button>`).join('')}</div>
-    <div id="feedback" class="feedback"></div>
-    <div class="bottom-nav">
-      <button class="ghost-btn" onclick="prevStep()">← Atrás</button>
-      <button id="nextGame" class="primary-btn hidden" onclick="nextStep()">Siguiente juego →</button>
+/* === FLASHCARD MEJORADA: imagen grande, audio doble, fonética con sílabas en colores === */
+function renderFlash(i){
+  const v=currentLesson.words[i];
+  markSeen(v.en);
+  const sceneKey=currentLesson.scene||'home_morning';
+  const sceneSvg=SCENES[sceneKey]||'';
+  const sylsHtml=v.syl.map(s=>`<span class="syl">${s}</span>`).join('');
+  $('activityBody').innerHTML=`<section class="card flash-main">
+    <div class="audio-badge">🇺🇸 Escucha 2 veces</div>
+    <div class="scene-frame">${sceneSvg}<div style="position:absolute;font-size:clamp(3rem,15vw,5.5rem);bottom:8px;right:14px;text-shadow:0 4px 12px rgba(0,0,0,.2)">${v.icon}</div></div>
+    <div class="word">${v.en}</div>
+    <div class="syllables">${sylsHtml}</div>
+    <div class="phonetic">/${v.phonetic}/</div>
+    <div class="translation">${v.es}</div>
+    <div class="phrase">💬 <b>${v.phrase}</b><br><small style="opacity:.75">${v.phraseEs}</small></div>
+    <div class="actions">
+      <button class="primary-btn" onclick="speakENtwice('${escapeAttr(v.en)}')">🔊 Repetir palabra</button>
+      <button class="secondary-btn" onclick="speakEN('${escapeAttr(v.phrase)}')">💬 Frase completa</button>
     </div>
-  </section>`;
-  setTimeout(()=>speakEN(correct.en),350);
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+      <button class="ghost-btn" onclick="speakEN('${escapeAttr(v.en)}',.45)">🐢 Muy lento</button>
+      <button class="ghost-btn" onclick="speakES('${escapeAttr(v.es)}')">🇪🇸 Significado</button>
+    </div>
+  </section>
+  <div class="action-bar">
+    <button class="primary-btn" onclick="nextStep()">${i===0?'Empezar →':'Siguiente →'}</button>
+  </div>`;
+  // Auto-play: 2 veces la palabra en inglés con voz inglesa
+  setTimeout(()=>speakENtwice(v.en),300);
+}
+
+async function playWord(i){const v=currentLesson.words[i];await speakENtwice(v.en)}
+function markSeen(word){const d=userData();d.wordsSeen=d.wordsSeen||{};d.wordsSeen[word]=(d.wordsSeen[word]||0)+1;currentUser.data=d;persistUser()}
+function nextStep(){stepIndex++;showStep();window.scrollTo({top:0,behavior:'smooth'})}
+
+/* === MICRO QUIZ: refuerzo inmediato después de 2 flashcards === */
+function renderMicroQuiz(from,to){
+  const candidates=currentLesson.words.slice(Math.max(0,from-1),to+1);
+  const pool=candidates.length>=2?candidates:currentLesson.words.slice(0,Math.min(3,currentLesson.words.length));
+  const correct=pool[Math.floor(Math.random()*pool.length)];
+  // Distractores
+  const others=currentLesson.words.filter(w=>w.en!==correct.en);
+  const distractors=shuffled(others).slice(0,Math.min(2,others.length));
+  const opts=shuffled([correct,...distractors]);
+  window._mqCorrect=correct.en;
+  $('activityBody').innerHTML=`<section class="card">
+    <div class="question">¿Qué escuchaste? <small>Listen and pick the picture</small></div>
+    <button class="primary-btn full" onclick="speakENtwice('${escapeAttr(correct.en)}')">🔊 Escuchar otra vez</button>
+    <div class="options" style="grid-template-columns:repeat(${opts.length},1fr);margin-top:12px">${opts.map(v=>`<button class="option" onclick="answerMicro(this,'${escapeAttr(v.en)}','${escapeAttr(v.es)}')"><span class="ic">${v.icon}</span><span class="lbl-es">${v.es}</span></button>`).join('')}</div>
+    <div id="feedback" class="feedback"></div>
+  </section>
+  <div class="action-bar with-back"><button class="ghost-btn" onclick="prevStepSafe()">← Atrás</button><button class="primary-btn hidden" id="mqNext" onclick="nextStep()">Continuar →</button></div>`;
+  setTimeout(()=>speakENtwice(correct.en),250);
+}
+async function answerMicro(el,enKey,esKey){
+  document.querySelectorAll('.option').forEach(o=>o.disabled=true);
+  const ok=enKey===window._mqCorrect;
+  el.classList.add(ok?'correct':'wrong');
+  if(ok){sfxCorrect();vibrate([20,40,20]);comboCount++;reward(8);showFeedback(true,'✅ ¡Muy bien!');await speakEN('Yes! '+enKey);
+    // Auto-avanzar
+    setTimeout(()=>nextStep(),1200);
+  }else{sfxWrong();vibrate(120);comboCount=0;
+    [...document.querySelectorAll('.option')].find(o=>o.querySelector('.lbl-es')&&o.querySelector('.lbl-es').textContent===currentLesson.words.find(w=>w.en===window._mqCorrect)?.es)?.classList.add('correct');
+    showFeedback(false,'Casi. Mira la respuesta correcta.');
+    await speakES('Casi.');await speakEN(window._mqCorrect);
+    $('mqNext').classList.remove('hidden');
+  }
+}
+
+function prevStepSafe(){if(stepIndex>0){stepIndex--;showStep();window.scrollTo(0,0)}}
+
+/* === LISTEN GAME === */
+function renderListenGame(){
+  const items=shuffled(currentLesson.words).slice(0,Math.min(4,currentLesson.words.length));
+  const correct=items[Math.floor(Math.random()*items.length)];
+  window.listenCorrect=correct.en;
+  $('activityBody').innerHTML=`<section class="card">
+    <div class="question">🎧 Escucha y elige <small>Listen and choose</small></div>
+    <button class="primary-btn full" onclick="speakENtwice('${escapeAttr(correct.en)}')">🔊 Escuchar otra vez</button>
+    <div class="options">${items.map(v=>`<button class="option" onclick="answerListen(this,'${escapeAttr(v.en)}')"><span class="ic">${v.icon}</span><span class="lbl-es">${v.es}</span><span class="lbl-en">${v.en}</span></button>`).join('')}</div>
+    <div id="feedback" class="feedback"></div>
+  </section>
+  <div class="action-bar with-back">
+    <button class="ghost-btn" onclick="prevStepSafe()">← Atrás</button>
+    <button id="nextGame" class="primary-btn hidden" onclick="nextStep()">Siguiente →</button>
+  </div>`;
+  setTimeout(()=>speakENtwice(correct.en),300);
 }
 async function answerListen(el,ans){
   document.querySelectorAll('.option').forEach(o=>o.disabled=true);
-  const ok=ans===window.listenCorrectKey;
+  const ok=ans===window.listenCorrect;
   el.classList.add(ok?'correct':'wrong');
   if(!ok){
-    [...document.querySelectorAll('.option')].find(o=>o.textContent.includes(currentLesson.words.find(w=>w.en===window.listenCorrect).es))?.classList.add('correct');
-    sfxWrong();vibrate(120);
-    comboCount=0;
-  }else{
-    sfxCorrect();vibrate([30,50,30]);
-    comboCount++;
-    if(comboCount>=3)comboPop('🔥 Combo x'+comboCount);
-  }
+    [...document.querySelectorAll('.option')].find(o=>o.querySelector('.lbl-en')?.textContent===window.listenCorrect)?.classList.add('correct');
+    sfxWrong();vibrate(120);comboCount=0;
+  }else{sfxCorrect();vibrate([30,50,30]);comboCount++;if(comboCount>=3)comboPop('🔥 Combo x'+comboCount)}
   showFeedback(ok);
-  if(ok)reward(12);
-  $('nextGame').classList.remove('hidden');
-  if(ok){await speakEN('Correct! '+window.listenCorrect)}
-  else{await speakES('Casi. Mira la respuesta correcta.');await speakEN(window.listenCorrect)}
+  if(ok){reward(12);await speakEN('Correct!');setTimeout(()=>nextStep(),1300)}
+  else{$('nextGame').classList.remove('hidden');await speakES('Casi. La respuesta correcta era:');await speakEN(window.listenCorrect)}
 }
 
-/* ============================================================
-   GAME 2: TAP THE THING — Toca el objeto correcto en una escena
-   ============================================================ */
+/* === TAP THE THING === */
 function renderTapGame(){
   const items=shuffled(currentLesson.words).slice(0,Math.min(6,currentLesson.words.length));
-  const target=items[Math.floor(Math.random()*items.length)];
-  window.tapTarget=target;
-  window.tapRound=0;window.tapItems=items;window.tapHits=0;window.tapTotal=Math.min(4,items.length);
+  tapState={items:[...items],remaining:[...items],hits:0,total:Math.min(4,items.length),current:null};
+  tapState.current=tapState.remaining[Math.floor(Math.random()*tapState.remaining.length)];
   renderTapRound();
 }
 function renderTapRound(){
-  const target=window.tapTarget;
+  const target=tapState.current;
+  const sceneKey=currentLesson.scene||'home_morning';
   $('activityBody').innerHTML=`<section class="card">
-    <div class="question">👆 Find: <span style="color:var(--primary)">${target.en}</span></div>
-    <p class="game-note">Toca el objeto correcto. Audio 100% en inglés.</p>
-    <div class="scene">
-      <div class="scene-prompt">🎧 ${target.en} — <small style="color:var(--muted)">${target.es}</small></div>
-      <div class="scene-objects">${window.tapItems.map(v=>`<button class="scene-obj" data-key="${normalize(v.en)}" onclick="tapAnswer(this,'${normalize(v.en)}')">${v.icon}</button>`).join('')}</div>
-    </div>
+    <div class="question">👆 Find: <span style="color:var(--primary)">${target.en}</span><small>${target.es}</small></div>
+    <div class="scene-frame">${SCENES[sceneKey]||''}</div>
+    <button class="primary-btn full" onclick="speakENtwice('${escapeAttr(target.en)}')">🔊 Escuchar</button>
+    <div class="scene-objects">${tapState.items.map(v=>`<button class="scene-obj" data-key="${escapeAttr(v.en)}" onclick="tapAnswer(this,'${escapeAttr(v.en)}')">${v.icon}</button>`).join('')}</div>
     <div id="feedback" class="feedback"></div>
-    <div class="bottom-nav">
-      <button class="ghost-btn" onclick="prevStep()">← Atrás</button>
-      <button class="secondary-btn" onclick="speakEN('${normalize(target.en)}')">🔊 Repetir</button>
-      <button id="nextGame" class="primary-btn hidden" onclick="nextStep()">Siguiente →</button>
-    </div>
-    <p style="text-align:center;margin-top:8px;font-weight:900;color:var(--muted)">Ronda ${window.tapRound+1} de ${window.tapTotal}</p>
-  </section>`;
-  setTimeout(()=>speakEN("Where is "+target.en+"?"),250);
+    <p style="text-align:center;margin-top:10px;font-weight:900;color:var(--muted);font-size:.88rem">Encontradas: ${tapState.hits} de ${tapState.total}</p>
+  </section>
+  <div class="action-bar with-back">
+    <button class="ghost-btn" onclick="prevStepSafe()">← Atrás</button>
+    <button id="nextGame" class="primary-btn hidden" onclick="nextStep()">Siguiente →</button>
+  </div>`;
+  setTimeout(()=>speakEN("Where is "+target.en+"?"),300);
 }
 async function tapAnswer(el,key){
-  const ok=key===window.tapTarget.en;
+  const ok=key===tapState.current.en;
   el.classList.add(ok?'correct':'wrong');
   if(ok){
-    sfxCorrect();vibrate([20,40,20]);comboCount++;
-    document.querySelectorAll('.scene-obj').forEach(o=>o.classList.add('faded'));
-    el.classList.remove('faded');
-    reward(10);
-    await speakEN('Yes! '+window.tapTarget.en);
-    window.tapRound++;window.tapHits++;
-    // remover este item para que no se repita
-    window.tapItems=window.tapItems.filter(v=>v.en!==window.tapTarget.en);
-    if(window.tapRound>=window.tapTotal||window.tapItems.length===0){
-      showFeedback(true,'¡Excelente! '+window.tapHits+' correctas');
+    sfxCorrect();vibrate([20,40,20]);comboCount++;reward(10);
+    el.classList.add('faded');
+    tapState.hits++;
+    await speakEN('Yes! '+tapState.current.en);
+    tapState.remaining=tapState.remaining.filter(v=>v.en!==tapState.current.en);
+    tapState.items=tapState.items.filter(v=>v.en!==tapState.current.en);
+    if(tapState.hits>=tapState.total||tapState.remaining.length===0){
+      showFeedback(true,'¡Excelente! '+tapState.hits+' correctas');
       $('nextGame').classList.remove('hidden');
-      confetti();
+      sfxLevelUp();confetti();
+      setTimeout(()=>nextStep(),2000);
     }else{
-      const next=window.tapItems[Math.floor(Math.random()*window.tapItems.length)];
-      window.tapTarget=next;
-      setTimeout(()=>renderTapRound(),1200);
+      tapState.current=tapState.remaining[Math.floor(Math.random()*tapState.remaining.length)];
+      setTimeout(()=>renderTapRound(),900);
     }
   }else{
     sfxWrong();vibrate(120);comboCount=0;
     setTimeout(()=>el.classList.remove('wrong'),500);
-    await speakEN("Try again. Find "+window.tapTarget.en);
+    await speakEN("Try again. Find "+tapState.current.en);
   }
 }
 
-/* ============================================================
-   GAME 3: MEMORICE MEJORADO con audio match
-   - Pares: imagen + audio (al voltear, suena la palabra en inglés)
-   - Animaciones, feedback sonoro, victoria con confetti
-   ============================================================ */
+/* === MEMORY === */
 function renderMatchGame(){
-  const pairs=shuffled(currentLesson.words).slice(0,4);
+  const pairs=shuffled(currentLesson.words).slice(0,Math.min(4,currentLesson.words.length));
   const cards=shuffled(pairs.flatMap(v=>[{id:v.en,show:v.icon,type:'icon'},{id:v.en,show:v.en,type:'word'}]));
   memoryState={open:[],matched:0,total:cards.length,moves:0};
   $('activityBody').innerHTML=`<section class="card">
-    <div class="question">🧠 Memorice con audio</div>
-    <p class="game-note">Une cada imagen con su palabra en inglés. Al voltear escucharás la palabra.</p>
-    <div style="text-align:center;margin:8px 0"><span class="audio-badge">🎧 Audio en cada carta</span></div>
-    <div class="memory-grid">${cards.map((c,i)=>`<button class="mem" data-id="${normalize(c.id)}" data-show="${normalize(c.show)}" data-type="${c.type}" onclick="flipMem(this)">?</button>`).join('')}</div>
+    <div class="question">🧠 Memorice <small>Match icon and word</small></div>
+    <p class="game-note">Une cada imagen con su palabra. Al voltear escuchas la palabra.</p>
+    <div class="memory-grid">${cards.map((c,i)=>`<button class="mem" data-id="${escapeAttr(c.id)}" data-show="${escapeAttr(c.show)}" data-type="${c.type}" onclick="flipMem(this)">?</button>`).join('')}</div>
     <div id="feedback" class="feedback"></div>
-    <div class="bottom-nav">
-      <button class="ghost-btn" onclick="prevStep()">← Atrás</button>
-      <button id="nextGame" class="primary-btn hidden" onclick="nextStep()">Siguiente juego →</button>
-    </div>
-  </section>`;
+  </section>
+  <div class="action-bar with-back">
+    <button class="ghost-btn" onclick="prevStepSafe()">← Atrás</button>
+    <button id="nextGame" class="primary-btn hidden" onclick="nextStep()">Siguiente →</button>
+  </div>`;
   speakES('Encuentra las parejas.');
 }
 async function flipMem(el){
   if(el.classList.contains('matched')||el.classList.contains('flipped')||memoryState.open.length>=2)return;
   el.textContent=el.dataset.show;el.classList.add('flipped');sfxTap();
-  // Si es una carta de palabra (texto inglés), reproducir audio en inglés. Si es icono, también lo reproducimos para reforzar.
   speakEN(el.dataset.id);
   memoryState.open.push(el);
-  if(memoryState.open.length===2){memoryState.moves++;setTimeout(checkMem,750)}
+  if(memoryState.open.length===2){memoryState.moves++;setTimeout(checkMem,800)}
 }
 async function checkMem(){
   const[a,b]=memoryState.open;
   if(a.dataset.id===b.dataset.id){
     a.classList.add('matched');b.classList.add('matched');
-    memoryState.matched+=2;reward(5);sfxCorrect();vibrate([20,30,20]);
-    comboCount++;
+    memoryState.matched+=2;reward(5);sfxCorrect();vibrate([20,30,20]);comboCount++;
     if(comboCount>=2)comboPop('✨ '+a.dataset.id);
-    await speakEN('Great match! '+a.dataset.id);
     if(memoryState.matched===memoryState.total){
       const stars=memoryState.moves<=6?3:memoryState.moves<=8?2:1;
-      showFeedback(true,'¡Todas las parejas! '+ '⭐'.repeat(stars));
+      showFeedback(true,'¡Todas las parejas! '+'⭐'.repeat(stars));
       $('nextGame').classList.remove('hidden');
       sfxLevelUp();confetti();
+      setTimeout(()=>nextStep(),2200);
     }
   }else{
     sfxWrong();
@@ -738,27 +1258,27 @@ async function checkMem(){
   memoryState.open=[];
 }
 
-/* ============================================================
-   GAME 4: ORDENAR FRASE
-   ============================================================ */
+/* === SENTENCE BUILDER === */
 function renderSentenceGame(){
-  const phrase=currentLesson.phrases[Math.floor(Math.random()*currentLesson.phrases.length)];
-  sentenceState={target:phrase,chosen:[]};
+  const ph=currentLesson.phrases[Math.floor(Math.random()*currentLesson.phrases.length)];
+  const phrase=typeof ph==='string'?ph:ph.en;
+  const phraseEs=typeof ph==='string'?'':ph.es;
+  sentenceState={target:phrase,targetEs:phraseEs,chosen:[]};
   const tiles=shuffled(phrase.split(' '));
   $('activityBody').innerHTML=`<section class="card">
-    <div class="question">🧩 Ordena la frase</div>
-    <p class="game-note">Construye la frase en inglés. Escúchala primero.</p>
+    <div class="question">🧩 Ordena la frase <small>Build the sentence</small></div>
+    <p class="game-note" style="font-size:1rem"><b>${phraseEs||'Construye la frase en inglés'}</b></p>
+    <button class="secondary-btn full" onclick="speakENtwice('${escapeAttr(phrase)}')">🔊 Escuchar frase</button>
     <div id="drop" class="dropzone">Toca las palabras abajo</div>
-    <div id="tiles" class="sentence-row">${tiles.map(t=>`<button class="tile" onclick="pickTile(this,'${normalize(t)}')">${t}</button>`).join('')}</div>
-    <button class="secondary-btn full" onclick="speakEN('${normalize(phrase)}')">🔊 Escuchar frase en inglés</button>
+    <div id="tiles" class="sentence-row">${tiles.map(t=>`<button class="tile" onclick="pickTile(this,'${escapeAttr(t)}')">${t}</button>`).join('')}</div>
     <div id="feedback" class="feedback"></div>
-    <div class="bottom-nav">
-      <button class="ghost-btn" onclick="prevStep()">← Atrás</button>
-      <button class="ghost-btn" onclick="resetSentence()">↺ Reiniciar</button>
-      <button id="nextGame" class="primary-btn hidden" onclick="nextStep()">Completar →</button>
-    </div>
-  </section>`;
-  speakEN(phrase);
+    <div style="text-align:center;margin-top:8px"><button class="ghost-btn" onclick="resetSentence()">↺ Reiniciar</button></div>
+  </section>
+  <div class="action-bar with-back">
+    <button class="ghost-btn" onclick="prevStepSafe()">← Atrás</button>
+    <button id="nextGame" class="primary-btn hidden" onclick="nextStep()">Siguiente →</button>
+  </div>`;
+  setTimeout(()=>speakEN(phrase),300);
 }
 function resetSentence(){
   if(!sentenceState)return;
@@ -770,28 +1290,24 @@ function resetSentence(){
 async function pickTile(el,t){
   sentenceState.chosen.push(t);el.disabled=true;el.style.opacity=.35;sfxTap();
   $('drop').innerHTML=sentenceState.chosen.map(x=>`<span class="tile">${x}</span>`).join('');
-  const built=sentenceState.chosen.join(' ');
   if(sentenceState.chosen.length===sentenceState.target.split(' ').length){
+    const built=sentenceState.chosen.join(' ');
     const ok=built===sentenceState.target;
-    showFeedback(ok,ok?'¡Frase correcta!':'Revisa el orden de la frase.');
+    showFeedback(ok,ok?'¡Frase correcta!':'Revisa el orden.');
     if(ok){
       reward(15);sfxCorrect();vibrate([20,40,20]);
       $('nextGame').classList.remove('hidden');
-      await speakEN(sentenceState.target);
-      confetti();
+      await speakEN(sentenceState.target);confetti();
+      setTimeout(()=>nextStep(),1800);
     }else{
       sfxWrong();vibrate(150);comboCount=0;
-      await speakES('Casi. Inténtalo de nuevo.');
-      await speakEN(sentenceState.target);
+      await speakES('Casi. Inténtalo de nuevo.');await speakEN(sentenceState.target);
       setTimeout(()=>renderSentenceGame(),1500);
     }
   }
 }
 
-/* ============================================================
-   GAME 5: DIÁLOGO INTERACTIVO (responde como en una conversación)
-   ============================================================ */
-let dialogState=null;
+/* === DIALOG === */
 function renderDialogGame(){
   if(!currentLesson.dialog||!currentLesson.dialog.length){nextStep();return}
   dialogState={turn:0,history:[],dialogs:shuffled([...currentLesson.dialog])};
@@ -799,42 +1315,45 @@ function renderDialogGame(){
 }
 async function showDialogTurn(){
   if(dialogState.turn>=dialogState.dialogs.length){
-    showFeedback(true,'¡Conversación completa!');
-    $('activityBody').innerHTML+=`<div style="text-align:center;margin-top:14px"><button class="primary-btn" onclick="nextStep()">Siguiente →</button></div>`;
+    $('activityBody').innerHTML=`<section class="card flash-main">
+      <div class="big-emoji">💬</div>
+      <div class="word" style="font-size:clamp(1.6rem,6vw,2.4rem)">¡Conversación completa!</div>
+      <p class="phrase">Practicaste 3 conversaciones reales en inglés.</p>
+    </section>
+    <div class="action-bar"><button class="primary-btn" onclick="nextStep()">Siguiente →</button></div>`;
     sfxLevelUp();confetti();
     return;
   }
   const d=dialogState.dialogs[dialogState.turn];
+  const sceneSvg=SCENES[d.scene]||'';
   $('activityBody').innerHTML=`<section class="card">
-    <div class="question">💬 Conversación</div>
-    <p class="game-note">Escucha y responde. Audio 100% en inglés.</p>
+    <div class="question">💬 Conversación <small>Listen and reply</small></div>
+    ${sceneSvg?`<div class="scene-frame" style="margin-top:8px">${sceneSvg}</div>`:''}
     <div class="dialog-area" id="dialogArea">
       ${dialogState.history.map(h=>`<div class="dialog-char"><span class="pic">${h.charPic}</span>${h.charName}</div><div class="dialog-bubble ${h.side}">${h.text}</div>`).join('')}
       <div class="dialog-char"><span class="pic">${d.char.split(' ')[0]}</span>${d.char}</div>
-      <div class="dialog-bubble them" id="themBubble">${d.en}<br><small style="opacity:.7">${d.es}</small></div>
+      <div class="dialog-bubble them" id="themBubble"><b>${d.en}</b><small>${d.es}</small></div>
     </div>
-    <button class="secondary-btn full" onclick="speakEN('${normalize(d.en)}')">🔊 Escuchar otra vez</button>
-    <div class="dialog-replies" style="margin-top:12px">
-      ${shuffled([...d.replies]).map((r,i)=>`<button class="reply-btn" onclick="pickReply(this,${r.ok?1:0},'${normalize(r.en)}','${normalize(r.es)}')"><span class="flag">🇺🇸</span><div><b>${r.en}</b><span class="es">${r.es}</span></div></button>`).join('')}
+    <button class="secondary-btn full" onclick="speakENtwice('${escapeAttr(d.en)}')">🔊 Escuchar otra vez</button>
+    <div class="dialog-replies" style="margin-top:10px">
+      ${shuffled([...d.replies]).map(r=>`<button class="reply-btn" onclick="pickReply(this,${r.ok?1:0},'${escapeAttr(r.en)}','${escapeAttr(r.es)}')"><span class="flag">🇺🇸</span><div><b>${r.en}</b><span class="es">${r.es}</span></div></button>`).join('')}
     </div>
     <div id="feedback" class="feedback"></div>
-    <div class="bottom-nav">
-      <button class="ghost-btn" onclick="prevStep()">← Atrás</button>
-    </div>
-  </section>`;
-  setTimeout(()=>speakEN(d.en),300);
+  </section>
+  <div class="action-bar with-back"><button class="ghost-btn" onclick="prevStepSafe()">← Atrás</button></div>`;
+  setTimeout(()=>speakENtwice(d.en),300);
 }
 async function pickReply(el,ok,en,es){
   document.querySelectorAll('.reply-btn').forEach(b=>b.disabled=true);
   el.classList.add(ok?'correct':'wrong');
   const d=dialogState.dialogs[dialogState.turn];
   if(ok){
-    sfxCorrect();vibrate([20,40,20]);reward(15);
-    dialogState.history.push({charName:d.char,charPic:d.char.split(' ')[0],text:d.en+'<br><small style="opacity:.7">'+d.es+'</small>',side:'them'});
-    dialogState.history.push({charName:'You',charPic:'🧒',text:en+'<br><small style="opacity:.7">'+es+'</small>',side:'you'});
+    sfxCorrect();vibrate([20,40,20]);reward(15);comboCount++;
+    dialogState.history.push({charName:d.char,charPic:d.char.split(' ')[0],text:'<b>'+d.en+'</b><small>'+d.es+'</small>',side:'them'});
+    dialogState.history.push({charName:'You',charPic:'🧒',text:'<b>'+en+'</b><small>'+es+'</small>',side:'you'});
     await speakEN(en);
     showFeedback(true,'¡Buena respuesta!');
-    setTimeout(()=>{dialogState.turn++;showDialogTurn()},900);
+    setTimeout(()=>{dialogState.turn++;showDialogTurn()},1200);
   }else{
     sfxWrong();vibrate(150);comboCount=0;
     showFeedback(false,'Esa no es la mejor respuesta. Intenta otra.');
@@ -843,18 +1362,15 @@ async function pickReply(el,ok,en,es){
   }
 }
 
-/* ============================================================
-   GAME 6: SPEED ROUND — contra reloj con vidas
-   ============================================================ */
-let speedState=null;
+/* === SPEED ROUND === */
 function renderSpeedGame(){
   speedState={score:0,lives:3,timeLeft:30,timer:null,deadline:Date.now()+30000};
   speedNextRound();
   speedState.timer=setInterval(speedTick,100);
 }
 function speedNextRound(){
-  if(speedState.lives<=0||speedState.timeLeft<=0){speedEnd();return}
-  const items=shuffled(currentLesson.words).slice(0,4);
+  if(!speedState||speedState.lives<=0||speedState.timeLeft<=0){speedEnd();return}
+  const items=shuffled(currentLesson.words).slice(0,Math.min(4,currentLesson.words.length));
   const correct=items[Math.floor(Math.random()*items.length)];
   speedState.correct=correct.en;
   $('activityBody').innerHTML=`<section class="card">
@@ -863,13 +1379,11 @@ function speedNextRound(){
       <div class="speed-timer"><div id="speedTimer" style="width:100%"></div></div>
       <div class="speed-lives" id="speedLives">${'❤️'.repeat(speedState.lives)+'🤍'.repeat(3-speedState.lives)}</div>
     </div>
-    <div class="question">⚡ Speed Round</div>
-    <p class="game-note">Escucha y elige rápido. Audio 100% en inglés.</p>
-    <button class="primary-btn full" onclick="speakEN('${normalize(correct.en)}')">🔊 Repetir</button>
-    <div class="options">${items.map(v=>`<button class="option" onclick="speedAnswer(this,'${normalize(v.en)}')"><span style="font-size:2rem;display:block">${v.icon}</span>${v.es}</button>`).join('')}</div>
-    <div id="feedback" class="feedback"></div>
-    <div class="bottom-nav"><button class="ghost-btn" onclick="speedQuit()">Salir</button></div>
-  </section>`;
+    <div class="question">⚡ Speed Round <small>30 segundos</small></div>
+    <button class="primary-btn full" onclick="speakEN('${escapeAttr(correct.en)}')">🔊 Repetir</button>
+    <div class="options">${items.map(v=>`<button class="option" onclick="speedAnswer(this,'${escapeAttr(v.en)}')"><span class="ic">${v.icon}</span><span class="lbl-es">${v.es}</span></button>`).join('')}</div>
+  </section>
+  <div class="action-bar"><button class="ghost-btn" onclick="speedQuit()">Salir del Speed Round</button></div>`;
   setTimeout(()=>speakEN(correct.en),200);
 }
 function speedTick(){
@@ -881,20 +1395,20 @@ function speedTick(){
   if(left<=0)speedEnd();
 }
 async function speedAnswer(el,key){
+  if(!speedState)return;
   const ok=key===speedState.correct;
   el.classList.add(ok?'correct':'wrong');
   document.querySelectorAll('.option').forEach(o=>o.disabled=true);
   if(ok){
     sfxCorrect();vibrate([15,30]);
     speedState.score+=10;reward(8);
-    comboCount++;
-    if(comboCount>=3)comboPop('🔥 '+comboCount+'x');
+    comboCount++;if(comboCount>=3)comboPop('🔥 '+comboCount+'x');
     await speakEN('Yes!');
   }else{
     sfxWrong();vibrate(100);
     speedState.lives--;comboCount=0;
-    $('speedLives').textContent='❤️'.repeat(speedState.lives)+'🤍'.repeat(3-speedState.lives);
-    await speakES('Era '+currentLesson.words.find(w=>w.en===speedState.correct).es);
+    const livesEl=$('speedLives');
+    if(livesEl)livesEl.textContent='❤️'.repeat(speedState.lives)+'🤍'.repeat(3-speedState.lives);
   }
   setTimeout(()=>speedNextRound(),500);
 }
@@ -904,21 +1418,77 @@ function speedEnd(){
   speedState=null;
   $('activityBody').innerHTML=`<section class="card flash-main">
     <div class="big-emoji">⚡</div>
-    <div class="word" style="font-size:clamp(1.8rem,7vw,3rem)">¡Speed Round!</div>
+    <div class="word" style="font-size:clamp(1.6rem,6vw,2.4rem)">¡Speed Round!</div>
     <div class="translation">Puntaje: ${score}</div>
-    <div class="phrase">${score>=50?'¡Increíble velocidad!':score>=30?'¡Muy bien!':'Sigue practicando.'}</div>
-    <div class="actions">
-      <button class="secondary-btn" onclick="renderSpeedGame()">🔁 Otra ronda</button>
-      <button class="primary-btn" onclick="nextStep()">Continuar →</button>
-    </div>
-  </section>`;
+    <p class="phrase">${score>=50?'¡Increíble velocidad!':score>=30?'¡Muy bien!':'Sigue practicando.'}</p>
+  </section>
+  <div class="action-bar with-back">
+    <button class="ghost-btn" onclick="renderSpeedGame()">🔁 Otra ronda</button>
+    <button class="primary-btn" onclick="nextStep()">Continuar →</button>
+  </div>`;
   if(score>=30){confetti();sfxLevelUp()}
 }
 function speedQuit(){if(speedState&&speedState.timer)clearInterval(speedState.timer);speedState=null;nextStep()}
 
-/* ============================================================
-   COMPLETAR
-   ============================================================ */
+/* === SORT GAME (Healthy vs Unhealthy) === */
+function renderSortGame(){
+  const items=shuffled([...currentLesson.sortItems]);
+  sortState={items,placed:[]};
+  $('activityBody').innerHTML=`<section class="card">
+    <div class="question">🥦 Saludable o NO saludable <small>Healthy or Unhealthy?</small></div>
+    <p class="game-note">Toca un alimento o hábito y luego toca dónde va.</p>
+    <div class="sort-board">
+      <div class="sort-bin healthy" id="binHealthy"><h4>💚 HEALTHY</h4><div class="items" id="itemsH"></div></div>
+      <div class="sort-bin unhealthy" id="binUnhealthy"><h4>🚫 UNHEALTHY</h4><div class="items" id="itemsU"></div></div>
+    </div>
+    <div class="sort-tray" id="sortTray">${items.map((it,i)=>`<button class="sort-pill" data-idx="${i}" onclick="pickSort(${i},this)"><span class="ic">${it.icon}</span> ${it.en}<small style="margin-left:6px;color:var(--muted);font-weight:800">(${it.es})</small></button>`).join('')}</div>
+    <p style="text-align:center;color:var(--muted);font-weight:800;font-size:.85rem;margin-top:8px">Selecciona un item, luego toca el bin correcto.</p>
+    <div id="feedback" class="feedback"></div>
+  </section>
+  <div class="action-bar with-back">
+    <button class="ghost-btn" onclick="prevStepSafe()">← Atrás</button>
+    <button id="nextGame" class="primary-btn hidden" onclick="nextStep()">Siguiente →</button>
+  </div>`;
+  // Click en bin
+  $('binHealthy').onclick=()=>placeSort(true);
+  $('binUnhealthy').onclick=()=>placeSort(false);
+  speakEN("Sort the food. Healthy or unhealthy?");
+}
+let sortPicked=null;
+function pickSort(i,el){
+  document.querySelectorAll('.sort-pill').forEach(p=>p.classList.remove('dragging'));
+  sortPicked={idx:i,el};el.classList.add('dragging');sfxTap();
+  const item=sortState.items[i];
+  speakEN(item.en);
+}
+async function placeSort(toHealthy){
+  if(sortPicked===null){speakES('Primero elige un item.');return}
+  const item=sortState.items[sortPicked.idx];
+  const ok=item.healthy===toHealthy;
+  if(ok){
+    sfxCorrect();vibrate([20,40,20]);reward(8);comboCount++;
+    sortPicked.el.remove();
+    const targetList=toHealthy?'itemsH':'itemsU';
+    $(targetList).insertAdjacentHTML('beforeend',`<span class="sort-pill ${toHealthy?'placed-h':'placed-u'}"><span class="ic">${item.icon}</span> ${item.en}</span>`);
+    sortState.placed.push(item);sortPicked=null;
+    await speakEN(item.en+' is '+(toHealthy?'healthy':'unhealthy'));
+    if(sortState.placed.length===sortState.items.length){
+      showFeedback(true,'¡Todo clasificado!');
+      $('nextGame').classList.remove('hidden');
+      sfxLevelUp();confetti();
+      setTimeout(()=>nextStep(),2000);
+    }
+  }else{
+    sfxWrong();vibrate(120);comboCount=0;
+    sortPicked.el.classList.remove('dragging');
+    sortPicked=null;
+    showFeedback(false,'No, ese va al otro lado. Intenta otra vez.');
+    await speakES('Es '+(item.healthy?'saludable':'no saludable'));
+    setTimeout(()=>{const f=$('feedback');if(f)f.classList.remove('show')},1800);
+  }
+}
+
+/* === COMPLETE === */
 function renderComplete(){
   const d=userData();
   if(!d.completed.includes(currentLesson.id)){
@@ -930,11 +1500,10 @@ function renderComplete(){
     currentUser.data=d;persistUser();
   }
   updateStats();
-  // Calcular estrellas según rendimiento (basado en sessionScore aproximado por reward)
   const stars=sessionScore>=120?3:sessionScore>=60?2:1;
   $('activityBody').innerHTML=`<section class="card flash-main">
     <div class="big-emoji">🏆</div>
-    <div class="word" style="font-size:clamp(2rem,8vw,3.2rem)">¡Lección completada!</div>
+    <div class="word" style="font-size:clamp(1.8rem,7vw,2.8rem)">¡Lección completada!</div>
     <div class="translation">${currentLesson.title}</div>
     <div class="stars-row">
       <span class="star-big">⭐</span>
@@ -942,65 +1511,48 @@ function renderComplete(){
       <span class="star-big">⭐</span>
     </div>
     <p class="phrase">Ganaste estrellas, una medalla y desbloqueaste la siguiente lección.</p>
-    <div class="actions">
-      <button class="secondary-btn" onclick="startLesson('${currentLesson.id}')">🔁 Repetir</button>
-      <button class="primary-btn" onclick="showHome()">Ruta →</button>
-    </div>
-  </section>`;
-  // Animar estrellas una por una
+  </section>
+  <div class="action-bar with-back">
+    <button class="ghost-btn" onclick="startLesson('${currentLesson.id}')">🔁 Repetir</button>
+    <button class="primary-btn" onclick="showHome()">Ir a la ruta →</button>
+  </div>`;
   const starEls=document.querySelectorAll('.star-big');
   for(let i=0;i<stars;i++){
     setTimeout(()=>{starEls[i].classList.add('shown');playTone(523+i*200,180,'sine',.18)},400+i*350);
   }
   confetti();
-  // Mensaje bilingüe: inglés primero (en su voz), luego español
   setTimeout(()=>speakEN('Congratulations! Lesson complete!'),300);
   setTimeout(()=>speakES('¡Felicitaciones! Completaste la lección.'),1800);
 }
+
 function reward(points){sessionScore+=points;const d=userData();d.stars=(d.stars||0)+points;currentUser.data=d;persistUser();updateStats()}
-function showFeedback(ok,msg){const f=$('feedback');f.className='feedback show '+(ok?'good':'bad');f.textContent=msg||(ok?'✅ Correcto':'❌ Intenta otra vez')}
+function showFeedback(ok,msg){const f=$('feedback');if(!f)return;f.className='feedback show '+(ok?'good':'bad');f.textContent=msg||(ok?'✅ Correcto':'❌ Intenta otra vez')}
 
-/* ============================================================
-   PRACTICE / LIBRARY / PARENTS
-   ============================================================ */
+/* === PRACTICE === */
 function allWords(){return LESSONS.flatMap(l=>l.words.map(w=>({...w,lesson:l.title,lessonEn:l.titleEn})))}
-
 function showPractice(){
-  setTab(1);
+  setNavTab(1);
   $('content').innerHTML=`<div class="path-header">
-    <div><h2>Práctica rápida</h2><p>Elige un mini-juego para practicar palabras de cualquier lección.</p></div>
+    <div><h2>Práctica rápida</h2><p>Elige un mini-juego con palabras al azar.</p></div>
     <div class="progress-pill">Modo juego</div>
   </div>
   <div class="game-modes">
-    <button class="game-mode" onclick="quickGame('flashcards')"><span class="icon">🃏</span><b>Flashcards</b><small>Audio en inglés</small></button>
+    <button class="game-mode" onclick="quickGame('flashcards')"><span class="icon">🃏</span><b>Flashcards</b><small>Escuchar y ver</small></button>
     <button class="game-mode" onclick="quickGame('listen')"><span class="icon">🎧</span><b>Escucha</b><small>Elige el significado</small></button>
     <button class="game-mode" onclick="quickGame('tap')"><span class="icon">👆</span><b>Tap the thing</b><small>Toca el correcto</small></button>
     <button class="game-mode" onclick="quickGame('memory')"><span class="icon">🧠</span><b>Memorice</b><small>Pares con audio</small></button>
     <button class="game-mode" onclick="quickGame('speed')"><span class="icon">⚡</span><b>Speed Round</b><small>Contra reloj</small></button>
-    <button class="game-mode" onclick="quickGame('dialog')"><span class="icon">💬</span><b>Diálogos</b><small>Conversaciones reales</small></button>
+    <button class="game-mode" onclick="quickGame('dialog')"><span class="icon">💬</span><b>Diálogos</b><small>Conversaciones</small></button>
   </div>
   <div id="quickArea"></div>`;
 }
-
 function quickGame(mode){
-  // Crear "lección virtual" con palabras al azar de toda la app
   const words=shuffled(allWords()).slice(0,8);
-  const phrases=words.map(w=>w.phrase);
-  // dialogs disponibles (mezclados de lecciones que tienen)
+  const phrases=LESSONS.flatMap(l=>l.phrases||[]);
   const allDialogs=LESSONS.filter(l=>l.dialog).flatMap(l=>l.dialog);
-  currentLesson={
-    id:'_quick_'+mode,
-    title:'Práctica rápida',
-    titleEn:'Quick practice',
-    icon:'🎮',
-    words,
-    phrases,
-    dialog:allDialogs.length?shuffled(allDialogs).slice(0,3):null
-  };
-  // Render solo la actividad pedida en quickArea
+  currentLesson={id:'_q_'+mode,title:'Práctica rápida',titleEn:'Quick practice',icon:'🎮',scene:'home_morning',words,phrases:shuffled(phrases).slice(0,5),dialog:allDialogs.length?shuffled(allDialogs).slice(0,3):null};
   const area=$('quickArea');
   area.innerHTML='<div id="activityBody"></div>';
-  // Necesitamos que las funciones de juego escriban en activityBody — ya lo hacen
   if(mode==='flashcards'){renderQuickFlashcards(words);return}
   if(mode==='listen')renderListenGame();
   if(mode==='tap')renderTapGame();
@@ -1010,86 +1562,104 @@ function quickGame(mode){
     if(!currentLesson.dialog){area.innerHTML='<p style="text-align:center;color:var(--muted);font-weight:900;margin-top:14px">Aún no hay diálogos disponibles.</p>';return}
     renderDialogGame();
   }
-  // Sustituir botón "Siguiente" por "otra ronda"
+  // Reemplazar acción "siguiente" por "otra ronda"
   setTimeout(()=>{
     const nb=$('nextGame');
     if(nb){nb.textContent='🎲 Otra ronda';nb.onclick=()=>quickGame(mode)}
   },300);
 }
-
 function renderQuickFlashcards(words){
-  $('activityBody').innerHTML=`<div class="practice-grid">${words.map((v,i)=>`<article class="practice-card">
-    <div style="font-size:2.8rem">${v.icon}</div>
+  $('activityBody').innerHTML=`<div class="practice-grid">${words.map(v=>`<article class="practice-card">
+    <div style="font-size:2.6rem">${v.icon}</div>
     <h3>${v.en}</h3>
     <p>${v.es} · ${v.lesson}</p>
     <div style="font-family:monospace;color:#5b21b6;background:#f5f3ff;border-radius:10px;padding:6px 10px;display:inline-block;margin:6px 0;font-weight:900">/${v.phonetic}/</div>
     <div class="quick-row">
-      <button class="primary-btn" onclick="speakEN('${normalize(v.en)}')">🔊 Palabra</button>
-      <button class="secondary-btn" onclick="speakEN('${normalize(v.phrase)}')">Frase</button>
+      <button class="primary-btn" onclick="speakENtwice('${escapeAttr(v.en)}')">🔊 Palabra</button>
+      <button class="secondary-btn" onclick="speakEN('${escapeAttr(v.phrase)}')">Frase</button>
     </div>
   </article>`).join('')}</div>
-  <div class="bottom-nav" style="margin-top:14px">
+  <div class="action-bar with-back">
     <button class="ghost-btn" onclick="showPractice()">← Cambiar juego</button>
     <button class="primary-btn" onclick="quickGame('flashcards')">🎲 Otra ronda</button>
   </div>`;
 }
 
+/* === LIBRARY === */
 function showLibrary(){
-  setTab(2);
+  setNavTab(2);
   const words=allWords();
   $('content').innerHTML=`<div class="path-header">
-    <div><h2>Biblioteca de palabras</h2><p>Toca una palabra para escucharla en inglés. Toca dos veces para oírla más despacio.</p></div>
+    <div><h2>Biblioteca de palabras</h2><p>Toca una palabra para escucharla. Doble toque = lento.</p></div>
     <div class="progress-pill">${words.length} palabras</div>
   </div>
-  <div class="library-grid">${words.map((v,i)=>`<button class="word-mini" ondblclick="speakEN('${normalize(v.en)}',.55)" onclick="speakEN('${normalize(v.en)}')">
+  <div class="library-grid">${words.map(v=>`<button class="word-mini" ondblclick="speakEN('${escapeAttr(v.en)}',.45)" onclick="speakENtwice('${escapeAttr(v.en)}')">
     <div class="e">${v.icon}</div>
     <b>${v.en}</b>
     <span>${v.es}</span>
-    <small style="display:block;color:#4338ca;font-weight:950;margin-top:6px;font-size:.72rem">/${v.phonetic}/</small>
+    <small style="display:block;color:#4338ca;font-weight:950;margin-top:6px;font-size:.7rem">/${v.phonetic}/</small>
   </button>`).join('')}</div>`;
 }
 
+/* === SETTINGS / PARENTS === */
 function showParents(){
-  setTab(3);
-  $('content').innerHTML=`<div class="parent-card">
-    <h3>👨‍👩‍👦 Guía para acompañar el aprendizaje</h3>
+  setNavTab(3);
+  // Voces disponibles
+  refreshVoices();
+  const enVoices=cachedVoices.filter(v=>v.lang.toLowerCase().startsWith('en'));
+  const optionsHtml=enVoices.length?`<select class="select" id="voiceSel" onchange="changeVoice(this.value)">
+    <option value="">Automático (mejor disponible)</option>
+    ${enVoices.map(v=>`<option value="${v.voiceURI}" ${prefs.voiceURI===v.voiceURI?'selected':''}>${v.name} (${v.lang})</option>`).join('')}
+  </select>`:'<p style="color:var(--muted);font-weight:800">No se detectaron voces inglesas en este dispositivo.</p>';
+
+  $('content').innerHTML=`
+  <div class="parent-card">
+    <h3>🔊 Audio</h3>
+    <label><input type="checkbox" ${prefs.slow?'checked':''} onchange="prefs.slow=this.checked;persistPrefs();toast(prefs.slow?'Audio lento ON':'Audio normal')"> <span>Audio lento (recomendado para empezar)</span></label>
+    <div style="margin-top:10px">
+      <div style="font-weight:900;margin-bottom:6px">Voz en inglés</div>
+      ${optionsHtml}
+      <button class="secondary-btn full" style="margin-top:8px" onclick="speakENtwice('Hello! My name is Facu. I am seven years old.')">🔊 Probar voz</button>
+    </div>
+  </div>
+  <div class="parent-card" style="margin-top:14px">
+    <h3>👨‍👩‍👦 Para los padres</h3>
     <ul>
-      <li>Usar 8 a 12 minutos por sesión, idealmente 4 veces por semana.</li>
-      <li>Repetir primero las lecciones de saludos, presentación y sala de clases: son la base de colegio bilingüe.</li>
-      <li>Pedirle al niño que diga una frase completa, no solo palabras sueltas: "My name is…", "I am happy", "Thank you".</li>
-      <li>Celebrar la pronunciación aproximada; a esta edad importa más la confianza oral que la perfección.</li>
-      <li>Usar la sección "Diálogos" como práctica de conversación real con preguntas y respuestas.</li>
-      <li>El "Speed Round" sirve para activar memoria rápida después de varias sesiones.</li>
-      <li>La app guarda avance localmente en el dispositivo, sin servidor ni cuentas externas.</li>
+      <li>Sesiones de 8 a 12 minutos, 4 veces por semana.</li>
+      <li>Lecciones 1-4 (saludos, presentación, sala, palabras mágicas) son la base. Repítelas varias veces.</li>
+      <li>Las lecciones de hábitos saludables ayudan a conversaciones reales: agua vs bebida, fruta vs dulce, dormir temprano.</li>
+      <li>Celebra la pronunciación aproximada — a esta edad importa más la confianza oral.</li>
+      <li>Si tu hijo aún no lee bien, activa "Audio lento" y pídele que repita después de escuchar.</li>
+      <li>La app guarda todo localmente en este dispositivo.</li>
     </ul>
   </div>
   <div class="parent-card" style="margin-top:14px">
-    <h3>🎯 Cómo está estructurada cada lección</h3>
+    <h3>📚 Estructura de cada lección</h3>
     <ul>
-      <li><b>Flashcards</b> — Cada palabra con icono, fonética y frase modelo. Audio en inglés.</li>
-      <li><b>Escucha y elige</b> — Identificar significado escuchando inglés.</li>
-      <li><b>Tap the thing</b> — Encontrar el objeto correcto en una escena.</li>
-      <li><b>Memorice con audio</b> — Unir imagen con palabra escrita; al voltear suena en inglés.</li>
-      <li><b>Ordenar frase</b> — Construir frases completas con tarjetas.</li>
-      <li><b>Diálogo</b> (en lecciones de saludos, presentación y sala) — Conversaciones reales con respuestas múltiples.</li>
-      <li><b>Speed Round</b> (algunas lecciones) — Práctica intensiva contra reloj con vidas.</li>
+      <li><b>Flashcards</b> — Palabra con escena ilustrada, audio doble en inglés, sílabas en colores.</li>
+      <li><b>Mini-quiz</b> cada 2 palabras para refuerzo inmediato.</li>
+      <li><b>Escucha y elige</b>, <b>Tap the thing</b>, <b>Memorice</b>, <b>Ordenar frase</b>.</li>
+      <li><b>Healthy / Unhealthy</b> — Clasificación de comida y hábitos (lección de hábitos).</li>
+      <li><b>Diálogo</b> — Conversaciones con respuestas múltiples.</li>
+      <li><b>Speed Round</b> — Práctica intensiva contra reloj.</li>
     </ul>
   </div>
   <div class="parent-card" style="margin-top:14px">
-    <h3>🔊 Sobre el audio</h3>
+    <h3>🎓 Niveles</h3>
     <ul>
-      <li>Las palabras y frases en inglés se pronuncian siempre con voz inglesa, incluso si están dentro de una explicación en español.</li>
-      <li>El español se pronuncia con voz en español de Chile cuando está disponible.</li>
-      <li>Toca dos veces una palabra en la Biblioteca para escucharla más despacio.</li>
+      <li><b>Starter 1</b>: Saludos, Mi nombre y edad, Sala de clases, Palabras mágicas, Emociones, Colores, Números, Útiles escolares.</li>
+      <li><b>Starter 2</b>: Familia, Cuerpo, Animales, Comida, Rutinas.</li>
+      <li><b>Starter 3</b>: Hábitos saludables, Hábitos NO saludables.</li>
     </ul>
   </div>`;
 }
+function changeVoice(uri){prefs.voiceURI=uri||null;persistPrefs();toast('Voz actualizada');speakENtwice('Hello! How are you today?')}
 
 async function speakHelp(){
   if($('loginScreen').classList.contains('hidden')){
-    await speakMixed('Usa la barra inferior para ir a [[en]]Path[[/en]] (ruta), [[en]]Practice[[/en]] (práctica), [[en]]Words[[/en]] (palabras) o padres. En cada tarjeta el botón de audio reproduce inglés.');
+    await speakES('Toca una lección para empezar. Usa el botón tortuga para audio lento.');
   }else{
-    await speakES('Crea un perfil o toca un perfil existente para empezar.');
+    await speakES('Crea un perfil o toca un perfil para empezar.');
   }
 }
 
@@ -1106,14 +1676,20 @@ function confetti(){
   }
 }
 
+/* === INIT === */
 window.addEventListener('load',()=>{
   renderAvatars();renderProfiles();
+  // Pre-warm voices: forzar carga de voces
+  if('speechSynthesis'in window){
+    speechSynthesis.getVoices();
+    setTimeout(refreshVoices,200);
+    setTimeout(refreshVoices,800);
+  }
   const id=localStorage.getItem(STORE+'_current');
   if(id){const u=appState().users.find(x=>x.id===id);if(u)login(id)}
 });
-
-// Activar audio context en primer toque (iOS requirement)
-document.addEventListener('touchstart',()=>{getCtx()},{once:true});
+// Activar audio context tras primer gesto (iOS)
+document.addEventListener('touchstart',()=>{getCtx();if('speechSynthesis'in window){const u=new SpeechSynthesisUtterance(' ');u.volume=0;speechSynthesis.speak(u)}},{once:true});
 document.addEventListener('click',()=>{getCtx()},{once:true});
 </script>
 </body>
