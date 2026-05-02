@@ -618,7 +618,7 @@
 
 <script>
 /* === DATOS Y ESTADO === */
-const STORE='facuEnglishProMobileV5';
+const STORE='facuEnglishProMobileV6';
 const AVATARS=['👦','👧','🧒','👶','🦊','🐼','🦁','🐯','🐶','🐱','🦄','🐸','🦖','🐙','🦋','🚀','⚽','🎨','🎧','⭐'];
 let selectedAvatar='👦', currentUser=null, currentLesson=null, stepIndex=0, sessionScore=0;
 let memoryState=null, sentenceState=null, dialogState=null, speedState=null, sortState=null, tapState=null;
@@ -1084,9 +1084,32 @@ const LESSONS=[
   w('Go to school','Ir al colegio','🚌','gou tu skul',['Go','to','school'],'I go to school.','Voy al colegio.'),
   w('Have lunch','Almorzar','🍽️','jav lonch',['Have','lunch'],'I have lunch at noon.','Almuerzo al mediodía.'),
   w('Play','Jugar','⚽','plei',['Play'],'I play with friends.','Juego con amigos.'),
+  w('Do homework','Hacer tareas','📝','du joum-uerk',['Do','home','work'],'I do my homework.','Hago mis tareas.'),
+  w('Take a shower','Ducharme','🚿','teik a shauer',['Take','a','show','er'],'I take a shower.','Me ducho.'),
   w('Read a book','Leer un libro','📚','rid a buk',['Read','a','book'],'I read a book.','Leo un libro.'),
+  w('Watch a movie','Ver una película','🎬','uatch a mu-vi',['Watch','a','mov','ie'],'I watch a movie.','Veo una película.'),
   w('Go to bed','Ir a dormir','🛏️','gou tu bed',['Go','to','bed'],'I go to bed.','Voy a dormir.')],
-  phrases:[{en:'I wake up',es:'Me despierto'},{en:'I get dressed',es:'Me visto'},{en:'I go to school',es:'Voy al colegio'},{en:'I go to bed',es:'Voy a dormir'}]
+  phrases:[{en:'I wake up',es:'Me despierto'},{en:'I get dressed',es:'Me visto'},{en:'I go to school',es:'Voy al colegio'},{en:'I do my homework',es:'Hago mis tareas'},{en:'I go to bed',es:'Voy a dormir'}],
+  dialog:[
+   {char:'👩 Mom',scene:'home_morning',en:'Wake up! Time for school.',es:'¡Despierta! Hora del colegio.',replies:[{en:'Good morning, Mom!',es:'¡Buenos días, mamá!',ok:true},{en:'I am sleeping.',es:'Estoy durmiendo.',ok:false},{en:'Goodbye!',es:'¡Adiós!',ok:false}]},
+   {char:'👨 Dad',scene:'bedroom_night',en:'It is late. Time to go to bed.',es:'Es tarde. Hora de ir a dormir.',replies:[{en:'OK, good night Dad!',es:'OK, ¡buenas noches papá!',ok:true},{en:'I want to play!',es:'¡Quiero jugar!',ok:false},{en:'Hello!',es:'¡Hola!',ok:false}]},
+   {char:'👩‍🏫 Teacher',scene:'classroom',en:'Did you do your homework?',es:'¿Hiciste tus tareas?',replies:[{en:'Yes, I did my homework.',es:'Sí, hice mis tareas.',ok:true},{en:'I am hungry.',es:'Tengo hambre.',ok:false},{en:'Goodbye!',es:'¡Adiós!',ok:false}]}
+  ],
+  sortItems:[
+   {en:'Wake up',es:'Despertar',icon:'⏰',healthy:true},
+   {en:'Eat breakfast',es:'Tomar desayuno',icon:'🥣',healthy:true},
+   {en:'Take a shower',es:'Ducharme',icon:'🚿',healthy:true},
+   {en:'Get dressed',es:'Vestirme',icon:'👕',healthy:true},
+   {en:'Go to school',es:'Ir al colegio',icon:'🚌',healthy:true},
+   {en:'Have lunch',es:'Almorzar',icon:'🍽️',healthy:true},
+   {en:'Do homework',es:'Hacer tareas',icon:'📝',healthy:false},
+   {en:'Read a book',es:'Leer un libro',icon:'📚',healthy:false},
+   {en:'Watch a movie',es:'Ver película',icon:'🎬',healthy:false},
+   {en:'Go to bed',es:'Ir a dormir',icon:'🛏️',healthy:false},
+   {en:'Brush teeth',es:'Lavar dientes',icon:'🪥',healthy:false},
+   {en:'Sleep',es:'Dormir',icon:'💤',healthy:false}
+  ],
+  sortMode:'time'
  },
  // === STARTER 3 — HÁBITOS SALUDABLES ===
  {id:'healthy-habits', level:'Starter 3', icon:'💪', scene:'healthy_plate', title:'Hábitos saludables', titleEn:'Healthy habits', goal:'Aprender qué es bueno para la salud.', tags:['Healthy','Exercise','Sleep'], words:[
@@ -1094,31 +1117,20 @@ const LESSONS=[
   w('Drink water','Tomar agua','🚰','drink uo-ter',['Drink','wa','ter'],'I drink water every day.','Tomo agua todos los días.'),
   w('Eat fruit','Comer fruta','🍓','it frut',['Eat','fruit'],'I eat fruit at school.','Como fruta en el colegio.'),
   w('Eat vegetables','Comer verduras','🥦','it vech-ta-bols',['Eat','veg','e','ta','bles'],'I eat vegetables for lunch.','Como verduras en el almuerzo.'),
+  w('Eat breakfast','Desayunar bien','🥣','it brek-fast',['Eat','break','fast'],'Eat a healthy breakfast.','Toma un desayuno saludable.'),
   w('Exercise','Hacer ejercicio','🏃','ek-ser-saiz',['Ex','er','cise'],'I exercise every day.','Hago ejercicio todos los días.'),
+  w('Go for a walk','Salir a caminar','🚶','gou for a uok',['Go','for','a','walk'],'I go for a walk.','Salgo a caminar.'),
   w('Sleep early','Dormir temprano','💤','slip er-li',['Sleep','ear','ly'],'I sleep early.','Duermo temprano.'),
   w('Wash my hands','Lavar manos antes de comer','🧼','uash mai jands',['Wash','my','hands'],'I wash my hands before eating.','Me lavo las manos antes de comer.'),
-  w('Brush my teeth','Lavar dientes 2 veces al día','🪥','brash mai tiz',['Brush','my','teeth'],'I brush my teeth twice a day.','Me lavo los dientes dos veces al día.')],
-  phrases:[{en:'I drink water',es:'Tomo agua'},{en:'I eat fruit',es:'Como fruta'},{en:'I exercise every day',es:'Hago ejercicio todos los días'},{en:'I sleep early',es:'Duermo temprano'},{en:'I am healthy',es:'Soy saludable'}],
+  w('Brush my teeth','Lavar dientes 2 veces al día','🪥','brash mai tiz',['Brush','my','teeth'],'I brush my teeth twice a day.','Me lavo los dientes dos veces al día.'),
+  w('Smile','Sonreír','😊','smail',['Smile'],'I smile every day.','Sonrío todos los días.')],
+  phrases:[{en:'I drink water',es:'Tomo agua'},{en:'I eat fruit',es:'Como fruta'},{en:'I exercise every day',es:'Hago ejercicio todos los días'},{en:'I sleep early',es:'Duermo temprano'},{en:'I am healthy',es:'Soy saludable'},{en:'I wash my hands',es:'Me lavo las manos'}],
   dialog:[
    {char:'👩 Mom',scene:'kitchen_breakfast',en:'Time for breakfast! What do you want?',es:'¡Hora del desayuno! ¿Qué quieres?',replies:[{en:'An apple, please.',es:'Una manzana, por favor.',ok:true},{en:'Candy and soda.',es:'Dulces y bebida.',ok:false},{en:'Goodbye!',es:'¡Adiós!',ok:false}]},
-   {char:'👨‍🏫 Teacher',scene:'classroom',en:'Did you wash your hands?',es:'¿Te lavaste las manos?',replies:[{en:'Yes, I washed my hands.',es:'Sí, me lavé las manos.',ok:true},{en:'I am tired.',es:'Estoy cansado.',ok:false},{en:'I see a cat.',es:'Veo un gato.',ok:false}]}
-  ]
- },
- {id:'unhealthy-habits', level:'Starter 3', icon:'⚠️', scene:'unhealthy_table', title:'Hábitos NO saludables', titleEn:'Unhealthy habits', goal:'Reconocer qué cosas hacen daño.', tags:['Junk food','Soda','Too much screen'], words:[
-  w('Unhealthy','No saludable','🚫','an-jel-zi',['Un','heal','thy'],'Candy is unhealthy.','Los dulces no son saludables.'),
-  w('Candy','Dulces','🍬','can-di',['Can','dy'],'Too much candy is bad.','Mucho dulce es malo.'),
-  w('Soda','Bebida','🥤','sou-da',['So','da'],'Soda has lots of sugar.','La bebida tiene mucho azúcar.'),
-  w('Chips','Papas fritas','🍟','chips',['Chips'],'Chips are not healthy.','Las papas fritas no son saludables.'),
-  w('Cake','Torta','🍰','keik',['Cake'],'Cake only sometimes.','Torta solo a veces.'),
-  w('Too much sugar','Mucha azúcar','🍭','tu mach shu-ger',['Too','much','sug','ar'],'Too much sugar is bad.','Mucha azúcar es malo.'),
-  w('Too much screen','Mucha pantalla','📱','tu mach skrin',['Too','much','screen'],'Too much screen hurts my eyes.','Mucha pantalla daña mis ojos.'),
-  w('Not sleeping','No dormir','😵','nat sli-ping',['Not','sleep','ing'],'Not sleeping makes me tired.','No dormir me hace estar cansado.')],
-  phrases:[{en:'Too much candy is bad',es:'Mucho dulce es malo'},{en:'I drink water, not soda',es:'Tomo agua, no bebida'},{en:'I should not eat too much sugar',es:'No debo comer mucha azúcar'},{en:'I sleep early',es:'Duermo temprano'}],
-  dialog:[
-   {char:'👴 Grandpa',scene:'family_living',en:'Do you want some candy?',es:'¿Quieres dulces?',replies:[{en:'No, thank you. I want fruit.',es:'No, gracias. Quiero fruta.',ok:true},{en:'Yes, all the candy please!',es:'¡Sí, todos los dulces por favor!',ok:false},{en:'Goodbye!',es:'¡Adiós!',ok:false}]},
-   {char:'👩 Mom',scene:'home_morning',en:'It is bedtime. Turn off the screen.',es:'Es hora de dormir. Apaga la pantalla.',replies:[{en:'OK, Mom. Good night!',es:'OK, mamá. ¡Buenas noches!',ok:true},{en:'No, I want soda!',es:'¡No, quiero bebida!',ok:false},{en:'I am from Chile',es:'Soy de Chile',ok:false}]}
+   {char:'👨‍🏫 Teacher',scene:'classroom',en:'Did you wash your hands?',es:'¿Te lavaste las manos?',replies:[{en:'Yes, I washed my hands.',es:'Sí, me lavé las manos.',ok:true},{en:'I am tired.',es:'Estoy cansado.',ok:false},{en:'I see a cat.',es:'Veo un gato.',ok:false}]},
+   {char:'👨 Dad',scene:'park_play',en:'Let us go for a walk to the park!',es:'¡Vamos a caminar al parque!',replies:[{en:'Yes! I love walking.',es:'¡Sí! Me encanta caminar.',ok:true},{en:'I want to watch TV.',es:'Quiero ver tele.',ok:false},{en:'Goodbye Dad.',es:'Adiós papá.',ok:false}]},
+   {char:'👩 Mom',scene:'home_morning',en:'What do you drink with breakfast?',es:'¿Qué tomas con el desayuno?',replies:[{en:'Water and milk.',es:'Agua y leche.',ok:true},{en:'A lot of soda.',es:'Mucha bebida.',ok:false},{en:'Cookies.',es:'Galletas.',ok:false}]}
   ],
-  // Lista para juego de clasificación
   sortItems:[
    {en:'Apple',es:'Manzana',icon:'🍎',healthy:true},
    {en:'Water',es:'Agua',icon:'💧',healthy:true},
@@ -1127,11 +1139,53 @@ const LESSONS=[
    {en:'Milk',es:'Leche',icon:'🥛',healthy:true},
    {en:'Sleep early',es:'Dormir temprano',icon:'😴',healthy:true},
    {en:'Exercise',es:'Ejercicio',icon:'🏃',healthy:true},
+   {en:'Brush teeth',es:'Lavar dientes',icon:'🪥',healthy:true},
    {en:'Candy',es:'Dulces',icon:'🍬',healthy:false},
    {en:'Soda',es:'Bebida',icon:'🥤',healthy:false},
    {en:'Chips',es:'Papas fritas',icon:'🍟',healthy:false},
    {en:'Too much screen',es:'Mucha pantalla',icon:'📱',healthy:false},
-   {en:'Lots of sugar',es:'Mucha azúcar',icon:'🍭',healthy:false}
+   {en:'Lots of sugar',es:'Mucha azúcar',icon:'🍭',healthy:false},
+   {en:'Stay up late',es:'Dormir tarde',icon:'🌙',healthy:false}
+  ]
+ },
+ {id:'unhealthy-habits', level:'Starter 3', icon:'⚠️', scene:'unhealthy_table', title:'Hábitos NO saludables', titleEn:'Unhealthy habits', goal:'Reconocer qué cosas hacen daño.', tags:['Junk food','Soda','Too much screen'], words:[
+  w('Unhealthy','No saludable','🚫','an-jel-zi',['Un','heal','thy'],'Candy is unhealthy.','Los dulces no son saludables.'),
+  w('Junk food','Comida chatarra','🍔','dchank fud',['Junk','food'],'Junk food is bad.','La comida chatarra es mala.'),
+  w('Candy','Dulces','🍬','can-di',['Can','dy'],'Too much candy is bad.','Mucho dulce es malo.'),
+  w('Soda','Bebida','🥤','sou-da',['So','da'],'Soda has lots of sugar.','La bebida tiene mucho azúcar.'),
+  w('Chips','Papas fritas','🍟','chips',['Chips'],'Chips are not healthy.','Las papas fritas no son saludables.'),
+  w('Cake','Torta','🍰','keik',['Cake'],'Cake only sometimes.','Torta solo a veces.'),
+  w('Too much sugar','Mucha azúcar','🍭','tu mach shu-ger',['Too','much','sug','ar'],'Too much sugar is bad.','Mucha azúcar es malo.'),
+  w('Skip breakfast','Saltarse el desayuno','🚷','skip brek-fast',['Skip','break','fast'],'Do not skip breakfast.','No te saltes el desayuno.'),
+  w('Too much screen','Mucha pantalla','📱','tu mach skrin',['Too','much','screen'],'Too much screen hurts my eyes.','Mucha pantalla daña mis ojos.'),
+  w('Stay up late','Dormir tarde','🌙','stei ap leit',['Stay','up','late'],'Do not stay up late.','No te quedes despierto tarde.'),
+  w('Not exercising','No hacer ejercicio','🛋️','nat ek-ser-sai-zing',['Not','ex','er','cis','ing'],'Not exercising is bad.','No hacer ejercicio es malo.')],
+  phrases:[{en:'Too much candy is bad',es:'Mucho dulce es malo'},{en:'I drink water, not soda',es:'Tomo agua, no bebida'},{en:'I should not eat too much sugar',es:'No debo comer mucha azúcar'},{en:'I sleep early',es:'Duermo temprano'},{en:'Junk food is unhealthy',es:'La comida chatarra no es saludable'}],
+  dialog:[
+   {char:'👴 Grandpa',scene:'family_living',en:'Do you want some candy?',es:'¿Quieres dulces?',replies:[{en:'No, thank you. I want fruit.',es:'No, gracias. Quiero fruta.',ok:true},{en:'Yes, all the candy please!',es:'¡Sí, todos los dulces por favor!',ok:false},{en:'Goodbye!',es:'¡Adiós!',ok:false}]},
+   {char:'👩 Mom',scene:'home_morning',en:'It is bedtime. Turn off the screen.',es:'Es hora de dormir. Apaga la pantalla.',replies:[{en:'OK, Mom. Good night!',es:'OK, mamá. ¡Buenas noches!',ok:true},{en:'No, I want soda!',es:'¡No, quiero bebida!',ok:false},{en:'I am from Chile',es:'Soy de Chile',ok:false}]},
+   {char:'👦 Friend',scene:'park_play',en:'Want some chips and soda?',es:'¿Quieres papas y bebida?',replies:[{en:'No thanks, I have water.',es:'No gracias, tengo agua.',ok:true},{en:'Yes, all of them!',es:'¡Sí, todas!',ok:false},{en:'Hello!',es:'¡Hola!',ok:false}]},
+   {char:'👨 Dad',scene:'kitchen_breakfast',en:'Did you eat breakfast?',es:'¿Tomaste desayuno?',replies:[{en:'Yes! Cereal and milk.',es:'¡Sí! Cereal y leche.',ok:true},{en:'No, I skipped it.',es:'No, me lo salté.',ok:false},{en:'Sit down please.',es:'Siéntate por favor.',ok:false}]}
+  ],
+  sortItems:[
+   {en:'Apple',es:'Manzana',icon:'🍎',healthy:true},
+   {en:'Water',es:'Agua',icon:'💧',healthy:true},
+   {en:'Vegetables',es:'Verduras',icon:'🥦',healthy:true},
+   {en:'Fish',es:'Pescado',icon:'🐟',healthy:true},
+   {en:'Milk',es:'Leche',icon:'🥛',healthy:true},
+   {en:'Banana',es:'Plátano',icon:'🍌',healthy:true},
+   {en:'Sleep early',es:'Dormir temprano',icon:'😴',healthy:true},
+   {en:'Exercise',es:'Ejercicio',icon:'🏃',healthy:true},
+   {en:'Wash hands',es:'Lavar manos',icon:'🧼',healthy:true},
+   {en:'Smile',es:'Sonreír',icon:'😊',healthy:true},
+   {en:'Candy',es:'Dulces',icon:'🍬',healthy:false},
+   {en:'Soda',es:'Bebida',icon:'🥤',healthy:false},
+   {en:'Chips',es:'Papas fritas',icon:'🍟',healthy:false},
+   {en:'Burger',es:'Hamburguesa',icon:'🍔',healthy:false},
+   {en:'Cake',es:'Torta',icon:'🍰',healthy:false},
+   {en:'Too much screen',es:'Mucha pantalla',icon:'📱',healthy:false},
+   {en:'Lots of sugar',es:'Mucha azúcar',icon:'🍭',healthy:false},
+   {en:'Stay up late',es:'Dormir tarde',icon:'🌙',healthy:false}
   ]
  }
 ];
@@ -2347,12 +2401,20 @@ function speedQuit(){
 function renderSortGame(){
   const items=shuffled([...currentLesson.sortItems]);
   sortState={items,placed:[],errors:0};
+  // Modo morning/night para rutinas, healthy/unhealthy para hábitos
+  const isTimeMode=currentLesson.sortMode==='time';
+  const labelL=isTimeMode?'☀️ MAÑANA':'💚 HEALTHY';
+  const labelR=isTimeMode?'🌙 NOCHE':'🚫 UNHEALTHY';
+  const titleEs=isTimeMode?'☀️ Día o 🌙 Noche':'🥦 Saludable o NO saludable';
+  const titleEn=isTimeMode?'Day or Night?':'Healthy or Unhealthy?';
+  const ttsHint=isTimeMode?'Sort actions. Day or night?':'Sort the food. Healthy or unhealthy?';
+  // Para tiempo, .healthy=true significa MAÑANA, .healthy=false significa NOCHE
   $('activityBody').innerHTML=`<section class="card">
-    <div class="question">🥦 Saludable o NO saludable <small>Healthy or Unhealthy?</small></div>
-    <p class="game-note">Toca un alimento o hábito y luego toca dónde va.</p>
+    <div class="question">${titleEs} <small>${titleEn}</small></div>
+    <p class="game-note">Toca un item y luego toca dónde va.</p>
     <div class="sort-board">
-      <div class="sort-bin healthy" id="binHealthy"><h4>💚 HEALTHY</h4><div class="items" id="itemsH"></div></div>
-      <div class="sort-bin unhealthy" id="binUnhealthy"><h4>🚫 UNHEALTHY</h4><div class="items" id="itemsU"></div></div>
+      <div class="sort-bin healthy" id="binHealthy"><h4>${labelL}</h4><div class="items" id="itemsH"></div></div>
+      <div class="sort-bin unhealthy" id="binUnhealthy"><h4>${labelR}</h4><div class="items" id="itemsU"></div></div>
     </div>
     <div class="sort-tray" id="sortTray">${items.map((it,i)=>`<button class="sort-pill" data-idx="${i}" onclick="pickSort(${i},this)"><span class="ic">${tw(it.icon)}</span> <b>${it.es}</b><small style="margin-left:6px;color:var(--muted);font-weight:800">${it.en}</small></button>`).join('')}</div>
     <p style="text-align:center;color:var(--muted);font-weight:800;font-size:.85rem;margin-top:8px">Selecciona un item, luego toca el bin correcto.</p>
@@ -2364,7 +2426,7 @@ function renderSortGame(){
   </div>`;
   $('binHealthy').onclick=()=>placeSort(true);
   $('binUnhealthy').onclick=()=>placeSort(false);
-  speakEN("Sort the food. Healthy or unhealthy?");
+  speakEN(ttsHint);
 }
 function skipSort(){
   showModal('Saltar este juego','¿Quieres saltar la clasificación y continuar?','Sí, saltar',()=>{
@@ -2382,13 +2444,18 @@ async function placeSort(toHealthy){
   if(sortPicked===null){speakES('Primero elige un item.');return}
   const item=sortState.items[sortPicked.idx];
   const ok=item.healthy===toHealthy;
+  const isTimeMode=currentLesson.sortMode==='time';
   if(ok){
     sfxCorrect();vibrate([20,40,20]);reward(8);comboCount++;
     sortPicked.el.remove();
     const targetList=toHealthy?'itemsH':'itemsU';
     $(targetList).insertAdjacentHTML('beforeend',`<span class="sort-pill ${toHealthy?'placed-h':'placed-u'}"><span class="ic">${tw(item.icon)}</span> <b>${item.es}</b></span>`);
     sortState.placed.push(item);sortPicked=null;
-    await speakEN(item.en+' is '+(toHealthy?'healthy':'unhealthy'));
+    if(isTimeMode){
+      await speakEN(item.en+' is in the '+(toHealthy?'morning':'night'));
+    }else{
+      await speakEN(item.en+' is '+(toHealthy?'healthy':'unhealthy'));
+    }
     if(sortState.placed.length===sortState.items.length){
       showFeedback(true,'¡Todo clasificado!');
       sfxLevelUp();confetti();
@@ -2400,11 +2467,17 @@ async function placeSort(toHealthy){
     sortPicked.el.classList.remove('dragging');
     sortPicked=null;
     showFeedback(false,'No, ese va al otro lado.');
-    await speakES('Es '+(item.healthy?'saludable':'no saludable'));
+    if(isTimeMode){
+      await speakES('Es de '+(item.healthy?'la mañana':'la noche'));
+    }else{
+      await speakES('Es '+(item.healthy?'saludable':'no saludable'));
+    }
     setTimeout(()=>{const f=$('feedback');if(f)f.classList.remove('show')},1800);
-    // Si hay 3+ errores, ofrecer ayuda
     if(sortState.errors>=3&&!$('helpPanel')?.innerHTML){
-      showHelpPanel('¿Te ayudo? Las frutas, verduras, agua y leche son saludables. Los dulces, bebidas y papas fritas no.',{
+      const helpMsg=isTimeMode?
+        '¿Te ayudo? Despertar, desayunar y ducharse son de la mañana. Cenar, leer y dormir son de la noche.':
+        '¿Te ayudo? Las frutas, verduras, agua y leche son saludables. Los dulces, bebidas y papas fritas no.';
+      showHelpPanel(helpMsg,{
         skip:{label:'⏭️ Saltar este juego',fn:()=>{hideHelpPanel();nextStep()}}
       });
     }
