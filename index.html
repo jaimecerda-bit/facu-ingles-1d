@@ -97,7 +97,23 @@
     .lesson.done{border-color:#a7f3d0;background:linear-gradient(135deg,#fff,#ecfdf5)}
     .lesson.locked{opacity:.55;filter:grayscale(.2)}
     .lesson-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-    .lesson-icon{width:54px;height:54px;border-radius:18px;display:grid;place-items:center;background:linear-gradient(135deg,#eef2ff,#fff0f6);font-size:30px}
+    .lesson-icon{width:64px;height:64px;border-radius:20px;display:grid;place-items:center;overflow:hidden;flex-shrink:0;background:linear-gradient(135deg,#eef2ff,#fff0f6)}
+    .lesson-icon svg{width:100%;height:100%;display:block}
+    .lesson-icon.bg-greet{background:linear-gradient(135deg,#fef3c7,#fed7aa)}
+    .lesson-icon.bg-me{background:linear-gradient(135deg,#dbeafe,#e9d5ff)}
+    .lesson-icon.bg-class{background:linear-gradient(135deg,#dcfce7,#bbf7d0)}
+    .lesson-icon.bg-magic{background:linear-gradient(135deg,#fef9c3,#fde68a)}
+    .lesson-icon.bg-feel{background:linear-gradient(135deg,#fce7f3,#fbcfe8)}
+    .lesson-icon.bg-color{background:linear-gradient(135deg,#fff,#f3f4f8)}
+    .lesson-icon.bg-num{background:linear-gradient(135deg,#dbeafe,#bfdbfe)}
+    .lesson-icon.bg-school{background:linear-gradient(135deg,#fde68a,#fbbf24)}
+    .lesson-icon.bg-fam{background:linear-gradient(135deg,#fce7f3,#f9a8d4)}
+    .lesson-icon.bg-body{background:linear-gradient(135deg,#e9d5ff,#c4b5fd)}
+    .lesson-icon.bg-anim{background:linear-gradient(135deg,#86efac,#bef264)}
+    .lesson-icon.bg-food{background:linear-gradient(135deg,#fecaca,#fca5a5)}
+    .lesson-icon.bg-rout{background:linear-gradient(135deg,#bae6fd,#7dd3fc)}
+    .lesson-icon.bg-healthy{background:linear-gradient(135deg,#bbf7d0,#86efac)}
+    .lesson-icon.bg-unhealthy{background:linear-gradient(135deg,#fecaca,#fca5a5)}
     .level{font-size:.7rem;font-weight:950;color:var(--muted);background:#f4f5fb;border-radius:999px;padding:6px 9px}
     .lesson h3{font-size:1.08rem;font-weight:950;margin-bottom:4px;line-height:1.15}
     .lesson p{color:var(--muted);font-weight:800;font-size:.85rem;line-height:1.3}
@@ -110,7 +126,23 @@
     .activity{max-width:860px;margin:0 auto}
     .activity-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;background:#fff;padding:10px 14px;border-radius:18px;box-shadow:0 6px 16px #1720330f}
     .activity-head .left{display:flex;align-items:center;gap:10px;min-width:0}
-    .mini-icon{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;font-size:24px;background:linear-gradient(135deg,#eef2ff,#fff0f6);flex-shrink:0}
+    .mini-icon{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;font-size:24px;background:linear-gradient(135deg,#eef2ff,#fff0f6);flex-shrink:0;overflow:hidden}
+    .mini-icon svg{width:100%;height:100%}
+    .mini-icon.bg-greet{background:linear-gradient(135deg,#fef3c7,#fed7aa)}
+    .mini-icon.bg-me{background:linear-gradient(135deg,#dbeafe,#e9d5ff)}
+    .mini-icon.bg-class{background:linear-gradient(135deg,#dcfce7,#bbf7d0)}
+    .mini-icon.bg-magic{background:linear-gradient(135deg,#fef9c3,#fde68a)}
+    .mini-icon.bg-feel{background:linear-gradient(135deg,#fce7f3,#fbcfe8)}
+    .mini-icon.bg-color{background:linear-gradient(135deg,#fff,#f3f4f8)}
+    .mini-icon.bg-num{background:linear-gradient(135deg,#dbeafe,#bfdbfe)}
+    .mini-icon.bg-school{background:linear-gradient(135deg,#fde68a,#fbbf24)}
+    .mini-icon.bg-fam{background:linear-gradient(135deg,#fce7f3,#f9a8d4)}
+    .mini-icon.bg-body{background:linear-gradient(135deg,#e9d5ff,#c4b5fd)}
+    .mini-icon.bg-anim{background:linear-gradient(135deg,#86efac,#bef264)}
+    .mini-icon.bg-food{background:linear-gradient(135deg,#fecaca,#fca5a5)}
+    .mini-icon.bg-rout{background:linear-gradient(135deg,#bae6fd,#7dd3fc)}
+    .mini-icon.bg-healthy{background:linear-gradient(135deg,#bbf7d0,#86efac)}
+    .mini-icon.bg-unhealthy{background:linear-gradient(135deg,#fecaca,#fca5a5)}
     .activity-head h2{font-size:1rem;font-weight:1000;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .activity-head p{font-size:.78rem;color:var(--muted);font-weight:800}
     .exit-btn{background:#fff1f1;color:var(--danger);border-radius:14px;padding:8px 12px;font-weight:900;font-size:.85rem;flex-shrink:0}
@@ -280,7 +312,26 @@
     .parent-card label:first-of-type{border-top:0}
     .parent-card .select{margin-top:6px}
 
-    /* === CONFETTI === */
+    /* === MODAL para confirmaciones (funciona en todo móvil) === */
+    .modal-mask{position:fixed;inset:0;background:#0008;z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
+    .modal-mask.show{display:flex;animation:fadeIn .2s}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    .modal-card{background:#fff;border-radius:24px;padding:22px;max-width:340px;width:100%;text-align:center;box-shadow:0 24px 60px #0006;animation:bounceIn .3s}
+    .modal-card h3{font-size:1.2rem;font-weight:1000;margin-bottom:10px}
+    .modal-card p{color:var(--muted);font-weight:850;margin-bottom:16px;line-height:1.4}
+    .modal-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .modal-actions .ghost-btn{min-height:50px}
+    .modal-actions .danger-btn{background:#fee2e2;color:#c92a2a;border-radius:18px;padding:12px;font-weight:1000;min-height:50px}
+    .modal-actions .primary-btn{min-height:50px}
+
+    /* === Panel inline de continuar/saltar tras error === */
+    .help-panel{margin-top:10px;background:linear-gradient(135deg,#fffbeb,#fef3c7);border:2px solid #fbbf24;border-radius:18px;padding:12px;text-align:center;animation:bounceIn .35s}
+    .help-panel.hidden{display:none}
+    .help-panel .msg{font-weight:950;color:#7c2d12;margin-bottom:10px;font-size:.95rem}
+    .help-panel .btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .help-panel button{border-radius:14px;padding:12px;font-weight:1000;min-height:48px;font-size:.92rem}
+    .help-panel .skip{background:#fff;color:#7c2d12;border:2px solid #fbbf24}
+    .help-panel .show-answer{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff}
     .confetti{position:fixed;top:-18px;width:12px;height:12px;border-radius:4px;z-index:50;animation:fall 2.8s linear forwards}
     @keyframes fall{to{transform:translateY(110dvh) rotate(720deg);opacity:0}}
     .combo-pop{position:fixed;top:40%;left:50%;transform:translate(-50%,-50%);font-size:3.2rem;font-weight:1000;color:#fff;text-shadow:0 4px 16px #6d5df6cc,0 0 30px #ff66a3aa;z-index:60;pointer-events:none;animation:comboPop .9s forwards}
@@ -365,6 +416,18 @@
 
   <button class="coach hidden" id="coachBtn" onclick="speakHelp()">🦉</button>
   <div id="toast" class="toast"></div>
+
+  <!-- Modal para confirmaciones (mejor que confirm() en móviles) -->
+  <div id="modalMask" class="modal-mask" onclick="closeModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <h3 id="modalTitle">Confirmar</h3>
+      <p id="modalMsg"></p>
+      <div class="modal-actions">
+        <button class="ghost-btn" onclick="modalCancel()">Cancelar</button>
+        <button class="danger-btn" id="modalConfirmBtn" onclick="modalConfirm()">Sí, salir</button>
+      </div>
+    </div>
+  </div>
 
 <script>
 /* === DATOS Y ESTADO === */
@@ -516,6 +579,152 @@ const SCENES = {
     <text x="320" y="170" font-size="40">🐄</text>
     <text x="180" y="60" font-size="28">🐦</text>
   </svg>`
+};
+
+/* === ICONOS SVG ÚNICOS PARA CADA LECCIÓN ===
+   Cada lección tiene un dibujo distinto para que el niño los reconozca de un vistazo.
+*/
+const LESSON_ICONS = {
+  greetings: {bg:'bg-greet', svg:`<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="32" cy="28" r="14" fill="#fde68a"/>
+    <circle cx="27" cy="26" r="2" fill="#1f2937"/>
+    <circle cx="37" cy="26" r="2" fill="#1f2937"/>
+    <path d="M 26 32 Q 32 38 38 32" stroke="#1f2937" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M 48 18 Q 54 14 56 20 Q 54 24 50 22" fill="#fbbf24" stroke="#92400e" stroke-width="1.5"/>
+    <text x="48" y="52" font-size="14" font-weight="900" fill="#7c2d12" font-family="Arial">Hi!</text>
+  </svg>`},
+  'about-me': {bg:'bg-me', svg:`<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="32" cy="22" r="11" fill="#fde68a"/>
+    <path d="M 18 50 Q 18 38 32 38 Q 46 38 46 50 L 46 56 L 18 56 Z" fill="#a78bfa"/>
+    <circle cx="28" cy="20" r="1.6" fill="#1f2937"/>
+    <circle cx="36" cy="20" r="1.6" fill="#1f2937"/>
+    <path d="M 28 26 Q 32 29 36 26" stroke="#1f2937" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <circle cx="50" cy="14" r="8" fill="#fff" stroke="#a78bfa" stroke-width="2"/>
+    <text x="50" y="18" font-size="11" font-weight="900" fill="#6d5df6" text-anchor="middle" font-family="Arial">7</text>
+  </svg>`},
+  classroom: {bg:'bg-class', svg:`<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="6" y="10" width="38" height="26" fill="#1f2937" rx="2"/>
+    <rect x="8" y="12" width="34" height="22" fill="#15803d"/>
+    <text x="14" y="22" fill="#fff" font-size="7" font-weight="900" font-family="Arial">A B C</text>
+    <text x="14" y="30" fill="#fde68a" font-size="6" font-weight="900" font-family="Arial">1 2 3</text>
+    <rect x="48" y="22" width="12" height="14" fill="#dc2626" rx="1"/>
+    <rect x="48" y="22" width="12" height="3" fill="#7f1d1d"/>
+    <rect x="6" y="42" width="52" height="4" fill="#92400e"/>
+    <circle cx="20" cy="52" r="6" fill="#fbbf24"/>
+    <circle cx="44" cy="52" r="6" fill="#f9a8d4"/>
+  </svg>`},
+  'magic-words': {bg:'bg-magic', svg:`<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M 32 50 L 26 38 L 14 36 L 23 27 L 21 14 L 32 20 L 43 14 L 41 27 L 50 36 L 38 38 Z" fill="#fbbf24" stroke="#92400e" stroke-width="2" stroke-linejoin="round"/>
+    <circle cx="48" cy="16" r="3" fill="#fff"/>
+    <circle cx="14" cy="20" r="2" fill="#fff"/>
+    <circle cx="52" cy="44" r="2.5" fill="#fff"/>
+  </svg>`},
+  feelings: {bg:'bg-feel', svg:`<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="20" cy="22" r="11" fill="#fde047"/>
+    <circle cx="16" cy="20" r="1.5" fill="#1f2937"/>
+    <circle cx="24" cy="20" r="1.5" fill="#1f2937"/>
+    <path d="M 15 25 Q 20 30 25 25" stroke="#1f2937" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <circle cx="44" cy="22" r="11" fill="#93c5fd"/>
+    <circle cx="40" cy="20" r="1.5" fill="#1f2937"/>
+    <circle cx="48" cy="20" r="1.5" fill="#1f2937"/>
+    <path d="M 39 28 Q 44 24 49 28" stroke="#1f2937" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <circle cx="32" cy="46" r="11" fill="#fca5a5"/>
+    <path d="M 27 44 L 30 44 M 34 44 L 37 44" stroke="#1f2937" stroke-width="2" stroke-linecap="round"/>
+    <path d="M 27 51 Q 32 54 37 51" stroke="#1f2937" stroke-width="2" fill="none" stroke-linecap="round"/>
+  </svg>`},
+  colors: {bg:'bg-color', svg:`<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="20" cy="22" r="9" fill="#dc2626"/>
+    <circle cx="44" cy="22" r="9" fill="#2563eb"/>
+    <circle cx="20" cy="44" r="9" fill="#facc15"/>
+    <circle cx="44" cy="44" r="9" fill="#16a34a"/>
+    <circle cx="32" cy="33" r="7" fill="#a855f7" stroke="#fff" stroke-width="2"/>
+  </svg>`},
+  numbers: {bg:'bg-num', svg:`<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <text x="10" y="30" font-size="22" font-weight="900" fill="#dc2626" font-family="Arial">1</text>
+    <text x="26" y="30" font-size="22" font-weight="900" fill="#2563eb" font-family="Arial">2</text>
+    <text x="42" y="30" font-size="22" font-weight="900" fill="#16a34a" font-family="Arial">3</text>
+    <text x="10" y="56" font-size="22" font-weight="900" fill="#a855f7" font-family="Arial">4</text>
+    <text x="26" y="56" font-size="22" font-weight="900" fill="#f59e0b" font-family="Arial">5</text>
+    <text x="42" y="56" font-size="22" font-weight="900" fill="#ec4899" font-family="Arial">6</text>
+  </svg>`},
+  'school-objects': {bg:'bg-school', svg:`<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g transform="rotate(-12 15 33)">
+      <rect x="8" y="14" width="14" height="38" fill="#fbbf24" rx="2"/>
+      <polygon points="8,14 15,8 22,14" fill="#1f2937"/>
+      <rect x="8" y="48" width="14" height="6" fill="#f9a8d4"/>
+    </g>
+    <rect x="28" y="20" width="22" height="28" fill="#dc2626" rx="2"/>
+    <rect x="28" y="20" width="22" height="6" fill="#7f1d1d"/>
+    <text x="39" y="38" font-size="7" font-weight="900" fill="#fff" text-anchor="middle" font-family="Arial">ABC</text>
+    <rect x="48" y="34" width="12" height="18" fill="#a855f7" rx="1.5"/>
+    <line x1="50" y1="38" x2="58" y2="38" stroke="#fff" stroke-width="1"/>
+    <line x1="50" y1="42" x2="58" y2="42" stroke="#fff" stroke-width="1"/>
+    <line x1="50" y1="46" x2="58" y2="46" stroke="#fff" stroke-width="1"/>
+  </svg>`},
+  family: {bg:'bg-fam', svg:`<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="16" cy="20" r="7" fill="#fde68a"/>
+    <path d="M 8 38 Q 8 30 16 30 Q 24 30 24 38 L 24 50 L 8 50 Z" fill="#3b82f6"/>
+    <circle cx="48" cy="20" r="7" fill="#fde68a"/>
+    <path d="M 40 38 Q 40 30 48 30 Q 56 30 56 38 L 56 50 L 40 50 Z" fill="#ec4899"/>
+    <circle cx="26" cy="36" r="5" fill="#fde68a"/>
+    <path d="M 21 50 Q 21 42 26 42 Q 31 42 31 50 Z" fill="#a855f7"/>
+    <circle cx="38" cy="36" r="5" fill="#fde68a"/>
+    <path d="M 33 50 Q 33 42 38 42 Q 43 42 43 50 Z" fill="#22c55e"/>
+    <path d="M 30 56 Q 32 60 34 56" stroke="#dc2626" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </svg>`},
+  body: {bg:'bg-body', svg:`<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="32" cy="16" r="9" fill="#fde68a"/>
+    <circle cx="29" cy="15" r="1.4" fill="#1f2937"/>
+    <circle cx="35" cy="15" r="1.4" fill="#1f2937"/>
+    <path d="M 28 19 Q 32 22 36 19" stroke="#1f2937" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+    <rect x="24" y="25" width="16" height="20" fill="#a78bfa" rx="3"/>
+    <rect x="16" y="27" width="6" height="14" fill="#fde68a" rx="2"/>
+    <rect x="42" y="27" width="6" height="14" fill="#fde68a" rx="2"/>
+    <rect x="26" y="45" width="5" height="12" fill="#3b82f6" rx="1.5"/>
+    <rect x="33" y="45" width="5" height="12" fill="#3b82f6" rx="1.5"/>
+  </svg>`},
+  animals: {bg:'bg-anim', svg:`<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <ellipse cx="20" cy="36" rx="12" ry="10" fill="#92400e"/>
+    <circle cx="14" cy="30" r="4" fill="#92400e"/>
+    <circle cx="26" cy="30" r="4" fill="#92400e"/>
+    <circle cx="16" cy="34" r="1.5" fill="#1f2937"/>
+    <circle cx="24" cy="34" r="1.5" fill="#1f2937"/>
+    <ellipse cx="20" cy="40" rx="2" ry="1.5" fill="#1f2937"/>
+    <ellipse cx="46" cy="34" rx="11" ry="9" fill="#fbbf24"/>
+    <path d="M 38 27 L 36 22 L 41 26 Z" fill="#fbbf24"/>
+    <path d="M 54 27 L 56 22 L 51 26 Z" fill="#fbbf24"/>
+    <circle cx="42" cy="33" r="1.5" fill="#1f2937"/>
+    <circle cx="50" cy="33" r="1.5" fill="#1f2937"/>
+    <ellipse cx="46" cy="38" rx="1.5" ry="1" fill="#1f2937"/>
+  </svg>`},
+  food: {bg:'bg-food', svg:`<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="32" cy="36" r="22" fill="#fff" stroke="#fda4af" stroke-width="3"/>
+    <circle cx="32" cy="36" r="16" fill="#fef2f2"/>
+    <circle cx="24" cy="32" r="6" fill="#dc2626"/>
+    <path d="M 24 26 Q 24 22 22 22" stroke="#16a34a" stroke-width="2" fill="none"/>
+    <ellipse cx="40" cy="36" rx="6" ry="4" fill="#fbbf24"/>
+    <circle cx="32" cy="44" r="4" fill="#86efac"/>
+  </svg>`},
+  routines: {bg:'bg-rout', svg:`<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="32" cy="32" r="22" fill="#fff" stroke="#0284c7" stroke-width="3"/>
+    <circle cx="32" cy="32" r="2" fill="#0284c7"/>
+    <line x1="32" y1="32" x2="32" y2="18" stroke="#0284c7" stroke-width="3" stroke-linecap="round"/>
+    <line x1="32" y1="32" x2="42" y2="38" stroke="#0284c7" stroke-width="2.5" stroke-linecap="round"/>
+    <text x="32" y="16" font-size="6" font-weight="900" fill="#0284c7" text-anchor="middle" font-family="Arial">12</text>
+    <text x="50" y="35" font-size="6" font-weight="900" fill="#0284c7" text-anchor="middle" font-family="Arial">3</text>
+    <text x="32" y="52" font-size="6" font-weight="900" fill="#0284c7" text-anchor="middle" font-family="Arial">6</text>
+    <text x="14" y="35" font-size="6" font-weight="900" fill="#0284c7" text-anchor="middle" font-family="Arial">9</text>
+    <circle cx="50" cy="14" r="6" fill="#fbbf24"/>
+  </svg>`},
+  'healthy-habits': {bg:'bg-healthy', svg:`<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M 32 52 C 12 38 12 22 22 18 C 28 16 32 22 32 22 C 32 22 36 16 42 18 C 52 22 52 38 32 52 Z" fill="#dc2626" stroke="#7f1d1d" stroke-width="2"/>
+    <path d="M 26 28 L 30 32 L 38 24" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>`},
+  'unhealthy-habits': {bg:'bg-unhealthy', svg:`<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <polygon points="32,8 56,52 8,52" fill="#fbbf24" stroke="#92400e" stroke-width="2.5" stroke-linejoin="round"/>
+    <rect x="30" y="22" width="4" height="16" fill="#1f2937" rx="1"/>
+    <circle cx="32" cy="44" r="2.5" fill="#1f2937"/>
+  </svg>`}
 };
 
 /* === LECCIONES (renovadas, con escenas e historias) ===
@@ -749,6 +958,19 @@ function persistUser(){const s=appState();const idx=s.users.findIndex(u=>u.id===
 function persistPrefs(){if(currentUser){currentUser.prefs=prefs;persistUser()}}
 function loadPrefs(){if(currentUser?.prefs)prefs={...prefs,...currentUser.prefs}}
 function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.classList.remove('show'),2200)}
+
+/* === Modal de confirmación (en lugar de confirm() nativo) === */
+let _modalCb=null;
+function showModal(title,msg,confirmText,onConfirm){
+  $('modalTitle').textContent=title;
+  $('modalMsg').textContent=msg;
+  $('modalConfirmBtn').textContent=confirmText||'Sí';
+  _modalCb=onConfirm;
+  $('modalMask').classList.add('show');
+}
+function closeModal(e){if(e&&e.target.id!=='modalMask')return;$('modalMask').classList.remove('show');_modalCb=null}
+function modalCancel(){$('modalMask').classList.remove('show');_modalCb=null}
+function modalConfirm(){const cb=_modalCb;$('modalMask').classList.remove('show');_modalCb=null;if(cb)cb()}
 function todayKey(){return new Date().toISOString().slice(0,10)}
 function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p)}catch(e){}}
 function shuffled(arr){return [...arr].sort(()=>Math.random()-.5)}
@@ -935,9 +1157,13 @@ function createProfile(){
 }
 function deleteProfile(id){
   const s=appState();const u=s.users.find(x=>x.id===id);
-  if(!u||!confirm('¿Eliminar el perfil de '+u.name+'?'))return;
-  s.users=s.users.filter(x=>x.id!==id);saveState(s);
-  if(currentUser?.id===id)logout();renderProfiles();
+  if(!u)return;
+  showModal('Eliminar perfil','¿Eliminar el perfil de '+u.name+'? Se perderá todo su progreso.','Sí, eliminar',()=>{
+    const s2=appState();
+    s2.users=s2.users.filter(x=>x.id!==id);saveState(s2);
+    if(currentUser?.id===id)logout();
+    renderProfiles();
+  });
 }
 async function login(id){
   const s=appState();const u=s.users.find(x=>x.id===id);if(!u)return;
@@ -980,8 +1206,9 @@ function showHome(){
     html+=`<div class="level-header">${lvl}</div><div class="lesson-grid">${levels[lvl].map(l=>{
       const done=d.completed.includes(l.id), lock=!isUnlocked(l.i);
       const acts=(l.dialog?5:4)+(l.sortItems?1:0);
+      const ico=LESSON_ICONS[l.id]||{bg:'',svg:''};
       return `<article class="lesson ${done?'done':''} ${lock?'locked':''}" onclick="${lock?"speakES('Completa la lección anterior primero.')":"startLesson('"+l.id+"')"}">
-        <div class="lesson-top"><div class="lesson-icon">${l.icon}</div><div class="level">${lock?'🔒 Bloqueada':done?'✅ Hecha':'Nivel '+l.level.split(' ')[1]}</div></div>
+        <div class="lesson-top"><div class="lesson-icon ${ico.bg}">${ico.svg||l.icon}</div><div class="level">${lock?'🔒 Bloqueada':done?'✅ Hecha':'Nivel '+l.level.split(' ')[1]}</div></div>
         <h3>${l.title}</h3>
         <p>${l.goal}</p>
         <div class="chips">${l.tags.map(t=>`<span class="chip">${t}</span>`).join('')}</div>
@@ -1028,10 +1255,12 @@ function showStep(){
   const steps=stepsForLesson();
   const step=steps[stepIndex];
   const pct=Math.round((stepIndex/Math.max(1,steps.length-1))*100);
+  const ico=LESSON_ICONS[currentLesson.id]||{bg:'',svg:''};
+  const headerIcon=ico.svg?`<div class="mini-icon ${ico.bg}" style="padding:0;overflow:hidden">${ico.svg}</div>`:`<div class="mini-icon">${currentLesson.icon}</div>`;
   $('content').innerHTML=`<div class="activity">
     <div class="activity-head">
       <div class="left">
-        <div class="mini-icon">${currentLesson.icon}</div>
+        ${headerIcon}
         <div>
           <h2>${currentLesson.title}</h2>
           <p>Paso ${Math.min(stepIndex+1,steps.length)} de ${steps.length}</p>
@@ -1056,9 +1285,23 @@ function showStep(){
 }
 
 function exitLesson(){
-  if(confirm('¿Salir de la lección? Tu progreso de la sesión actual se perderá.')){
+  showModal('Salir de la lección','¿Quieres salir? El progreso de esta sesión se guardará igual.','Sí, salir',()=>{
+    cleanupActivityState();
     showHome();
-  }
+  });
+}
+
+/* Limpiar timers y estado al salir o cambiar de paso */
+function cleanupActivityState(){
+  if(speedState&&speedState.timer){clearInterval(speedState.timer);speedState=null}
+  if(window._dialogTimer){clearTimeout(window._dialogTimer);window._dialogTimer=null}
+  if(window._tapTimer){clearTimeout(window._tapTimer);window._tapTimer=null}
+  // Cancelar audio en cola
+  speechQueue=[];
+  if('speechSynthesis'in window){try{speechSynthesis.cancel()}catch(e){}}
+  speaking=false;
+  // Reset estados de juegos
+  sortPicked=null;
 }
 
 /* === FLASHCARD MEJORADA: imagen grande, audio doble, fonética con sílabas en colores === */
@@ -1094,7 +1337,7 @@ function renderFlash(i){
 
 async function playWord(i){const v=currentLesson.words[i];await speakENtwice(v.en)}
 function markSeen(word){const d=userData();d.wordsSeen=d.wordsSeen||{};d.wordsSeen[word]=(d.wordsSeen[word]||0)+1;currentUser.data=d;persistUser()}
-function nextStep(){stepIndex++;showStep();window.scrollTo({top:0,behavior:'smooth'})}
+function nextStep(){cleanupActivityState();stepIndex++;showStep();window.scrollTo({top:0,behavior:'smooth'})}
 
 /* === MICRO QUIZ: refuerzo inmediato después de 2 flashcards === */
 function renderMicroQuiz(from,to){
@@ -1112,7 +1355,7 @@ function renderMicroQuiz(from,to){
     <div class="options" style="grid-template-columns:repeat(${opts.length},1fr);margin-top:12px">${opts.map(v=>`<button class="option" onclick="answerMicro(this,'${escapeAttr(v.en)}','${escapeAttr(v.es)}')"><span class="ic">${v.icon}</span><span class="lbl-es">${v.es}</span></button>`).join('')}</div>
     <div id="feedback" class="feedback"></div>
   </section>
-  <div class="action-bar with-back"><button class="ghost-btn" onclick="prevStepSafe()">← Atrás</button><button class="primary-btn hidden" id="mqNext" onclick="nextStep()">Continuar →</button></div>`;
+  <div class="action-bar with-back"><button class="ghost-btn" onclick="prevStepSafe()">← Atrás</button><button class="primary-btn" onclick="nextStep()">⏭️ Saltar</button></div>`;
   setTimeout(()=>speakENtwice(correct.en),250);
 }
 async function answerMicro(el,enKey,esKey){
@@ -1120,17 +1363,21 @@ async function answerMicro(el,enKey,esKey){
   const ok=enKey===window._mqCorrect;
   el.classList.add(ok?'correct':'wrong');
   if(ok){sfxCorrect();vibrate([20,40,20]);comboCount++;reward(8);showFeedback(true,'✅ ¡Muy bien!');await speakEN('Yes! '+enKey);
-    // Auto-avanzar
     setTimeout(()=>nextStep(),1200);
-  }else{sfxWrong();vibrate(120);comboCount=0;
+  }else{
+    sfxWrong();vibrate(120);comboCount=0;
+    // Resaltar la respuesta correcta
     [...document.querySelectorAll('.option')].find(o=>o.querySelector('.lbl-es')&&o.querySelector('.lbl-es').textContent===currentLesson.words.find(w=>w.en===window._mqCorrect)?.es)?.classList.add('correct');
-    showFeedback(false,'Casi. Mira la respuesta correcta.');
+    showFeedback(false,'Casi. La correcta era: '+window._mqCorrect);
     await speakES('Casi.');await speakEN(window._mqCorrect);
-    $('mqNext').classList.remove('hidden');
+    // Mostrar panel inline con botón continuar — siempre visible
+    showHelpPanel('No te preocupes, sigue intentando.', {
+      showAnswer:{label:'✅ Continuar',fn:()=>{hideHelpPanel();nextStep()}}
+    });
   }
 }
 
-function prevStepSafe(){if(stepIndex>0){stepIndex--;showStep();window.scrollTo(0,0)}}
+function prevStepSafe(){if(stepIndex>0){cleanupActivityState();stepIndex--;showStep();window.scrollTo(0,0)}}
 
 /* === LISTEN GAME === */
 function renderListenGame(){
@@ -1145,7 +1392,7 @@ function renderListenGame(){
   </section>
   <div class="action-bar with-back">
     <button class="ghost-btn" onclick="prevStepSafe()">← Atrás</button>
-    <button id="nextGame" class="primary-btn hidden" onclick="nextStep()">Siguiente →</button>
+    <button class="primary-btn" onclick="nextStep()">⏭️ Saltar</button>
   </div>`;
   setTimeout(()=>speakENtwice(correct.en),300);
 }
@@ -1159,7 +1406,12 @@ async function answerListen(el,ans){
   }else{sfxCorrect();vibrate([30,50,30]);comboCount++;if(comboCount>=3)comboPop('🔥 Combo x'+comboCount)}
   showFeedback(ok);
   if(ok){reward(12);await speakEN('Correct!');setTimeout(()=>nextStep(),1300)}
-  else{$('nextGame').classList.remove('hidden');await speakES('Casi. La respuesta correcta era:');await speakEN(window.listenCorrect)}
+  else{
+    await speakES('Casi. La respuesta correcta era:');await speakEN(window.listenCorrect);
+    showHelpPanel('La correcta era: '+window.listenCorrect, {
+      showAnswer:{label:'✅ Continuar',fn:()=>{hideHelpPanel();nextStep()}}
+    });
+  }
 }
 
 /* === TAP THE THING === */
@@ -1182,7 +1434,7 @@ function renderTapRound(){
   </section>
   <div class="action-bar with-back">
     <button class="ghost-btn" onclick="prevStepSafe()">← Atrás</button>
-    <button id="nextGame" class="primary-btn hidden" onclick="nextStep()">Siguiente →</button>
+    <button class="primary-btn" onclick="nextStep()">⏭️ Saltar</button>
   </div>`;
   setTimeout(()=>speakEN("Where is "+target.en+"?"),300);
 }
@@ -1193,22 +1445,43 @@ async function tapAnswer(el,key){
     sfxCorrect();vibrate([20,40,20]);comboCount++;reward(10);
     el.classList.add('faded');
     tapState.hits++;
+    tapState.errors=0; // Reset al acertar
+    hideHelpPanel();
     await speakEN('Yes! '+tapState.current.en);
     tapState.remaining=tapState.remaining.filter(v=>v.en!==tapState.current.en);
     tapState.items=tapState.items.filter(v=>v.en!==tapState.current.en);
     if(tapState.hits>=tapState.total||tapState.remaining.length===0){
       showFeedback(true,'¡Excelente! '+tapState.hits+' correctas');
-      $('nextGame').classList.remove('hidden');
       sfxLevelUp();confetti();
       setTimeout(()=>nextStep(),2000);
     }else{
       tapState.current=tapState.remaining[Math.floor(Math.random()*tapState.remaining.length)];
-      setTimeout(()=>renderTapRound(),900);
+      window._tapTimer=setTimeout(()=>renderTapRound(),900);
     }
   }else{
     sfxWrong();vibrate(120);comboCount=0;
+    tapState.errors=(tapState.errors||0)+1;
     setTimeout(()=>el.classList.remove('wrong'),500);
     await speakEN("Try again. Find "+tapState.current.en);
+    // Tras 2 errores en la misma palabra, ofrecer ayuda
+    if(tapState.errors>=2){
+      showHelpPanel('Pista: busca <b>'+tapState.current.es+'</b> ('+tapState.current.icon+')',{
+        showAnswer:{label:'👁️ Mostrar correcta',fn:()=>{
+          // Marcar visualmente la correcta
+          const correctEl=document.querySelector('.scene-obj[data-key="'+escapeAttr(tapState.current.en)+'"]');
+          if(correctEl){correctEl.classList.add('correct');correctEl.style.outline='4px solid #fbbf24'}
+          hideHelpPanel();
+        }},
+        skip:{label:'⏭️ Saltar palabra',fn:()=>{
+          hideHelpPanel();
+          tapState.errors=0;
+          tapState.remaining=tapState.remaining.filter(v=>v.en!==tapState.current.en);
+          tapState.items=tapState.items.filter(v=>v.en!==tapState.current.en);
+          if(tapState.remaining.length===0||tapState.hits>=tapState.total)nextStep();
+          else{tapState.current=tapState.remaining[Math.floor(Math.random()*tapState.remaining.length)];renderTapRound()}
+        }}
+      });
+    }
   }
 }
 
@@ -1222,12 +1495,19 @@ function renderMatchGame(){
     <p class="game-note">Une cada imagen con su palabra. Al voltear escuchas la palabra.</p>
     <div class="memory-grid">${cards.map((c,i)=>`<button class="mem" data-id="${escapeAttr(c.id)}" data-show="${escapeAttr(c.show)}" data-type="${c.type}" onclick="flipMem(this)">?</button>`).join('')}</div>
     <div id="feedback" class="feedback"></div>
+    <p id="memMoves" style="text-align:center;margin-top:10px;color:var(--muted);font-weight:900;font-size:.85rem">Movimientos: 0</p>
   </section>
   <div class="action-bar with-back">
     <button class="ghost-btn" onclick="prevStepSafe()">← Atrás</button>
-    <button id="nextGame" class="primary-btn hidden" onclick="nextStep()">Siguiente →</button>
+    <button class="primary-btn" onclick="skipMemory()">⏭️ Saltar</button>
   </div>`;
   speakES('Encuentra las parejas.');
+}
+function skipMemory(){
+  showModal('Saltar Memorice','¿Quieres saltar este juego y continuar con la lección?','Sí, saltar',()=>{
+    hideHelpPanel();
+    nextStep();
+  });
 }
 async function flipMem(el){
   if(el.classList.contains('matched')||el.classList.contains('flipped')||memoryState.open.length>=2)return;
@@ -1245,7 +1525,6 @@ async function checkMem(){
     if(memoryState.matched===memoryState.total){
       const stars=memoryState.moves<=6?3:memoryState.moves<=8?2:1;
       showFeedback(true,'¡Todas las parejas! '+'⭐'.repeat(stars));
-      $('nextGame').classList.remove('hidden');
       sfxLevelUp();confetti();
       setTimeout(()=>nextStep(),2200);
     }
@@ -1256,6 +1535,16 @@ async function checkMem(){
     comboCount=0;
   }
   memoryState.open=[];
+  // Actualizar contador de movimientos
+  const mm=$('memMoves');
+  if(mm)mm.textContent='Movimientos: '+memoryState.moves;
+  // Tras 12 movimientos, ofrecer ayuda inline (sin obligar)
+  if(memoryState.moves>=12&&memoryState.matched<memoryState.total&&!$('helpPanel')?.innerHTML){
+    showHelpPanel('¿Te resulta difícil? Puedes seguir o saltar este juego.', {
+      skip:{label:'⏭️ Saltar Memorice',fn:()=>{hideHelpPanel();nextStep()}},
+      retry:{label:'🔁 Empezar de nuevo',fn:()=>{hideHelpPanel();renderMatchGame()}}
+    });
+  }
 }
 
 /* === SENTENCE BUILDER === */
@@ -1276,7 +1565,7 @@ function renderSentenceGame(){
   </section>
   <div class="action-bar with-back">
     <button class="ghost-btn" onclick="prevStepSafe()">← Atrás</button>
-    <button id="nextGame" class="primary-btn hidden" onclick="nextStep()">Siguiente →</button>
+    <button class="primary-btn" onclick="nextStep()">⏭️ Saltar</button>
   </div>`;
   setTimeout(()=>speakEN(phrase),300);
 }
@@ -1293,16 +1582,30 @@ async function pickTile(el,t){
   if(sentenceState.chosen.length===sentenceState.target.split(' ').length){
     const built=sentenceState.chosen.join(' ');
     const ok=built===sentenceState.target;
+    sentenceState.attempts=(sentenceState.attempts||0)+1;
     showFeedback(ok,ok?'¡Frase correcta!':'Revisa el orden.');
     if(ok){
       reward(15);sfxCorrect();vibrate([20,40,20]);
-      $('nextGame').classList.remove('hidden');
+      hideHelpPanel();
       await speakEN(sentenceState.target);confetti();
       setTimeout(()=>nextStep(),1800);
     }else{
       sfxWrong();vibrate(150);comboCount=0;
-      await speakES('Casi. Inténtalo de nuevo.');await speakEN(sentenceState.target);
-      setTimeout(()=>renderSentenceGame(),1500);
+      await speakES('Casi.');await speakEN(sentenceState.target);
+      // Tras 1 error: ofrecer ver respuesta o reintentar
+      if(sentenceState.attempts>=2){
+        // 2 errores: mostrar respuesta + botón continuar
+        $('drop').innerHTML=sentenceState.target.split(' ').map(x=>`<span class="tile" style="background:#dcfce7;color:#087f5b">${x}</span>`).join('');
+        showHelpPanel('La frase correcta era: <b>'+sentenceState.target+'</b>',{
+          showAnswer:{label:'✅ Continuar',fn:()=>{hideHelpPanel();nextStep()}}
+        });
+      }else{
+        // 1er error: solo permitir reintentar (sin cambiar la frase)
+        showHelpPanel('Intenta de nuevo. La frase es: <b>'+sentenceState.targetEs+'</b>',{
+          retry:{label:'🔁 Reintentar',fn:()=>{hideHelpPanel();sentenceState.chosen=[];document.querySelectorAll('#tiles .tile').forEach(t=>{t.disabled=false;t.style.opacity=1});$('drop').innerHTML='Toca las palabras abajo';showFeedback(false,'')}},
+          showAnswer:{label:'✅ Saltar',fn:()=>{hideHelpPanel();nextStep()}}
+        });
+      }
     }
   }
 }
@@ -1340,7 +1643,7 @@ async function showDialogTurn(){
     </div>
     <div id="feedback" class="feedback"></div>
   </section>
-  <div class="action-bar with-back"><button class="ghost-btn" onclick="prevStepSafe()">← Atrás</button></div>`;
+  <div class="action-bar with-back"><button class="ghost-btn" onclick="prevStepSafe()">← Atrás</button><button class="primary-btn" onclick="nextStep()">⏭️ Saltar diálogo</button></div>`;
   setTimeout(()=>speakENtwice(d.en),300);
 }
 async function pickReply(el,ok,en,es){
@@ -1349,16 +1652,35 @@ async function pickReply(el,ok,en,es){
   const d=dialogState.dialogs[dialogState.turn];
   if(ok){
     sfxCorrect();vibrate([20,40,20]);reward(15);comboCount++;
+    dialogState.errors=0;
+    hideHelpPanel();
     dialogState.history.push({charName:d.char,charPic:d.char.split(' ')[0],text:'<b>'+d.en+'</b><small>'+d.es+'</small>',side:'them'});
     dialogState.history.push({charName:'You',charPic:'🧒',text:'<b>'+en+'</b><small>'+es+'</small>',side:'you'});
     await speakEN(en);
     showFeedback(true,'¡Buena respuesta!');
-    setTimeout(()=>{dialogState.turn++;showDialogTurn()},1200);
+    window._dialogTimer=setTimeout(()=>{dialogState.turn++;showDialogTurn()},1200);
   }else{
     sfxWrong();vibrate(150);comboCount=0;
-    showFeedback(false,'Esa no es la mejor respuesta. Intenta otra.');
+    dialogState.errors=(dialogState.errors||0)+1;
+    showFeedback(false,'Esa no es la mejor respuesta.');
     await speakES('Intenta con otra respuesta.');
-    setTimeout(()=>{document.querySelectorAll('.reply-btn').forEach(b=>{if(!b.classList.contains('wrong'))b.disabled=false});el.disabled=true},900);
+    if(dialogState.errors>=2){
+      // Tras 2 errores, mostrar la correcta y avanzar
+      const correctReply=d.replies.find(r=>r.ok);
+      [...document.querySelectorAll('.reply-btn')].find(b=>b.querySelector('b')?.textContent===correctReply.en)?.classList.add('correct');
+      showHelpPanel('La mejor respuesta era: <b>'+correctReply.en+'</b><br><small>'+correctReply.es+'</small>',{
+        showAnswer:{label:'✅ Continuar',fn:()=>{
+          hideHelpPanel();
+          dialogState.errors=0;
+          dialogState.history.push({charName:d.char,charPic:d.char.split(' ')[0],text:'<b>'+d.en+'</b><small>'+d.es+'</small>',side:'them'});
+          dialogState.history.push({charName:'You',charPic:'🧒',text:'<b>'+correctReply.en+'</b><small>'+correctReply.es+'</small>',side:'you'});
+          dialogState.turn++;
+          showDialogTurn();
+        }}
+      });
+    }else{
+      setTimeout(()=>{document.querySelectorAll('.reply-btn').forEach(b=>{if(!b.classList.contains('wrong'))b.disabled=false});el.disabled=true},900);
+    }
   }
 }
 
@@ -1428,12 +1750,18 @@ function speedEnd(){
   </div>`;
   if(score>=30){confetti();sfxLevelUp()}
 }
-function speedQuit(){if(speedState&&speedState.timer)clearInterval(speedState.timer);speedState=null;nextStep()}
+function speedQuit(){
+  showModal('Salir del Speed Round','¿Quieres salir del juego rápido y continuar?','Sí, salir',()=>{
+    if(speedState&&speedState.timer)clearInterval(speedState.timer);
+    speedState=null;
+    nextStep();
+  });
+}
 
 /* === SORT GAME (Healthy vs Unhealthy) === */
 function renderSortGame(){
   const items=shuffled([...currentLesson.sortItems]);
-  sortState={items,placed:[]};
+  sortState={items,placed:[],errors:0};
   $('activityBody').innerHTML=`<section class="card">
     <div class="question">🥦 Saludable o NO saludable <small>Healthy or Unhealthy?</small></div>
     <p class="game-note">Toca un alimento o hábito y luego toca dónde va.</p>
@@ -1447,12 +1775,16 @@ function renderSortGame(){
   </section>
   <div class="action-bar with-back">
     <button class="ghost-btn" onclick="prevStepSafe()">← Atrás</button>
-    <button id="nextGame" class="primary-btn hidden" onclick="nextStep()">Siguiente →</button>
+    <button class="primary-btn" onclick="skipSort()">⏭️ Saltar</button>
   </div>`;
-  // Click en bin
   $('binHealthy').onclick=()=>placeSort(true);
   $('binUnhealthy').onclick=()=>placeSort(false);
   speakEN("Sort the food. Healthy or unhealthy?");
+}
+function skipSort(){
+  showModal('Saltar este juego','¿Quieres saltar la clasificación y continuar?','Sí, saltar',()=>{
+    hideHelpPanel();nextStep();
+  });
 }
 let sortPicked=null;
 function pickSort(i,el){
@@ -1474,17 +1806,23 @@ async function placeSort(toHealthy){
     await speakEN(item.en+' is '+(toHealthy?'healthy':'unhealthy'));
     if(sortState.placed.length===sortState.items.length){
       showFeedback(true,'¡Todo clasificado!');
-      $('nextGame').classList.remove('hidden');
       sfxLevelUp();confetti();
       setTimeout(()=>nextStep(),2000);
     }
   }else{
     sfxWrong();vibrate(120);comboCount=0;
+    sortState.errors++;
     sortPicked.el.classList.remove('dragging');
     sortPicked=null;
-    showFeedback(false,'No, ese va al otro lado. Intenta otra vez.');
+    showFeedback(false,'No, ese va al otro lado.');
     await speakES('Es '+(item.healthy?'saludable':'no saludable'));
     setTimeout(()=>{const f=$('feedback');if(f)f.classList.remove('show')},1800);
+    // Si hay 3+ errores, ofrecer ayuda
+    if(sortState.errors>=3&&!$('helpPanel')?.innerHTML){
+      showHelpPanel('¿Te ayudo? Las frutas, verduras, agua y leche son saludables. Los dulces, bebidas y papas fritas no.',{
+        skip:{label:'⏭️ Saltar este juego',fn:()=>{hideHelpPanel();nextStep()}}
+      });
+    }
   }
 }
 
@@ -1528,6 +1866,32 @@ function renderComplete(){
 function reward(points){sessionScore+=points;const d=userData();d.stars=(d.stars||0)+points;currentUser.data=d;persistUser();updateStats()}
 function showFeedback(ok,msg){const f=$('feedback');if(!f)return;f.className='feedback show '+(ok?'good':'bad');f.textContent=msg||(ok?'✅ Correcto':'❌ Intenta otra vez')}
 
+/* Panel de ayuda inline tras errores - aparece JUNTO a la pregunta, no abajo */
+window._helpHandlers={};
+function showHelpPanel(msg, options){
+  // options: {showAnswer:{label, fn}, skip:{...}, retry:{...}}
+  let p=$('helpPanel');
+  if(!p){
+    p=document.createElement('div');
+    p.id='helpPanel';
+    p.className='help-panel';
+    const fb=$('feedback');
+    if(fb&&fb.parentNode)fb.parentNode.insertBefore(p,fb.nextSibling);
+    else{const ab=$('activityBody');if(ab)ab.appendChild(p)}
+  }
+  // Guardar handlers en _helpHandlers para poder llamarlos desde onclick
+  window._helpHandlers={};
+  let btnsHtml='';
+  if(options.showAnswer){window._helpHandlers.showAnswer=options.showAnswer.fn;btnsHtml+=`<button class="show-answer" onclick="window._helpHandlers.showAnswer&&window._helpHandlers.showAnswer()">${options.showAnswer.label||'👁️ Ver respuesta'}</button>`}
+  if(options.skip){window._helpHandlers.skip=options.skip.fn;btnsHtml+=`<button class="skip" onclick="window._helpHandlers.skip&&window._helpHandlers.skip()">${options.skip.label||'⏭️ Saltar'}</button>`}
+  if(options.retry){window._helpHandlers.retry=options.retry.fn;btnsHtml+=`<button class="skip" onclick="window._helpHandlers.retry&&window._helpHandlers.retry()">${options.retry.label||'🔁 Intentar otra vez'}</button>`}
+  p.innerHTML=`<div class="msg">${msg}</div><div class="btns">${btnsHtml}</div>`;
+  p.classList.remove('hidden');
+  // Hacer scroll al panel para que sea visible
+  setTimeout(()=>p.scrollIntoView({behavior:'smooth',block:'center'}),100);
+}
+function hideHelpPanel(){const p=$('helpPanel');if(p){p.classList.add('hidden');p.innerHTML=''}window._helpHandlers={}}
+
 /* === PRACTICE === */
 function allWords(){return LESSONS.flatMap(l=>l.words.map(w=>({...w,lesson:l.title,lessonEn:l.titleEn})))}
 function showPractice(){
@@ -1562,10 +1926,10 @@ function quickGame(mode){
     if(!currentLesson.dialog){area.innerHTML='<p style="text-align:center;color:var(--muted);font-weight:900;margin-top:14px">Aún no hay diálogos disponibles.</p>';return}
     renderDialogGame();
   }
-  // Reemplazar acción "siguiente" por "otra ronda"
+  // En modo práctica: el botón "Saltar" se convierte en "Otra ronda"
   setTimeout(()=>{
-    const nb=$('nextGame');
-    if(nb){nb.textContent='🎲 Otra ronda';nb.onclick=()=>quickGame(mode)}
+    const ab=document.querySelector('.action-bar.with-back .primary-btn');
+    if(ab){ab.textContent='🎲 Otra ronda';ab.onclick=()=>quickGame(mode)}
   },300);
 }
 function renderQuickFlashcards(words){
